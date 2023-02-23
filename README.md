@@ -14,11 +14,11 @@ présents dans la séquence entre guillemets.
 - [ ] Gérer " (double quote) qui doit empêcher le shell d’interpréter les méta-caractères
 présents dans la séquence entre guillemets sauf le $ (signe dollar).
 - [ ] Implémenter les redirections :
-	- < doit rediriger l’entrée.
-	- > doit rediriger la sortie.
-	- << doit recevoir un délimiteur et lire l’input donné jusqu’à rencontrer une ligne
+	- "<" doit rediriger l’entrée.
+	- ">" doit rediriger la sortie.
+	- "<<" doit recevoir un délimiteur et lire l’input donné jusqu’à rencontrer une ligne
 contenant le délimiteur. Cependant, l’historique n’a pas à être mis à jour !
-	- >> doit rediriger la sortie en mode append.
+	- ">>" doit rediriger la sortie en mode append.
 - [ ] Implémenter les pipes (caractère |). La sortie de chaque commande de la pipeline
 est connectée à l’entrée de la commande suivante grâce à un pipe.
 - [ ] Gérer les variables d’environnement (un $ suivi d’une séquence de caractères)
