@@ -43,9 +43,20 @@ exécutée au premier plan.
 
 ## Example commands
 ### Mandatory
+	those commands are "equivalent":
+		grep one < /dev/null
+		echo "something" > temp_file | grep something
+		-> an empty file desciptor is redirected to grep's stdin and it does not work
+		cat < /dev/null
+		-> cat does not care if stdin is empty
+
+	those are almost hte same:
+		< infile ls -l > temp && < temp wc -l > outfile
+		< infile ls -l | wc -l > outfile
 ### Bonus
 	echo "test" && echo 'other' | grep test
 
 ## Notes
 
 notion of priority for each token type
+	-> pipes have priority over redirections
