@@ -38,3 +38,14 @@ exécutée au premier plan.
 	- unset sans aucune option
 	- env sans aucune option ni argument
 	- exit sans aucune option
+
+## Interface between tokenizer and exec
+
+## Example commands
+### Mandatory
+### Bonus
+	echo "test" && echo 'other' | grep test
+
+## Notes
+
+notion of priority for each token type
