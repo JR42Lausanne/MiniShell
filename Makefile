@@ -3,6 +3,9 @@ FLAGS = -Wall -Wextra -Werror -O2 -g
 RM = rm -rf
 
 SRC = main.c \
+	  token_create.c \
+	  token_destroy.c \
+	  token_void_dest.c \
 	  tokenizer_create.c \
 	  tokenizer_destroy.c \
 	  tokenizer_next_token.c \
