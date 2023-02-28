@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 15:46:12 by graux             #+#    #+#             */
-/*   Updated: 2023/02/28 16:19:40 by graux            ###   ########.fr       */
+/*   Updated: 2023/02/28 17:21:44 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ typedef enum e_token_type
 	TOK_HEREDOC,
 	TOK_EQ
 }			t_token_type;
+
+//TODO string value for tok type enum
 
 typedef struct s_token
 {
@@ -61,6 +63,9 @@ void		token_destroy(t_token *tok);
 t_tokenizer	*tokenizer_create(char *input);
 void		tokenizer_destroy(t_tokenizer *toker);
 t_token		*tokenizer_next_token(t_tokenizer *toker);
+t_token		**tokenizer_as_array(t_tokenizer *toker);
 t_token		**tokenizer_parse(t_tokenizer *toker);
+
+void		tokens_print(t_token **tokens);
 
 #endif
