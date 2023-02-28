@@ -6,17 +6,17 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 16:22:58 by graux             #+#    #+#             */
-/*   Updated: 2023/02/28 14:30:28 by graux            ###   ########.fr       */
+/*   Updated: 2023/02/28 14:23:17 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef LIBFT_H
 # define LIBFT_H
 
 # include <stdlib.h>
-# include "libft/get_next_line.h"
-# include "libft/ft_printf.h"
-# include "libft/ft_format.h"
-# include "libft/ft_specifier.h"
+# include "get_next_line.h"
+# include "ft_printf.h"
+# include "ft_format.h"
+# include "ft_specifier.h"
 
 // Libc functions ---------------------------------------------------
 int		ft_isalnum(int c);

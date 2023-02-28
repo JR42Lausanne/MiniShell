@@ -3,23 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstnew_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlaiti <marvin@42lausanne.ch>              +#+  +:+       +#+        */
+/*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/19 09:50:55 by jlaiti            #+#    #+#             */
-/*   Updated: 2022/10/19 13:45:23 by jlaiti           ###   ########.fr       */
+/*   Created: 2022/10/07 16:05:14 by graux             #+#    #+#             */
+/*   Updated: 2022/10/07 16:05:36 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "libft.h"
 
-t_list	*ft_lstnew(void	*content)
+t_list	*ft_lstnew(void *content)
 {
-	t_list	*newlist;
+	t_list	*new_elem;
 
-	newlist = malloc(sizeof(t_list));
-	if (newlist == NULL)
+	new_elem = malloc(sizeof(t_list));
+	if (new_elem == NULL)
 		return (NULL);
-	newlist->content = content;
-	newlist->next = NULL;
-	return (newlist);
+	new_elem->content = content;
+	new_elem->next = NULL;
+	return (new_elem);
 }

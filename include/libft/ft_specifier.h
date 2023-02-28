@@ -1,26 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
+/*   ft_specifier.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: graux <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/31 11:48:48 by graux             #+#    #+#             */
-/*   Updated: 2022/11/04 14:20:02 by graux            ###   ########.fr       */
+/*   Created: 2022/10/18 10:32:52 by graux             #+#    #+#             */
+/*   Updated: 2022/10/20 16:27:11 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#ifndef FT_SPECIFIER_H
+# define FT_SPECIFIER_H
 
-int	ft_isendln(char *str)
-{
-	if (!str)
-		return (0);
-	while (*str)
-	{
-		if (*str == '\n')
-			return (1);
-		str++;
-	}
-	return (0);
-}
+# include "ft_format.h"
+
+void	ft_handle_specifier(int *pos, t_md *md, const char *format);
+void	ft_display_char(t_md *md);
+void	ft_display_str(t_md *md);
+void	ft_display_pointer(t_md *md);
+void	ft_display_decimal(t_md *md);
+void	ft_display_unsigned(t_md *md);
+void	ft_display_hex(int pos, t_md *md, const char *format);
+
+#endif

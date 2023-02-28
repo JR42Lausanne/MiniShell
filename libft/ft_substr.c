@@ -3,68 +3,52 @@
 /*                                                        :::      ::::::::   */
 /*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlaiti <marvin@42lausanne.ch>              +#+  +:+       +#+        */
+/*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/17 10:21:34 by jlaiti            #+#    #+#             */
-/*   Updated: 2022/10/20 11:04:05 by jlaiti           ###   ########.fr       */
+/*   Created: 2022/10/07 16:20:50 by graux             #+#    #+#             */
+/*   Updated: 2022/10/11 17:21:03 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "libft.h"
 
-//#include <stdio.h>
-//#include <string.h>
-//#include <stdlib.h>
-
-static size_t	ft_sizelen(const char *s, unsigned int start, size_t len)
+static size_t	ft_min(size_t a, size_t b)
 {
-	size_t	size_s;
-
-	size_s = ft_strlen(s);
-	if (start == 0 && len == 0)
-		return (0);
-	if (start == 1 && len == 1)
-		return (0);
-	if (start > size_s)
-		return (0);
-	if (len > size_s - start)
-		return (size_s - start);
+	if (a <= b)
+		return (a);
 	else
+		return (b);
+}
+
+static int	ft_calclen(size_t slen, unsigned int start, size_t len)
+{
+	if (start > slen)
+		return (0);
+	if (len > slen)
+		return (slen - start);
+	else if (len == 0)
+		return (0);
+	else if (start == 0)
 		return (len);
+	else
+		return (ft_min(slen - start, len));
 }
 
-char	*ft_substr(const char *s, unsigned int start, size_t len)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	size_t	i;
-	size_t	j;
-	char	*new_s;
+	char			*substr;
+	size_t			slen;
+	unsigned int	i;
 
-	i = start;
-	if (!s)
+	slen = ft_strlen(s);
+	substr = malloc((ft_calclen(slen, start, len) + 1) * sizeof(char));
+	if (substr == NULL)
 		return (NULL);
-	new_s = (char *)malloc(sizeof(char) * (ft_sizelen(s, start, len) + 1));
-	if (!new_s)
-		return (NULL);
-	j = 0;
-	while (j < len && ft_strlen(s) > i)
+	i = 0;
+	while (i < len && start + i < slen)
 	{
-		new_s[j] = s[i];
+		substr[i] = s[start + i];
 		i++;
-		j++;
 	}
-	new_s[j] = '\0';
-	return (new_s);
+	substr[i] = '\0';
+	return (substr);
 }
-/*
-int main(void)
-{
-	char str[] = "Bonjour ca va";
-	unsigned int	st;
-	size_t		len;
-
-	st = 8;
-	len = 2;
-	printf("la nouvelle chaine de caractere %s\n, ft_substr(str, st, len);
-	return (0);
-}
-*/

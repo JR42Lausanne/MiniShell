@@ -1,97 +1,83 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/10/05 10:44:06 by jlaiti            #+#    #+#              #
-#    Updated: 2023/01/17 15:52:28 by jlaiti           ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
+CC =         gcc
+CFLAGS =     -Wall -Wextra -Werror
+RM =         rm -f
 
-SRCS =	ft_strlen.c			\
-	ft_isalnum.c			\
-	ft_isalpha.c			\
-	ft_isascii.c			\
-	ft_isdigit.c			\
-	ft_isprint.c			\
-	ft_strchr.c				\
-	ft_strrchr.c			\
-	ft_strlen.c				\
-	ft_tolower.c			\
-	ft_toupper.c			\
-	ft_strncmp.c			\
-	ft_atoi.c				\
-	ft_strdup.c				\
-	ft_memset.c				\
-	ft_bzero.c				\
-	ft_memcpy.c				\
-	ft_memmove.c			\
-	ft_putchar_fd.c			\
-	ft_putstr_fd.c			\
-	ft_putendl_fd.c			\
-	ft_putnbr_fd.c			\
-	ft_strlcpy.c			\
-	ft_strlcat.c			\
-	ft_memchr.c				\
-	ft_memcmp.c				\
-	ft_strnstr.c			\
-	ft_calloc.c				\
-	ft_strjoin.c			\
-	ft_substr.c				\
-	ft_strtrim.c			\
-	ft_itoa.c				\
-	ft_striteri.c			\
-	ft_strmapi.c			\
-	ft_split.c				\
-	ft_check_args.c			\
-	ft_number.c				\
-	ft_printf.c				\
-	ft_putchar.c			\
-	ft_unsigned_int.c		\
-	ft_char.c				\
-	ft_hexa.c				\
-	ft_pointer.c			\
-	ft_string.c				\
-	get_next_line.c			\
-	get_next_line_utils.c	\
-	ft_lstnew_bonus.c 		\
-	ft_lstadd_front_bonus.c	\
-	ft_lstsize_bonus.c		\
-	ft_lstlast_bonus.c		\
-	ft_lstadd_back_bonus.c	\
-	ft_lstdelone_bonus.c	\
-	ft_lstclear_bonus.c		\
-	ft_lstiter_bonus.c		\
+SRCS =        ft_isalpha.c \
+			  ft_isdigit.c \
+			  ft_isalnum.c \
+			  ft_isprint.c \
+			  ft_isascii.c \
+			  ft_putchar_fd.c \
+			  ft_putstr_fd.c \
+			  ft_putendl_fd.c \
+			  ft_putnbr_fd.c \
+			  ft_strlen.c \
+			  ft_strlcpy.c \
+			  ft_strlcat.c \
+			  ft_toupper.c \
+			  ft_tolower.c \
+			  ft_substr.c \
+			  ft_strjoin.c \
+			  ft_strdup.c \
+			  ft_bzero.c \
+			  ft_memset.c \
+			  ft_memcpy.c \
+			  ft_memmove.c \
+			  ft_memchr.c \
+			  ft_memcmp.c \
+			  ft_strchr.c \
+			  ft_strrchr.c \
+			  ft_strncmp.c \
+			  ft_strnstr.c \
+			  ft_atoi.c \
+			  ft_striteri.c \
+			  ft_strmapi.c \
+			  ft_itoa.c \
+			  ft_strtrim.c \
+			  ft_calloc.c \
+			  ft_split.c \
+			  ft_lstnew.c \
+			  ft_lstadd_front.c \
+			  ft_lstsize.c \
+			  ft_lstlast.c \
+			  ft_lstadd_back.c \
+			  ft_lstdelone.c \
+			  ft_lstclear.c \
+			  ft_lstiter.c \
+			  ft_lstmap.c \
+			  get_next_line.c \
+			  get_next_line_utils.c \
+			  ft_printf.c \
+			  ft_format.c \
+			  ft_num_len.c \
+			  ft_handle_specifier.c \
+			  ft_display_char.c \
+			  ft_display_str.c \
+			  ft_display_pointer.c \
+			  ft_display_decimal.c \
+			  ft_display_unsigned.c \
+			  ft_display_hex.c
 
-NAME = libft.a
+INCLUDES =    includes/
 
-OBJS_SRCS = $(SRCS:.c=.o)
+OBJS =        ${SRCS:.c=.o}
 
-OBJS_BSRCS = $(B_SRCS:.c=.o)  
+NAME =     libft.a
 
-CFLAGS = -Wall -Wextra -Werror #-fsanitize=address -g3
-CC = gcc $(CFLAGS)
+%.o: %.c
+	${CC} ${CFLAGS} -c $< -o $@ -I${INCLUDES}
 
-$(NAME) : $(OBJS_SRCS)
-	ar rcs $(NAME) $(OBJS_SRCS)
+all: ${NAME}
 
+${NAME}: ${OBJS}
+	ar rcs ${NAME} ${OBJS}
 
-%.o : %.c
-	$(CC) -o $@ -c $< -I.
+clean:
+	${RM} ${OBJS}
 
-all : $(NAME)
+fclean: clean
+	${RM} ${NAME}
 
-clean :
-	rm -rf $(OBJS_SRCS) $(OBJS_BSRCS)
-
-fclean : clean
-	rm -f $(NAME)
-
-re : fclean all
-	
-bonus : $(OBJS_SRCS) $(OBJS_BSRCS)
-	ar rcs $(NAME) $(OBJS_SRCS) $(OBJS_BSRCS)
+re: fclean all
 
 .PHONY: all clean fclean re bonus

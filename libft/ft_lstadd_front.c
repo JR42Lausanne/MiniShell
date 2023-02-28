@@ -1,22 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstiter_bonus.c                                 :+:      :+:    :+:   */
+/*   ft_lstadd_front_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlaiti <marvin@42lausanne.ch>              +#+  +:+       +#+        */
+/*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/19 19:06:16 by jlaiti            #+#    #+#             */
-/*   Updated: 2022/10/20 10:29:24 by jlaiti           ###   ########.fr       */
+/*   Created: 2022/10/07 16:03:20 by graux             #+#    #+#             */
+/*   Updated: 2022/10/07 16:03:31 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "libft.h"
 
-void	ft_lstiter(t_list *lst, void (*f) (void *))
+void	ft_lstadd_front(t_list **lst, t_list *new_elem)
 {
-	while (lst != NULL)
-	{	
-		f(lst->content);
-		lst = lst->next;
+	if (new_elem != NULL && lst != NULL)
+	{
+		new_elem->next = *lst;
+		*lst = new_elem;
 	}
 }

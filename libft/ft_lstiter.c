@@ -1,18 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putchar.c                                       :+:      :+:    :+:   */
+/*   ft_lstiter_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlaiti <marvin@42lausanne.ch>              +#+  +:+       +#+        */
+/*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/25 15:29:51 by jlaiti            #+#    #+#             */
-/*   Updated: 2022/10/31 10:49:38 by jlaiti           ###   ########.fr       */
+/*   Created: 2022/10/07 16:04:22 by graux             #+#    #+#             */
+/*   Updated: 2022/10/11 10:53:39 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "libft.h"
 
-#include "ft_printf.h"
-
-void	ft_putchar(char c)
+void	ft_lstiter(t_list *lst, void (*f)(void *))
 {
-	write(1, &c, 1);
+	while (lst != NULL)
+	{
+		f(lst->content);
+		lst = lst->next;
+	}
 }

@@ -1,26 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
+/*   ft_display_char.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: graux <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/31 11:48:48 by graux             #+#    #+#             */
-/*   Updated: 2022/11/04 14:20:02 by graux            ###   ########.fr       */
+/*   Created: 2022/10/18 11:12:43 by graux             #+#    #+#             */
+/*   Updated: 2022/10/19 20:21:17 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "ft_format.h"
+#include <unistd.h>
 
-#include "get_next_line.h"
-
-int	ft_isendln(char *str)
+void	ft_display_char(t_md *md)
 {
-	if (!str)
-		return (0);
-	while (*str)
+	char	c;
+	int		i;
+
+	c = (char) va_arg(md->args, int);
+	i = 0;
+	if (md->dash)
 	{
-		if (*str == '\n')
-			return (1);
-		str++;
+		md->total_len += write(1, &c, 1);
+		while (++i < md->width)
+			md->total_len += write(1, " ", 1);
 	}
-	return (0);
+	else
+	{
+		while (++i < md->width - 1)
+			md->total_len += write(1, " ", 1);
+		md->total_len += write(1, &c, 1);
+	}
+	md = ft_reset_format(md);
 }
