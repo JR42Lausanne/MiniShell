@@ -1,20 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tokenizer.c                                        :+:      :+:    :+:   */
+/*   tokenizer.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
+/*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/27 10:48:19 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/02/27 11:06:09 by jlaiti           ###   ########.fr       */
+/*   Created: 2023/02/28 15:46:12 by graux             #+#    #+#             */
+/*   Updated: 2023/02/28 15:50:56 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef TOKENIZER_H
+# define TOKENIZER_H
+
 typedef enum e_token_type
 {
-	WORD = 0,
-	SPACE,
-	TAB
+	TOK_WORD = 0,
+	TOK_SPACE,
+	TOK_TAB,
+	TOK_SQ,
+	TOK_DQ,
+	TOK_VAR,
+	TOK_PIPE,
+	TOK_REDIR_IN,
+	TOK_REDIR_OUT,
+	TOK_REDIR_APP,
+	TOK_HEREDOC,
+	TOK_EQ
 }			t_token_type;
 
 typedef struct s_token
@@ -25,7 +37,7 @@ typedef struct s_token
 	int				pos;
 }			t_token;
 
-typedef	enum e_tokenizer_mode
+typedef enum e_tokenizer_mode
 {
 	NORMAL = 0,
 	SQ_STRING,
@@ -40,30 +52,4 @@ typedef struct s_tokenizer
 	t_tok_mode	mode;
 }			t_tokenizer;
 
-
-void	check_is_word(char **prompt, t_token *token)
-{
-	int	i;
-	
-	i = 0;
-	while (prompt[i] != '\0')
-	{
-		if (prompt[i] == ' ' || prompt[i] == '\t')
-			i++;
-		is_string;
-		else if (prompt[i] == ':'
-			TODO
-		else if (prompt
-
-	}
-
-}
-
-void	read_line(char	**prompt)
-{
-	t_token	*token;
-
-	token = malloc(sizeof(t_token));
-	check_word(&prompt, &token);
-	
-}
+#endif
