@@ -3,32 +3,41 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
+/*   By: graux <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/22 18:25:37 by jlaiti            #+#    #+#             */
-/*   Updated: 2022/10/31 10:53:00 by jlaiti           ###   ########.fr       */
+/*   Created: 2022/10/13 11:18:53 by graux             #+#    #+#             */
+/*   Updated: 2022/11/03 16:33:34 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
+#include "libft.h"
 #include "ft_printf.h"
+#include <unistd.h>
 
 int	ft_printf(const char *format, ...)
 {
-	va_list	args;
-	int		len;
-	int		i;
+	t_md		*md;
+	int			printed_chars;
+	int			i;
 
-	va_start(args, format);
 	i = 0;
-	len = 0;
+	printed_chars = 0;
+	md = (t_md *) malloc(sizeof(t_md));
+	if (md == NULL)
+		return (-1);
+	md = ft_init_format(md);
+	va_start(md->args, format);
 	while (format[i])
 	{
 		if (format[i] == '%')
-			ft_check_args(args, &format[++i], &len);
+		{
+			i++;
+			ft_handle_flags(&(i), md, format);
+		}
 		else
-			len += write(1, &format[i], 1);
-		i++;
+			printed_chars += write(1, &format[i++], 1);
 	}
-	va_end(args);
-	return (len);
+	va_end(md->args);
+	printed_chars += md->total_len;
+	free(md);
+	return (printed_chars);
 }

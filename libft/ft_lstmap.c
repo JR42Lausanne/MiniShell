@@ -1,33 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_lstmap_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/07 16:09:46 by graux             #+#    #+#             */
-/*   Updated: 2022/10/07 16:10:26 by graux            ###   ########.fr       */
+/*   Created: 2022/10/07 16:05:03 by graux             #+#    #+#             */
+/*   Updated: 2022/10/11 16:04:26 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
 
-static void	ft_putnbr_fd_rec(long n, int fd)
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	if (n < 0)
-	{
-		ft_putchar_fd('-', fd);
-		ft_putnbr_fd_rec(-n, fd);
-	}
-	else if (n >= 10)
-	{
-		ft_putnbr_fd_rec(n / 10, fd);
-		ft_putnbr_fd_rec(n % 10, fd);
-	}
-	else
-		ft_putchar_fd(n + '0', fd);
-}
+	t_list	*map;
+	t_list	*elem;
+	t_list	*temp;
 
-void	ft_putnbr_fd(int n, int fd)
-{
-	ft_putnbr_fd_rec(n, fd);
+	map = NULL;
+	while (lst != NULL)
+	{
+		temp = f(lst->content);
+		elem = ft_lstnew(temp);
+		if (elem == NULL)
+		{
+			ft_lstclear(&map, del);
+			if (temp != NULL)
+				del(temp);
+			return (NULL);
+		}
+		ft_lstadd_back(&map, elem);
+		lst = lst->next;
+	}
+	return (map);
 }
