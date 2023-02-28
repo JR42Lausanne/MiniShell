@@ -6,7 +6,7 @@
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 13:00:55 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/02/27 16:23:39 by jlaiti           ###   ########.fr       */
+/*   Updated: 2023/02/28 14:59:05 by jlaiti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,23 @@ const static int	g_ast_prio[AST_TYPE_SIZE] = {
 [AST_PIPE] = 1
 };
 
+typedef struct s_cmd_cont
+{
+	char	*cmd_name;
+	char	**args;
+}			t_cmd_cont;
+
+typedef struct s_builtin_cont
+{
+	int		(*func_pointer)(char **);
+	char	**args;
+}			t_builtin_cont;
+
 typedef struct s_ast_node
 {
 	t_ast_node_type		type;
 	int					child_number;
+	void				*content;
 	struct s_ast_node	*children;
 }			t_ast_node;
 
