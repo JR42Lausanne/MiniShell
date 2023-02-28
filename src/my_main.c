@@ -1,24 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin_pwd.c                                      :+:      :+:    :+:   */
+/*   my_main.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/24 16:14:14 by graux             #+#    #+#             */
-/*   Updated: 2023/02/24 16:23:32 by graux            ###   ########.fr       */
+/*   Created: 2023/02/24 16:21:49 by graux             #+#    #+#             */
+/*   Updated: 2023/02/24 16:22:46 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/builtins.h"
-#include <stdlib.h>
-#include <stdio.h>
 
-void	builtin_pwd(void)
+int	main(void)
 {
-	char	*working_dir;
-
-	working_dir = getenv("PWD");
-	//TODO change to ft_printf
-	printf("%s\n", working_dir);
+	builtin_pwd();
+	return (0);
 }
