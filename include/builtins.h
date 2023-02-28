@@ -1,33 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
+/*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/07 16:09:46 by graux             #+#    #+#             */
-/*   Updated: 2022/10/07 16:10:26 by graux            ###   ########.fr       */
+/*   Created: 2023/02/24 16:03:53 by graux             #+#    #+#             */
+/*   Updated: 2023/02/24 16:09:53 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "libft.h"
 
-static void	ft_putnbr_fd_rec(long n, int fd)
-{
-	if (n < 0)
-	{
-		ft_putchar_fd('-', fd);
-		ft_putnbr_fd_rec(-n, fd);
-	}
-	else if (n >= 10)
-	{
-		ft_putnbr_fd_rec(n / 10, fd);
-		ft_putnbr_fd_rec(n % 10, fd);
-	}
-	else
-		ft_putchar_fd(n + '0', fd);
-}
+#ifndef BUILTINS_H
+# define BUILTINS_H
 
-void	ft_putnbr_fd(int n, int fd)
-{
-	ft_putnbr_fd_rec(n, fd);
-}
+# define ECHO_OPT_NONE 0
+# define ECHO_OPT_NONL 1
+
+void	builtin_echo(int option, char *text);
+void	builtin_cd(char *path);
+void	builtin_pwd(void);
+void	builtin_export(char *var, char *value);
+//TODO correct arguments
+void	builtin_unset(void);
+void	builtin_env(void);
+void	builtin_exit(void);
+
+#endif

@@ -3,64 +3,69 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlaiti <marvin@42lausanne.ch>              +#+  +:+       +#+        */
+/*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/17 10:49:32 by jlaiti            #+#    #+#             */
-/*   Updated: 2022/10/17 18:40:18 by jlaiti           ###   ########.fr       */
+/*   Created: 2022/10/07 16:19:40 by graux             #+#    #+#             */
+/*   Updated: 2022/10/10 13:53:18 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "libft.h"
 
-//#include <stdio.h>
-//#include <stdlib.h>
-//#include <string.h>
-
-static int	verif_set(char s1, char const *set)
+static int	ft_num_trimed_up(char const *s, char const *set)
 {
+	int	count;
 	int	i;
 
 	i = 0;
-	while (set[i] != '\0')
-	{	
-		if (set[i] == s1)
-			return (1);
+	count = 0;
+	while (s[i] && ft_strchr(set, s[i]) != NULL)
+	{
+		count++;
 		i++;
 	}
-	return (0);
+	return (count);
+}
+
+static int	ft_num_trimed_down(char const *s, char const *set)
+{
+	int	count;
+	int	len;
+
+	count = 0;
+	len = ft_strlen(s) - 1;
+	while (len >= 0 && ft_strchr(set, s[len]) != NULL)
+	{
+		count++;
+		len--;
+	}
+	return (count);
 }
 
 char	*ft_strtrim(char const *s1, char const *set)
 {
-	char	*new;
-	int		i;
-	int		j;
-	int		k;
+	char			*trimed;
+	unsigned int	before;
+	unsigned int	after;
+	unsigned int	i;
 
+	before = ft_num_trimed_up(s1, set);
+	after = ft_num_trimed_down(s1, set);
+	if (ft_strlen(s1) == before && ft_strlen(s1) == after)
+		after = 0;
+	trimed = malloc((ft_strlen(s1) - before - after + 1) * sizeof(char));
+	if (trimed == NULL)
+		return (NULL);
 	i = 0;
-	j = (int)ft_strlen(s1);
-	k = 0;
-	while (s1[i] != '\0' && verif_set(s1[i], set))
-		i++;
-	while (j > i && verif_set(s1[j - 1], set))
-		j--;
-	new = (char *)malloc(sizeof(char) * (j - i + 1));
-	if (new == 0)
-		return (0);
-	while (i < j)
+	if (ft_strlen(s1) == before)
 	{
-		new[k] = s1[i];
-		i++;
-		k++;
+		trimed[i] = '\0';
+		return (trimed);
 	}
-	new[k] = '\0';
-	return (new);
+	while (i < ft_strlen(s1) - before - after)
+	{
+		trimed[i] = s1[before + i];
+		i++;
+	}
+	trimed[i] = '\0';
+	return (trimed);
 }
-/*
-int main(void)
-{
-	char s[] = "Bonjour ca va ?";
-	char set[] = "Bo";
-	printf("la nouvelle chaine de caractere est %s\n", ft_strtrim(s, set));
-	return (0);
-}*/

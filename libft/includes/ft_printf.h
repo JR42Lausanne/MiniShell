@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_char.c                                          :+:      :+:    :+:   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlaiti <marvin@42lausanne.ch>              +#+  +:+       +#+        */
+/*   By: graux <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/25 18:31:25 by jlaiti            #+#    #+#             */
-/*   Updated: 2022/10/31 10:52:11 by jlaiti           ###   ########.fr       */
+/*   Created: 2022/10/13 11:13:54 by graux             #+#    #+#             */
+/*   Updated: 2022/10/22 12:36:41 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#ifndef FT_PRINTF_H
+# define FT_PRINTF_H
 
-int	ft_char(va_list args)
-{
-	char	c;
+# include <stdarg.h>
+# include "ft_format.h"
+# include <stdio.h>
 
-	c = (char)va_arg(args, int);
-	ft_putchar(c);
-	return (1);
-}
+int			ft_printf(const char *format, ...);
+
+#endif

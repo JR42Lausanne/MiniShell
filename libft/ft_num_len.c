@@ -1,21 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_back_bonus.c                             :+:      :+:    :+:   */
+/*   ft_num_len.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlaiti <marvin@42lausanne.ch>              +#+  +:+       +#+        */
+/*   By: graux <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/19 15:36:27 by jlaiti            #+#    #+#             */
-/*   Updated: 2022/10/19 18:14:48 by jlaiti           ###   ########.fr       */
+/*   Created: 2022/10/22 11:13:36 by graux             #+#    #+#             */
+/*   Updated: 2022/10/22 12:33:23 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "libft.h"
 
-void	ft_lstadd_back(t_list **lst, t_list *new)
+int	ft_num_size(int pos, const char *format)
 {
-	if (*lst != NULL)
-		ft_lstlast(*lst)->next = new;
-	else
-		*lst = new;
+	int	len;
+
+	len = 0;
+	while (ft_isdigit(format[pos++]))
+		len++;
+	return (len);
 }
