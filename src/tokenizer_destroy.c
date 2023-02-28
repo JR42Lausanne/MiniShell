@@ -1,16 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   tokenizer_destroy.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/28 16:10:51 by graux             #+#    #+#             */
-/*   Updated: 2023/02/28 16:11:17 by graux            ###   ########.fr       */
+/*   Created: 2023/02/28 15:59:12 by graux             #+#    #+#             */
+/*   Updated: 2023/02/28 16:27:26 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	main(void)
+#include "../include/tokenizer.h"
+#include <stdlib.h>
+
+void	tokenizer_destroy(t_tokenizer *toker)
 {
-	return (0);
+	if (!toker)
+		return ;
+	ft_lstclear(&toker->tokens, token_void_dest);
+	free(toker->input);
+	free(toker);
 }

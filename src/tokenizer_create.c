@@ -1,16 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   tokenizer_create.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/28 16:10:51 by graux             #+#    #+#             */
-/*   Updated: 2023/02/28 16:11:17 by graux            ###   ########.fr       */
+/*   Created: 2023/02/28 15:57:40 by graux             #+#    #+#             */
+/*   Updated: 2023/02/28 16:14:38 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	main(void)
+#include "../include/tokenizer.h"
+#include <stdlib.h>
+
+t_tokenizer	*tokenizer_create(char *input)
 {
-	return (0);
+	t_tokenizer	*toker;
+
+	toker = malloc(sizeof(t_tokenizer));
+	if (!toker)
+		return (NULL);
+	toker->tokens = NULL;
+	toker->input = input;
+	toker->pos = 0;
+	toker->mode = MODE_NORMAL;
+	return (toker);
 }

@@ -1,16 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   tokenizer_next_token.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/28 16:10:51 by graux             #+#    #+#             */
-/*   Updated: 2023/02/28 16:11:17 by graux            ###   ########.fr       */
+/*   Created: 2023/02/28 16:00:32 by graux             #+#    #+#             */
+/*   Updated: 2023/02/28 16:28:52 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	main(void)
+#include "../include/tokenizer.h"
+
+t_token	*tokenizer_next_token(t_tokenizer *toker)
 {
-	return (0);
+	t_token	*tok;
+
+	//TODO implement
+	(void) toker;
+	tok = NULL;
+	return (tok);
 }
