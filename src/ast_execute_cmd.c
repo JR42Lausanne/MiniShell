@@ -6,7 +6,7 @@
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 16:04:14 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/03/01 13:31:14 by jlaiti           ###   ########.fr       */
+/*   Updated: 2023/03/01 15:19:29 by jlaiti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-static	char	*get_cmd(char *cmd)
+static int	check_relative(char *cmd)
+{
+	if (ft_strnstr(cmd, "./", ft_strlen(cmd)))
+		return (1);
+	else if (ft_strnstr(cmd, "../", ft_strlen(cmd)))
+		return (1);
+	return (0);
+}
+
+static char	*get_cmd(char *cmd)
 {
 	char	*tmp;
 	char	*command;
@@ -23,6 +32,8 @@ static	char	*get_cmd(char *cmd)
 	char	**path;
 	int		i;
 
+	if (check_relative(cmd))
+		return (ft_strdup(cmd));
 	env_path = getenv("PATH");
 	path = ft_split(env_path, ':');
 	i = 0;
@@ -56,6 +67,11 @@ void	ast_execute_cmd(t_ast_node *node)
 	if (pid == 0)
 	{
 		execve(cmd_full_path, content->args, node->env);
+		perror(cmd_full_path);
 	}
-	free(cmd_full_path);
+	else
+	{
+		waitpid(pid, NULL, 0);
+		free(cmd_full_path);
+	}
 }

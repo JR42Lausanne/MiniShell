@@ -1,51 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   my_main.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-<<<<<<< HEAD
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 10:23:40 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/03/01 13:29:29 by jlaiti           ###   ########.fr       */
+/*   Updated: 2023/03/01 15:19:56 by jlaiti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ast.h"
-#include <stdio.h>
-#include <readline/readline.h>
-#include <readline/history.h>
-#include <stdlib.h>
+#include "../include/execute.h"
+#include "../include/tokenizer.h"
 
 int	main(int argc, char *argv[], char *envp[])
 {
-	char		*input;
-	t_token		*tokens;
 	t_ast_node	*ast;
+	t_ast_node	*child;
+	t_cmd_cont	*cont;
 
 	(void) argc;
 	(void) argv;
-	(void) envp;
-	input = NULL;
-	while (1)
-	{
-		input = readline("$>");
-		tokens = tokenize_input(&input);
-		ast = ast_generate(tokens);
-		ast_execute(ast);
-		// TODO cleanup tokens and ast
-		free(input);
-	}
-=======
-/*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/28 16:10:51 by graux             #+#    #+#             */
-/*   Updated: 2023/02/28 16:11:17 by graux            ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-int	main(void)
-{
+	ast = malloc(sizeof(t_ast_node));
+	ast->type = AST_ROOT;
+	ast->child_number = 1;
+	ast->content = NULL;
+	ast->env = NULL;
+	child = malloc(sizeof(t_ast_node));
+	child->type = AST_CMD;
+	child->child_number = 0;
+	cont = malloc(sizeof(t_cmd_cont));
+	cont->cmd_name = "../minishell/script.sh";
+	cont->args = malloc(2 * sizeof(char *));
+	cont->args[0] = "../minishell/script.sh";
+	cont->args[1] = NULL;
+	child->content = cont;
+	child->env = envp;
+	ast->children = malloc(sizeof(t_ast_node *));
+	ast->children[0] = child;
+	ast_execute(ast);
 	return (0);
->>>>>>> dev
 }
