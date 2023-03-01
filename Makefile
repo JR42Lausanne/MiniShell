@@ -5,6 +5,7 @@ RM = rm -rf
 SRC = ast_execute_cmd.c \
 	  ast_execute_built.c \
 	  ast_execute.c \
+	  builtin_echo.c \
 	  token_create.c \
 	  token_destroy.c \
 	  token_void_dest.c \
