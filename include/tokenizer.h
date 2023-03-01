@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 15:46:12 by graux             #+#    #+#             */
-/*   Updated: 2023/02/28 17:21:44 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/01 13:06:53 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,20 @@ typedef enum e_token_type
 	TOK_EQ
 }			t_token_type;
 
-//TODO string value for tok type enum
+const static char	*g_tokens_str[] = {
+[TOK_WORD] = "",
+[TOK_SPACE] = "",
+[TOK_TAB] = "",
+[TOK_SQ] = "",
+[TOK_DQ] = "",
+[TOK_VAR] = "",
+[TOK_PIPE] = "",
+[TOK_REDIR_IN] = "",
+[TOK_REDIR_OUT] = "",
+[TOK_REDIR_APP] = "",
+[TOK_HEREDOC] = "",
+[TOK_EQ] = ""
+};
 
 typedef struct s_token
 {
