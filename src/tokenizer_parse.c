@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 16:01:38 by graux             #+#    #+#             */
-/*   Updated: 2023/02/28 16:56:59 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/01 16:41:42 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ t_token	**tokenizer_parse(t_tokenizer *toker)
 {
 	t_token	*token;
 
-	//TODO implement
 	token = tokenizer_next_token(toker);
 	while (token)
 	{
