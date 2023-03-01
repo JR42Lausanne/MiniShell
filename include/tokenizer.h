@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 15:46:12 by graux             #+#    #+#             */
-/*   Updated: 2023/03/01 16:35:32 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/01 17:16:53 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,7 @@ typedef enum e_tokenizer_mode
 {
 	MODE_NORMAL = 0,
 	MODE_SQ,
-	MODE_DQ,
-	MODE_DONE
+	MODE_DQ
 }			t_tok_mode;
 
 typedef struct s_tokenizer
