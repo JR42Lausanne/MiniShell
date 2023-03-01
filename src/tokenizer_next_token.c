@@ -6,11 +6,12 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 16:00:32 by graux             #+#    #+#             */
-/*   Updated: 2023/03/01 17:24:24 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/01 20:55:56 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/tokenizer.h"
+#include "../include/minishell.h"
 
 static void	normal_mode(t_tokenizer *toker, t_token *tok)
 {
