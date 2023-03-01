@@ -3,6 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
+<<<<<<< HEAD
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 10:23:40 by jlaiti            #+#    #+#             */
@@ -35,4 +36,16 @@ int	main(int argc, char *argv[], char *envp[])
 		// TODO cleanup tokens and ast
 		free(input);
 	}
+=======
+/*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/28 16:10:51 by graux             #+#    #+#             */
+/*   Updated: 2023/02/28 16:11:17 by graux            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+int	main(void)
+{
+	return (0);
+>>>>>>> dev
 }

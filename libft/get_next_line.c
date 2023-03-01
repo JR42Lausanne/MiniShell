@@ -1,16 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: graux <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 11:48:29 by graux             #+#    #+#             */
-/*   Updated: 2022/10/31 11:50:46 by graux            ###   ########.fr       */
+/*   Updated: 2023/02/28 16:09:26 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "includes/get_next_line.h"
+#include "includes/libft.h"
 #include <stdio.h>
 
 static char	*ft_grow_buffer(char *next, char *buffer)

@@ -1,26 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   token_void_dest.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: graux <marvin@42lausanne.ch>               +#+  +:+       +#+        */
+/*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/31 11:48:48 by graux             #+#    #+#             */
-/*   Updated: 2023/02/28 16:08:47 by graux            ###   ########.fr       */
+/*   Created: 2023/02/28 16:25:26 by graux             #+#    #+#             */
+/*   Updated: 2023/02/28 16:26:29 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/get_next_line.h"
+#include "../include/tokenizer.h"
 
-int	ft_isendln(char *str)
+void	token_void_dest(void *tok)
 {
-	if (!str)
-		return (0);
-	while (*str)
-	{
-		if (*str == '\n')
-			return (1);
-		str++;
-	}
-	return (0);
+	token_destroy((t_token *) tok);
 }

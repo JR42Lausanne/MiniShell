@@ -1,26 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   tokenizer_parse.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: graux <marvin@42lausanne.ch>               +#+  +:+       +#+        */
+/*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/31 11:48:48 by graux             #+#    #+#             */
-/*   Updated: 2023/02/28 16:08:47 by graux            ###   ########.fr       */
+/*   Created: 2023/02/28 16:01:38 by graux             #+#    #+#             */
+/*   Updated: 2023/02/28 16:29:20 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/get_next_line.h"
+#include "../include/tokenizer.h"
 
-int	ft_isendln(char *str)
+t_token	**tokenizer_parse(t_tokenizer *toker)
 {
-	if (!str)
-		return (0);
-	while (*str)
-	{
-		if (*str == '\n')
-			return (1);
-		str++;
-	}
-	return (0);
+	t_token	**tok_tab;
+
+	//TODO implement
+	(void) toker;
+	tok_tab = NULL;
+	return (tok_tab);
 }

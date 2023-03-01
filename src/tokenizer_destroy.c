@@ -1,26 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   tokenizer_destroy.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: graux <marvin@42lausanne.ch>               +#+  +:+       +#+        */
+/*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/31 11:48:48 by graux             #+#    #+#             */
-/*   Updated: 2023/02/28 16:08:47 by graux            ###   ########.fr       */
+/*   Created: 2023/02/28 15:59:12 by graux             #+#    #+#             */
+/*   Updated: 2023/02/28 16:27:26 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/get_next_line.h"
+#include "../include/tokenizer.h"
+#include <stdlib.h>
 
-int	ft_isendln(char *str)
+void	tokenizer_destroy(t_tokenizer *toker)
 {
-	if (!str)
-		return (0);
-	while (*str)
-	{
-		if (*str == '\n')
-			return (1);
-		str++;
-	}
-	return (0);
+	if (!toker)
+		return ;
+	ft_lstclear(&toker->tokens, token_void_dest);
+	free(toker->input);
+	free(toker);
 }
