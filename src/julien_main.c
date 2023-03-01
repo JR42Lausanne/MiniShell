@@ -6,7 +6,7 @@
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 15:25:52 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/03/01 18:09:33 by jlaiti           ###   ########.fr       */
+/*   Updated: 2023/03/01 20:38:03 by jlaiti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int	main(int argc, char *argv[], char *envp[])
 	(void) argc;
 	(void) argv;
 	g_env = envp;
+	printf("%s\n", ms_getenv("PATH"));
 	ast = malloc(sizeof(t_ast_node));
 	ast->type = AST_ROOT;
 	ast->child_number = 1;
@@ -33,12 +34,10 @@ int	main(int argc, char *argv[], char *envp[])
 	child->type = AST_BUILTIN;
 	child->child_number = 0;
 	cont = malloc(sizeof(t_builtin_cont));
-	cont->func_pointer = builtin_echo;
-	cont->args = malloc(4 * sizeof(char *));
-	cont->args[0] = "echo";
-	cont->args[1] = "test";
-	cont->args[2] = "-n";
-	cont->args[3] = NULL;
+	cont->func_pointer = builtin_env;
+	cont->args = malloc(2 * sizeof(char *));
+	cont->args[0] = "env";
+	cont->args[1] = NULL;
 	child->content = cont;
 	ast->children = malloc(sizeof(t_ast_node *));
 	ast->children[0] = child;

@@ -1,33 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin_pwd.c                                      :+:      :+:    :+:   */
+/*   ms_getenv.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/01 18:11:33 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/03/01 20:15:06 by jlaiti           ###   ########.fr       */
+/*   Created: 2023/03/01 18:22:09 by jlaiti            #+#    #+#             */
+/*   Updated: 2023/03/01 20:10:52 by jlaiti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-#include "../include/builtins.h"
-#include <stdio.h>
-#include <stdlib.h>
+#include "../include/libft.h"
 
-//using g_env
-int	builtin_pwd(char **args)
+char	*ms_getenv(char	*name)
 {
-	char	*cwd;
+	int		i;
+	char	**env;
+	char	*copy;
+	char	*match;
 
-	(void) args;
-	cwd = ms_getenv("PWD");
-	if (!cwd)
+	env = g_env;
+	i = 0;
+	while (env[i] != 0)
 	{
-		printf("You f*** up the environement PWD is not in it\n");
-		return (1);
+		match = ft_strnstr(env[i], name, ft_strlen(env[i]));
+		if (match)
+		{
+			if (match == env[i])
+				copy = ft_strdup(env[i]);
+		}
+		i++;
 	}
-	printf("%s\n", cwd);
-	free(cwd);
-	return (0);
+	return (copy);
 }
