@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   my_main.c                                          :+:      :+:    :+:   */
+/*   julien_main.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/28 10:23:40 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/03/01 15:19:56 by jlaiti           ###   ########.fr       */
+/*   Created: 2023/03/01 15:25:52 by jlaiti            #+#    #+#             */
+/*   Updated: 2023/03/01 15:38:53 by jlaiti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ int	main(int argc, char *argv[], char *envp[])
 	child->type = AST_CMD;
 	child->child_number = 0;
 	cont = malloc(sizeof(t_cmd_cont));
-	cont->cmd_name = "../minishell/script.sh";
+	cont->cmd_name = "../script.sh";
 	cont->args = malloc(2 * sizeof(char *));
-	cont->args[0] = "../minishell/script.sh";
+	cont->args[0] = "../script.sh";
 	cont->args[1] = NULL;
 	child->content = cont;
 	child->env = envp;
