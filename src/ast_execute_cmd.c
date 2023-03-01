@@ -6,12 +6,13 @@
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 16:04:14 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/03/01 15:19:29 by jlaiti           ###   ########.fr       */
+/*   Updated: 2023/03/01 18:10:30 by jlaiti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/libft.h"
 #include "../include/execute.h"
+#include "../include/minishell.h"
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -66,7 +67,7 @@ void	ast_execute_cmd(t_ast_node *node)
 	pid = fork();
 	if (pid == 0)
 	{
-		execve(cmd_full_path, content->args, node->env);
+		execve(cmd_full_path, content->args, g_env);
 		perror(cmd_full_path);
 	}
 	else

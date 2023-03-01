@@ -1,21 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ast_execute_built.c                                :+:      :+:    :+:   */
+/*   builtin_env.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/28 19:09:38 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/03/01 16:56:57 by jlaiti           ###   ########.fr       */
+/*   Created: 2023/03/01 20:15:56 by jlaiti            #+#    #+#             */
+/*   Updated: 2023/03/01 20:35:33 by jlaiti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/ast.h"
+#include <stdio.h>
+#include "../include/minishell.h"
 
-void	ast_execute_built(t_ast_node *node)
+int	builtin_env(char **args)
 {
-	t_builtin_cont	*content;
+	int		i;
+	char	**env;
 
-	content = (t_builtin_cont *) node->content;
-	content->func_pointer(content->args);
+	env = g_env;
+	(void) args;
+	i = 0;
+	while (env[i])
+	{
+		printf("%s", env[i]);
+		i++;
+	}
+	if (!env)
+		return (1);
+	return (0);
 }

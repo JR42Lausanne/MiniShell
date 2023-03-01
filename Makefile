@@ -2,17 +2,21 @@ CC = gcc
 FLAGS = -Wall -Wextra -Werror -O2 -g
 RM = rm -rf
 
-SRC = ast_execute_cmd.c \
-	  ast_execute_built.c \
-	  ast_execute.c \
-	  token_create.c \
-	  token_destroy.c \
-	  token_void_dest.c \
-	  tokenizer_create.c \
-	  tokenizer_destroy.c \
-	  tokenizer_next_token.c \
-	  tokenizer_parse.c \
-	  tokenizer_as_array.c \
+SRC = ast_execute_cmd.c 		\
+	  ast_execute_built.c 		\
+	  ast_execute.c 			\
+	  builtin_echo.c 			\
+	  builtin_env.c				\
+	  builtin_pwd.c				\
+	  ms_getenv.c 				\
+	  token_create.c			\
+	  token_destroy.c 			\
+	  token_void_dest.c 		\
+	  tokenizer_create.c 		\
+	  tokenizer_destroy.c		\
+	  tokenizer_next_token.c	\
+	  tokenizer_parse.c			\
+	  tokenizer_as_array.c		\
 	  tokens_print.c
 SRC_DIR = $(addprefix src/, $(SRC))
 OBJ = ${SRC_DIR:.c=.o}
