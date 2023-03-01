@@ -6,7 +6,7 @@
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 16:04:14 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/02/28 19:08:50 by jlaiti           ###   ########.fr       */
+/*   Updated: 2023/03/01 13:07:55 by jlaiti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,13 +55,20 @@ static	char	*get_cmd(char	**path, char *cmd)
 	return (NULL);
 }
 
-void	ast_execute_cmd(t_ast_node *node)
+static	void	*get_bin(t_exe *exe)
 {
-	t_exe	*exe;
-
 	exe->path = getenv("PATH");
 	exe->path_bin = ft_split(exe->path, ':');
-	exe->cmd_opt = ft_split(node->content, ' ');
+}
+
+void	ast_execute_cmd(t_ast_node *node)
+{
+	t_exe		*exe;
+	t_cmd_cont	*content;
+
+	content = (t_cmd_cont *) node->content;
+	get_bin(exe);
+	exe->cmd_opt = content->args;
 	exe->cmd = get_cmd(exe->path_bin, exe->cmd_opt[0]);
 	if (!exe->cmd)
 	{
@@ -69,5 +76,9 @@ void	ast_execute_cmd(t_ast_node *node)
 		perror("Command not found");
 		exit(EXIT_FAILURE);
 	}
-	execve(exe->cmd, exe->cmd_opt, (const *char) exe->path);
+	exe->pid1 = fork();
+	if (exe->pid1 == 0)
+	{
+		execve(exe->cmd, exe->cmd_opt,getenv);
+	}
 }
