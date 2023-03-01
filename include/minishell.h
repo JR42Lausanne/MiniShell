@@ -6,7 +6,7 @@
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 13:25:03 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/03/01 13:25:40 by jlaiti           ###   ########.fr       */
+/*   Updated: 2023/03/01 20:13:16 by jlaiti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,7 @@
 # define MINISHELL_H
 
 char	**g_env;
+
+char	*ms_getenv(char *name);
 
 #endif

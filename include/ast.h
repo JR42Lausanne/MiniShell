@@ -6,7 +6,7 @@
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 13:00:55 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/03/01 13:33:04 by jlaiti           ###   ########.fr       */
+/*   Updated: 2023/03/01 18:08:33 by jlaiti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ typedef struct s_ast_node
 	int					child_number;
 	void				*content;
 	struct s_ast_node	**children;
-	char				**env;
 }			t_ast_node;
 
 #endif

@@ -1,21 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ast_execute_built.c                                :+:      :+:    :+:   */
+/*   ms_getenv.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/28 19:09:38 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/03/01 16:56:57 by jlaiti           ###   ########.fr       */
+/*   Created: 2023/03/01 18:22:09 by jlaiti            #+#    #+#             */
+/*   Updated: 2023/03/01 20:10:52 by jlaiti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/ast.h"
+#include "../include/minishell.h"
+#include "../include/libft.h"
 
-void	ast_execute_built(t_ast_node *node)
+char	*ms_getenv(char	*name)
 {
-	t_builtin_cont	*content;
+	int		i;
+	char	**env;
+	char	*copy;
+	char	*match;
 
-	content = (t_builtin_cont *) node->content;
-	content->func_pointer(content->args);
+	env = g_env;
+	i = 0;
+	while (env[i] != 0)
+	{
+		match = ft_strnstr(env[i], name, ft_strlen(env[i]));
+		if (match)
+		{
+			if (match == env[i])
+				copy = ft_strdup(env[i]);
+		}
+		i++;
+	}
+	return (copy);
 }
