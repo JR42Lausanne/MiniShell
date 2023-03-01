@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 15:46:12 by graux             #+#    #+#             */
-/*   Updated: 2023/03/01 17:16:53 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/01 17:43:14 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,19 +53,11 @@ typedef struct s_token
 	int				tok_num;
 }			t_token;
 
-typedef enum e_tokenizer_mode
-{
-	MODE_NORMAL = 0,
-	MODE_SQ,
-	MODE_DQ
-}			t_tok_mode;
-
 typedef struct s_tokenizer
 {
 	t_list		*tokens;
 	char		*input;
 	int			pos;
-	t_tok_mode	mode;
 }			t_tokenizer;
 
 t_token		*token_create(t_token_type type, char *cont, int num);
