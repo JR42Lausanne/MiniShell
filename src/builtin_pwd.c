@@ -1,20 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   builtin_pwd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/01 13:25:03 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/03/01 18:15:01 by jlaiti           ###   ########.fr       */
+/*   Created: 2023/03/01 18:11:33 by jlaiti            #+#    #+#             */
+/*   Updated: 2023/03/01 18:19:47 by jlaiti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "../include/minishell.h"
+#include "../include/builtins.h"
+#include <stdio.h>
+#include <stdlib.h>
 
-char	**g_env;
+//using g_env
+int	builtin_pwd(char **args)
+{
+	char	*cwd;
 
-char	*ms_getenv(char *name);
-
-#endif
+	(void) args;
+	cwd = ms_getenv("PWD");
+	if (!cwd)
+	{
+		printf("You f*** up the environement PWD is not in it\n");
+		return (1);
+	}
+	printf("%s\n", cwd);
+	free(cwd);
+	return (0);
+}

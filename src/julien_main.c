@@ -6,7 +6,7 @@
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 15:25:52 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/03/01 17:41:41 by jlaiti           ###   ########.fr       */
+/*   Updated: 2023/03/01 18:09:33 by jlaiti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "../include/execute.h"
 #include "../include/tokenizer.h"
 #include "../include/builtins.h"
+#include "../include/minishell.h"
 
 int	main(int argc, char *argv[], char *envp[])
 {
@@ -23,11 +24,11 @@ int	main(int argc, char *argv[], char *envp[])
 
 	(void) argc;
 	(void) argv;
+	g_env = envp;
 	ast = malloc(sizeof(t_ast_node));
 	ast->type = AST_ROOT;
 	ast->child_number = 1;
 	ast->content = NULL;
-	ast->env = NULL;
 	child = malloc(sizeof(t_ast_node));
 	child->type = AST_BUILTIN;
 	child->child_number = 0;
@@ -39,7 +40,6 @@ int	main(int argc, char *argv[], char *envp[])
 	cont->args[2] = "-n";
 	cont->args[3] = NULL;
 	child->content = cont;
-	child->env = envp;
 	ast->children = malloc(sizeof(t_ast_node *));
 	ast->children[0] = child;
 	ast_execute(ast);
