@@ -1,34 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tokens_print.c                                     :+:      :+:    :+:   */
+/*   tokenizer_as_array.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/28 17:18:05 by graux             #+#    #+#             */
-/*   Updated: 2023/03/01 16:07:35 by graux            ###   ########.fr       */
+/*   Created: 2023/03/01 16:09:18 by graux             #+#    #+#             */
+/*   Updated: 2023/03/01 16:10:18 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/tokenizer.h"
-#include <stdio.h>
 
-static void	print_tok(t_token *tok)
+t_token	**tokenizer_as_array(t_tokenizer *toker)
 {
-	(void) tok;
-	printf("\n");
-}
+	(void) toker;
 
-void	tokens_print(t_token **tokens)
-{
-	int	i;
-
-	if (!tokens)
-	{
-		printf("This token array is empty\n");
-		return ;
-	}
-	i = -1;
-	while (tokens[++i])
-		print_tok(tokens[i]);
+	//TODO implement
+	return (NULL);
 }

@@ -12,6 +12,7 @@ SRC = ast_execute_cmd.c \
 	  tokenizer_destroy.c \
 	  tokenizer_next_token.c \
 	  tokenizer_parse.c \
+	  tokenizer_as_array.c \
 	  tokens_print.c
 SRC_DIR = $(addprefix src/, $(SRC))
 OBJ = ${SRC_DIR:.c=.o}
