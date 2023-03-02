@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 15:46:12 by graux             #+#    #+#             */
-/*   Updated: 2023/03/01 17:43:14 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/02 08:03:14 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@
 typedef enum e_token_type
 {
 	TOK_WORD = 0,
-	TOK_SPACE,
-	TOK_TAB,
 	TOK_SQ,
 	TOK_DQ,
 	TOK_VAR,
@@ -27,14 +25,11 @@ typedef enum e_token_type
 	TOK_REDIR_IN,
 	TOK_REDIR_OUT,
 	TOK_REDIR_APP,
-	TOK_HEREDOC,
-	TOK_EQ
+	TOK_HEREDOC
 }			t_token_type;
 
 const static char	*g_tokens_str[] = {
 [TOK_WORD] = "TOK_WORD",
-[TOK_SPACE] = "TOK_SPACE",
-[TOK_TAB] = "TOK_TAB",
 [TOK_SQ] = "TOK_SQ",
 [TOK_DQ] = "TOK_DQ",
 [TOK_VAR] = "TOK_VAR",
@@ -42,8 +37,7 @@ const static char	*g_tokens_str[] = {
 [TOK_REDIR_IN] = "TOK_REDIR_IN",
 [TOK_REDIR_OUT] = "TOK_REDIR_OUT",
 [TOK_REDIR_APP] = "TOK_REDIR_APP",
-[TOK_HEREDOC] = "TOK_HEREDOC",
-[TOK_EQ] = "TOK_EQ"
+[TOK_HEREDOC] = "TOK_HEREDOC"
 };
 
 typedef struct s_token
