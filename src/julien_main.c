@@ -6,7 +6,7 @@
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 15:25:52 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/03/02 11:41:45 by jlaiti           ###   ########.fr       */
+/*   Updated: 2023/03/02 11:45:41 by jlaiti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,23 +17,6 @@
 #include "../include/minishell.h"
 #include "../include/libft.h"
 
-static int	env_setup(char **envp)
-{
-	int	i;
-
-	i = 0;
-	while (i < MAX_ENV && envp[i])
-	{
-		g_env[i] = ft_strdup(envp[i]);
-		i++;
-	}
-	if (!envp[i])
-		return (1); //TODO free
-	while (i < MAX_ENV)
-		g_env[i++] = NULL;
-	return (0);
-}
-
 int	main(int argc, char *argv[], char *envp[])
 {
 	t_ast_node		*ast;
@@ -42,7 +25,7 @@ int	main(int argc, char *argv[], char *envp[])
 
 	(void) argc;
 	(void) argv;
-	env_setup(envp);
+	ms_envsetup(envp);
 	ast = malloc(sizeof(t_ast_node));
 	ast->type = AST_ROOT;
 	ast->child_number = 1;

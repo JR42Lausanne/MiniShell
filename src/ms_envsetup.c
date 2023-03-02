@@ -1,23 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ms_envsetup.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/01 13:25:03 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/03/02 11:46:38 by jlaiti           ###   ########.fr       */
+/*   Created: 2023/03/02 11:44:53 by jlaiti            #+#    #+#             */
+/*   Updated: 2023/03/02 11:46:07 by jlaiti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "../include/minishell.h"
+#include "../include/libft.h"
 
-# define MAX_ENV 1000
+int	ms_envsetup(char **envp)
+{
+	int	i;
 
-char	*g_env[MAX_ENV];
-
-char	*ms_getenv(char *name);
-int		ms_envsetup(char **envp);
-
-#endif
+	i = 0;
+	while (i < MAX_ENV && envp[i])
+	{
+		g_env[i] = ft_strdup(envp[i]);
+		i++;
+	}
+	if (!envp[i])
+		return (1); //TODO free
+	while (i < MAX_ENV)
+		g_env[i++] = NULL;
+	return (0);
+}
