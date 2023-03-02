@@ -15,6 +15,8 @@ SRC = ast_execute_cmd.c 		\
 	  token_gen_content.c 		\
 	  token_handle_pipe.c 		\
 	  token_handle_word.c 		\
+	  token_handle_and.c 		\
+	  token_handle_wildcard.c 	\
 	  tokenizer_create.c 		\
 	  tokenizer_destroy.c		\
 	  tokenizer_next_token.c	\
