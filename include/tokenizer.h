@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 15:46:12 by graux             #+#    #+#             */
-/*   Updated: 2023/03/02 10:27:48 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/02 10:38:09 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ void		token_handle_pipe(t_tokenizer *toker, t_token *tok);
 void		token_handle_word(t_tokenizer *toker, t_token *tok);
 void		token_handle_and(t_tokenizer *toker, t_token *tok);
 void		token_handle_wildcard(t_tokenizer *toker, t_token *tok);
+void		token_handle_redir_i(t_tokenizer *toker, t_token *tok);
+void		token_handle_redir_o(t_tokenizer *toker, t_token *tok);
 
 t_tokenizer	*tokenizer_create(char *input);
 void		tokenizer_destroy(t_tokenizer *toker);
