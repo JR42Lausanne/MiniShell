@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 15:46:12 by graux             #+#    #+#             */
-/*   Updated: 2023/03/02 10:04:59 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/02 10:16:39 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ const static char	*g_tokens_str[] = {
 [TOK_INVALID] = "TOK_INVALID"
 };
 
-const static char	*g_special_chars = "|$\'\"<>&";
+const static char	*g_special_chars = "|$\'\"<>&*";
 
 typedef struct s_token
 {
