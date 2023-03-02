@@ -6,7 +6,7 @@
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 21:39:02 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/03/02 11:39:25 by jlaiti           ###   ########.fr       */
+/*   Updated: 2023/03/02 13:09:03 by jlaiti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ int	builtin_export(char **args)
 {	
 	int	i;
 
+	if (args && !args[1])
+		return (1);
 	i = -1;
 	if (ft_strchr(args[1], '='))
 	{		
