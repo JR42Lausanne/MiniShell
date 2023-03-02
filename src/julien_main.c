@@ -6,7 +6,7 @@
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 15:25:52 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/03/01 20:38:03 by jlaiti           ###   ########.fr       */
+/*   Updated: 2023/03/02 11:45:41 by jlaiti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "../include/tokenizer.h"
 #include "../include/builtins.h"
 #include "../include/minishell.h"
+#include "../include/libft.h"
 
 int	main(int argc, char *argv[], char *envp[])
 {
@@ -24,8 +25,7 @@ int	main(int argc, char *argv[], char *envp[])
 
 	(void) argc;
 	(void) argv;
-	g_env = envp;
-	printf("%s\n", ms_getenv("PATH"));
+	ms_envsetup(envp);
 	ast = malloc(sizeof(t_ast_node));
 	ast->type = AST_ROOT;
 	ast->child_number = 1;
@@ -34,13 +34,15 @@ int	main(int argc, char *argv[], char *envp[])
 	child->type = AST_BUILTIN;
 	child->child_number = 0;
 	cont = malloc(sizeof(t_builtin_cont));
-	cont->func_pointer = builtin_env;
-	cont->args = malloc(2 * sizeof(char *));
-	cont->args[0] = "env";
-	cont->args[1] = NULL;
+	cont->func_pointer = builtin_export;
+	cont->args = malloc(3 * sizeof(char *));
+	cont->args[0] = "export";
+	cont->args[1] = "test=some value";
+	cont->args[2] = NULL;
 	child->content = cont;
 	ast->children = malloc(sizeof(t_ast_node *));
 	ast->children[0] = child;
 	ast_execute(ast);
+	builtin_env(NULL);
 	return (0);
 }

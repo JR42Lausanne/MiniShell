@@ -1,34 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ms_getenv.c                                        :+:      :+:    :+:   */
+/*   ms_envsetup.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/01 18:22:09 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/03/01 22:07:44 by jlaiti           ###   ########.fr       */
+/*   Created: 2023/03/02 11:44:53 by jlaiti            #+#    #+#             */
+/*   Updated: 2023/03/02 11:46:07 by jlaiti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 #include "../include/libft.h"
 
-char	*ms_getenv(char	*name)
+int	ms_envsetup(char **envp)
 {
-	int		i;
-	char	*copy;
-	char	*match;
+	int	i;
 
 	i = 0;
-	while (g_env[i] != 0)
+	while (i < MAX_ENV && envp[i])
 	{
-		match = ft_strnstr(g_env[i], name, ft_strlen(g_env[i]));
-		if (match)
-		{
-			if (match == g_env[i])
-				copy = ft_strdup(g_env[i]);
-		}
+		g_env[i] = ft_strdup(envp[i]);
 		i++;
 	}
-	return (copy);
+	if (!envp[i])
+		return (1); //TODO free
+	while (i < MAX_ENV)
+		g_env[i++] = NULL;
+	return (0);
 }

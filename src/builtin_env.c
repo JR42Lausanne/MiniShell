@@ -6,7 +6,7 @@
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 20:15:56 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/03/01 20:35:33 by jlaiti           ###   ########.fr       */
+/*   Updated: 2023/03/01 21:09:02 by jlaiti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,14 @@ int	builtin_env(char **args)
 	char	**env;
 
 	env = g_env;
+	if (!env)
+		return (1);
 	(void) args;
 	i = 0;
 	while (env[i])
 	{
-		printf("%s", env[i]);
+		printf("%s\n", env[i]);
 		i++;
 	}
-	if (!env)
-		return (1);
 	return (0);
 }
