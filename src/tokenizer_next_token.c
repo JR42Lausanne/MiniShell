@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 16:00:32 by graux             #+#    #+#             */
-/*   Updated: 2023/03/02 14:47:16 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/02 15:36:14 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,20 +42,13 @@ static void	sq_mode(t_tokenizer *toker, t_token *tok)
 	closing_sq = ft_strchr(toker->input + toker->pos, '\'');
 	if (!closing_sq)
 	{
-		printf("No matching \'\n");
-		token_gen_content(tok, "Invalid string", 14);
+		token_gen_content(tok, "Invalid sq string", 17);
 		tok->type = TOK_INVALID;
 		return ;
 	}
 	str_size = closing_sq - (toker->input + toker->pos);
 	token_gen_content(tok, toker->input + toker->pos, str_size);
 	toker->pos += str_size + 1;
-}
-
-static void	dq_mode(t_tokenizer *toker, t_token *tok)
-{
-	(void) toker;
-	(void) tok;
 }
 
 t_token	*tokenizer_next_token(t_tokenizer *toker)

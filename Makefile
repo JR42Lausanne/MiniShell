@@ -10,6 +10,7 @@ SRC = ast_execute_cmd.c 		\
 	  builtin_pwd.c				\
 	  builtin_export.c			\
 	  builtin_unset.c			\
+	  dq_mode.c					\
 	  ms_getenv.c 				\
 	  ms_envsetup.c				\
 	  token_create.c			\
