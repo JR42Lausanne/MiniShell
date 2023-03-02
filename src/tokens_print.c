@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 17:18:05 by graux             #+#    #+#             */
-/*   Updated: 2023/03/02 09:09:13 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/02 09:49:47 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 static void	print_tok(t_token *tok)
 {
-	printf("%d: %15s -> %s\n", tok->tok_num, g_tokens_str[tok->type],
+	printf("%d: %-15s -> %s\n", tok->tok_num, g_tokens_str[tok->type],
 		tok->content);
 }
 

@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 15:46:12 by graux             #+#    #+#             */
-/*   Updated: 2023/03/02 09:25:13 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/02 10:04:59 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ const static char	*g_tokens_str[] = {
 [TOK_INVALID] = "TOK_INVALID"
 };
 
+const static char	*g_special_chars = "|$\'\"<>&";
+
 typedef struct s_token
 {
 	t_token_type	type;
@@ -60,6 +62,9 @@ t_token		*token_create(t_token_type type, char *cont, int num);
 void		token_void_dest(void *tok);
 void		token_destroy(t_token *tok);
 void		token_gen_content(t_token *tok, char *src, int size);
+//handlers for next token generation
+void		token_handle_pipe(t_tokenizer *toker, t_token *tok);
+void		token_handle_word(t_tokenizer *toker, t_token *tok);
 
 t_tokenizer	*tokenizer_create(char *input);
 void		tokenizer_destroy(t_tokenizer *toker);

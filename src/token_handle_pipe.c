@@ -1,23 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tokenizer_parse.c                                  :+:      :+:    :+:   */
+/*   token_handle_pipe.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/28 16:01:38 by graux             #+#    #+#             */
-/*   Updated: 2023/03/02 09:49:02 by graux            ###   ########.fr       */
+/*   Created: 2023/03/02 09:54:39 by graux             #+#    #+#             */
+/*   Updated: 2023/03/02 09:58:09 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/tokenizer.h"
 
-t_token	**tokenizer_parse(t_tokenizer *toker)
+void	token_handle_pipe(t_tokenizer *toker, t_token *tok)
 {
-	t_token	*token;
-
-	token = tokenizer_next_token(toker);
-	while (token)
-		token = tokenizer_next_token(toker);
-	return (tokenizer_as_array(toker));
+	tok->type = TOK_PIPE;
+	token_gen_content(tok, "|", 1);
+	toker->pos += 1;
 }

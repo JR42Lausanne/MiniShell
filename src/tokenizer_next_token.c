@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 16:00:32 by graux             #+#    #+#             */
-/*   Updated: 2023/03/02 09:39:51 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/02 10:16:00 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,10 @@
 
 static void	normal_mode(t_tokenizer *toker, t_token *tok)
 {
-	(void) toker;
-	(void) tok;
+	if (toker->input[toker->pos] == '|') // TODO manage or
+		token_handle_pipe(toker, tok);
+	else
+		token_handle_word(toker, tok);
 }
 
 static void	sq_mode(t_tokenizer *toker, t_token *tok)

@@ -13,6 +13,8 @@ SRC = ast_execute_cmd.c 		\
 	  token_destroy.c 			\
 	  token_void_dest.c 		\
 	  token_gen_content.c 		\
+	  token_handle_pipe.c 		\
+	  token_handle_word.c 		\
 	  tokenizer_create.c 		\
 	  tokenizer_destroy.c		\
 	  tokenizer_next_token.c	\
