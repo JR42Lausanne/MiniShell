@@ -3,96 +3,81 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlaiti <marvin@42lausanne.ch>              +#+  +:+       +#+        */
+/*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/17 11:56:24 by jlaiti            #+#    #+#             */
-/*   Updated: 2022/10/18 15:00:42 by jlaiti           ###   ########.fr       */
+/*   Created: 2022/10/07 16:00:51 by graux             #+#    #+#             */
+/*   Updated: 2022/10/10 14:43:08 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "libft.h"
-//#include <stdio.h>
-//#include <stdlib.h>
 
-static	int	numb_int(int n)
+static void	ft_strrev(char *s, int start, int end)
 {
-	int	counter;
+	char	temp;
 
-	counter = 0;
-	if (n <= 0)
-		counter = 1;
+	if (start < end)
+	{
+		temp = *(s + start);
+		*(s + start) = *(s + end);
+		*(s + end) = temp;
+		start++;
+		end--;
+		ft_strrev(s, start, end);
+	}
+}
+
+static void	ft_itoa_long(char *n_str, long n)
+{
+	int	i;
+	int	neg;
+
+	i = 0;
+	neg = 0;
+	if (n == 0)
+		n_str[i++] = '0';
+	if (n < 0)
+	{
+		n = (long) -n;
+		neg = 1;
+	}
 	while (n != 0)
 	{
-		n = n / 10;
-		counter++;
+		n_str[i++] = n % 10 + '0';
+		n /= 10;
 	}
-	return (counter + 1);
+	if (neg)
+		n_str[i++] = '-';
+	ft_strrev(n_str, 0, i - 1);
+	n_str[i] = '\0';
 }
 
-static char	*ft_strrev(char *str)
+static size_t	ft_intcharlen(long n)
 {
-	int		i;
-	int		size;
-	char	t;
+	size_t	len;
 
-	i = 0;
-	size = 0;
-	while (str[size] != '\0')
-		size++;
-	while (i < size / 2)
-	{
-		t = str[i];
-		str[i] = str[size - 1 - i];
-		str[size - 1 - i] = t;
-		i++;
-	}
-	return (str);
-}
-
-static char	*ft_itoa_long(long n)
-{
-	int		i;
-	char	*new;
-	int		isneg;
-
-	isneg = 0;
-	i = 0;
-	new = (char *)malloc(sizeof(char) * numb_int(n));
-	if (new == 0)
-		return (0);
+	if (n == 0)
+		return (2);
+	len = 1;
 	if (n < 0)
-	{	
-		isneg = 1 ;
-		n = -n;
-	}
-	while (n >= 0)
 	{
-		new[i++] = n % 10 + '0';
-		n = n / 10;
-		if (n == 0)
-			n = -1;
+		n = -n;
+		len++;
 	}
-	if (isneg)
-		new[i++] = '-';
-	new[i] = '\0';
-	return (ft_strrev(new));
+	while (n != 0)
+	{
+		len++;
+		n /= 10;
+	}
+	return (len);
 }
 
 char	*ft_itoa(int n)
 {
-	long	nb;
+	char	*n_str;
 
-	nb = n;
-	return (ft_itoa_long(nb));
+	n_str = malloc(ft_intcharlen(n) * sizeof(char));
+	if (n_str == NULL)
+		return (NULL);
+	ft_itoa_long(n_str, n);
+	return (n_str);
 }
-/*
-int main(void)
-{
-	int n;
-	n = 0;
-
-	printf("la chaine de caractere est %s\n", ft_itoa(n));
-
-	return (0);
-
-}*/
