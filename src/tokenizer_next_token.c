@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 16:00:32 by graux             #+#    #+#             */
-/*   Updated: 2023/03/02 09:36:59 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/02 09:39:51 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ static void	sq_mode(t_tokenizer *toker, t_token *tok)
 	if (!closing_sq)
 	{
 		printf("No matching \'\n");
+		token_gen_content(tok, "(INVALID)", 9);
 		tok->type = TOK_INVALID;
 		return ;
 	}
