@@ -6,7 +6,7 @@
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 18:22:09 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/03/01 22:07:44 by jlaiti           ###   ########.fr       */
+/*   Updated: 2023/03/02 15:02:30 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 char	*ms_getenv(char	*name)
 {
 	int		i;
-	char	*copy;
 	char	*match;
 
 	i = 0;
@@ -26,9 +25,9 @@ char	*ms_getenv(char	*name)
 		if (match)
 		{
 			if (match == g_env[i])
-				copy = ft_strdup(g_env[i]);
+				return (ft_strdup(g_env[i]));
 		}
 		i++;
 	}
-	return (copy);
+	return (NULL);
 }
