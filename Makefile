@@ -12,6 +12,7 @@ SRC = ast_execute_cmd.c 		\
 	  token_create.c			\
 	  token_destroy.c 			\
 	  token_void_dest.c 		\
+	  token_gen_content.c 		\
 	  tokenizer_create.c 		\
 	  tokenizer_destroy.c		\
 	  tokenizer_next_token.c	\
@@ -29,7 +30,7 @@ INCLUDES = -Iinclude/
 LIB = libft.a
 
 %.o: %.c
-	${CC} ${FLAGS} ${INCLUDES} -c $< -o $@
+	${CC} ${FLAGS} ${INCLUDES} -c $< -o $@ -fsanitize=address
 
 all: ${NAME}
 

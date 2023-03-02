@@ -1,27 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tokenizer_parse.c                                  :+:      :+:    :+:   */
+/*   token_gen_content.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/28 16:01:38 by graux             #+#    #+#             */
-/*   Updated: 2023/03/02 08:53:18 by graux            ###   ########.fr       */
+/*   Created: 2023/03/02 09:25:32 by graux             #+#    #+#             */
+/*   Updated: 2023/03/02 09:32:47 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/tokenizer.h"
+#include "../include/libft.h"
 
-t_token	**tokenizer_parse(t_tokenizer *toker)
+void	token_gen_content(t_token *tok, char *src, int size)
 {
-	t_token	*token;
-
-	token = tokenizer_next_token(toker);
-	while (token)
-	{
-		token = tokenizer_next_token(toker);
-		if (token && token->type == TOK_INVALID)
-			return (tokenizer_as_array(toker));
-	}
-	return (tokenizer_as_array(toker));
+	tok->content = malloc((size + 1) * sizeof(char));
+	if (!tok->content)
+		return ;
+	ft_memcpy(tok->content, src, size);
+	tok->content[size] = '\0';
 }
