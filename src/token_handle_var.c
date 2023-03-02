@@ -1,33 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   guilhem_main.c                                     :+:      :+:    :+:   */
+/*   token_handle_var.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/01 15:52:35 by graux             #+#    #+#             */
-/*   Updated: 2023/03/02 12:20:05 by graux            ###   ########.fr       */
+/*   Created: 2023/03/02 12:08:53 by graux             #+#    #+#             */
+/*   Updated: 2023/03/02 12:18:44 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/tokenizer.h"
-#include "../include/minishell.h"
-#include <stdio.h>
+#include "../include/libft.h"
 
-int	main(int argc, char *argv[], char *envp[])
+static int	var_len(t_tokenizer *toker)
 {
-	t_token		**tokens;
-	t_tokenizer	*toker;
+	int	size;
 
-	ms_envsetup(envp);
-	if (argc != 2)
+	size = 0;
+	while (toker->input[toker->pos + size] == '_'
+		|| ft_isalpha(toker->input[toker->pos + size]))
 	{
-		printf("Invalid number of arguments\n");
-		return (1);
+		size++;
 	}
-	printf("%s\n", argv[1]);
-	toker = tokenizer_create(argv[1]);
-	tokens = tokenizer_parse(toker);
-	tokens_print(tokens);
-	return (0);
+	return (size);
+}
+
+void	token_handle_var(t_tokenizer *toker, t_token *tok)
+{
+	int	size_in_input;
+
+	printf("hey there");
+	tok->type = TOK_VAR;
+	toker->pos++;
+	size_in_input = var_len(toker);
+	toker->pos += size_in_input;
+	printf("%d\n", size_in_input);
 }
