@@ -24,6 +24,7 @@ SRC = ast_execute_cmd.c 		\
 	  token_handle_redir_i.c 	\
 	  token_handle_redir_o.c 	\
 	  token_handle_var.c	 	\
+	  token_handle_space.c	 	\
 	  tokenizer_create.c 		\
 	  tokenizer_destroy.c		\
 	  tokenizer_next_token.c	\
@@ -55,7 +56,7 @@ $(JULIEN_BIN): ${LIB} $(OBJ) src/julien_main.o
 	$(CC) ${FLAGS} src/julien_main.o $(OBJ) -L. -lft -o $(JULIEN_BIN) -fsanitize=address
 
 $(GUILHEM_BIN): ${LIB} $(OBJ) src/guilhem_main.o
-	$(CC) ${FLAGS} src/guilhem_main.o $(OBJ) -L. -lft -o $(GUILHEM_BIN) -fsanitize=address
+	$(CC) ${FLAGS} src/guilhem_main.o $(OBJ) -L. -lft -o $(GUILHEM_BIN)
 
 re: fclean all
 

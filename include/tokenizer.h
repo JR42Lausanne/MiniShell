@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 15:46:12 by graux             #+#    #+#             */
-/*   Updated: 2023/03/03 16:15:30 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/03 16:47:46 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ typedef enum e_token_type
 	TOK_REDIR_OUT,
 	TOK_REDIR_APP,
 	TOK_HEREDOC,
+	TOK_SPACE,
 	TOK_INVALID
 }			t_token_type;
 
@@ -58,6 +59,7 @@ void		token_handle_wildcard(t_tokenizer *toker, t_token *tok);
 void		token_handle_redir_i(t_tokenizer *toker, t_token *tok);
 void		token_handle_redir_o(t_tokenizer *toker, t_token *tok);
 void		token_handle_var(t_tokenizer *toker, t_token *tok);
+void		token_handle_space(t_tokenizer *toker, t_token *tok);
 void		dq_mode(t_tokenizer *toker, t_token *tok);
 
 t_tokenizer	*tokenizer_create(char *input);
