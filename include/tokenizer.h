@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 15:46:12 by graux             #+#    #+#             */
-/*   Updated: 2023/03/02 15:29:34 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/03 16:15:30 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,24 +31,6 @@ typedef enum e_token_type
 	TOK_HEREDOC,
 	TOK_INVALID
 }			t_token_type;
-
-const static char	*g_tokens_str[] = {
-[TOK_WORD] = "TOK_WORD",
-[TOK_SQ] = "TOK_SQ",
-[TOK_DQ] = "TOK_DQ",
-[TOK_VAR] = "TOK_VAR",
-[TOK_PIPE] = "TOK_PIPE",
-[TOK_OR] = "TOK_OR",
-[TOK_AND] = "TOK_AND",
-[TOK_WILDCARD] = "TOK_WILDCARD",
-[TOK_REDIR_IN] = "TOK_REDIR_IN",
-[TOK_REDIR_OUT] = "TOK_REDIR_OUT",
-[TOK_REDIR_APP] = "TOK_REDIR_APP",
-[TOK_HEREDOC] = "TOK_HEREDOC",
-[TOK_INVALID] = "TOK_INVALID"
-};
-
-const static char	*g_special_chars = "|$\'\"<>&* \t";
 
 typedef struct s_token
 {

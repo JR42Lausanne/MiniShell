@@ -41,7 +41,7 @@ INCLUDES = -Iinclude/
 LIB = libft.a
 
 %.o: %.c
-	${CC} ${FLAGS} ${INCLUDES} -c $< -o $@ -fsanitize=address
+	${CC} ${FLAGS} ${INCLUDES} -c $< -o $@
 
 all: ${NAME}
 

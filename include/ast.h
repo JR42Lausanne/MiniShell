@@ -6,7 +6,7 @@
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 13:00:55 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/03/01 18:08:33 by jlaiti           ###   ########.fr       */
+/*   Updated: 2023/03/03 16:11:16 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ typedef enum e_ast_node_type
 	AST_TYPE_SIZE
 }			t_ast_node_type;
 
-const static int	g_ast_prio[AST_TYPE_SIZE] = {
+static const int	g_ast_prio[AST_TYPE_SIZE] = {
 [AST_ROOT] = 0,
 [AST_BUILTIN] = 4,
 [AST_CMD] = 4,

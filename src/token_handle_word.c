@@ -6,11 +6,13 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 10:00:50 by graux             #+#    #+#             */
-/*   Updated: 2023/03/02 10:15:37 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/03 16:17:11 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/tokenizer.h"
+
+static const char	*g_special_chars = "|$\'\"<>&* \t";
 
 static int	in_tok_word(char c)
 {
