@@ -6,12 +6,14 @@
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 13:00:55 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/03/03 16:11:16 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/03 18:37:57 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef AST_H
 # define AST_H
+
+# include "tokenizer.h"
 
 typedef enum e_ast_node_type
 {
@@ -25,7 +27,6 @@ typedef enum e_ast_node_type
 	AST_OUT_REDIR,
 	AST_OUT_APPEND,
 	AST_PIPE,
-	AST_SPLIT,
 	AST_TYPE_SIZE
 }			t_ast_node_type;
 
@@ -60,7 +61,13 @@ typedef struct s_ast_node
 	t_ast_node_type		type;
 	int					child_number;
 	void				*content;
-	struct s_ast_node	**children;
+	struct s_ast_node	*children[2];
 }			t_ast_node;
+
+t_ast_node		*ast_node_create(t_token **tokens, int start, int size);
+t_ast_node_type	ast_find_type(t_token **tokens, int start, int size);
+
+t_ast_node		*ast_generate(t_token **tokens);
+void			ast_print(t_ast_node *root, int depth);
 
 #endif

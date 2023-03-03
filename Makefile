@@ -5,6 +5,9 @@ RM = rm -rf
 SRC = ast_execute_cmd.c 		\
 	  ast_execute_built.c 		\
 	  ast_execute.c 			\
+	  ast_generate.c 			\
+	  ast_node_create.c 		\
+	  ast_print.c	 			\
 	  builtin_echo.c 			\
 	  builtin_env.c				\
 	  builtin_pwd.c				\
@@ -31,6 +34,7 @@ SRC = ast_execute_cmd.c 		\
 	  tokenizer_parse.c			\
 	  tokenizer_as_array.c		\
 	  tokenize_input.c			\
+	  tokens_size.c				\
 	  tokens_print.c
 SRC_DIR = $(addprefix src/, $(SRC))
 OBJ = ${SRC_DIR:.c=.o}

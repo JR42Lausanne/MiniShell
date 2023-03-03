@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 15:46:12 by graux             #+#    #+#             */
-/*   Updated: 2023/03/03 17:21:48 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/03 17:50:57 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 # define TOKENIZER_H
 
 # include "libft.h"
+
+//TODO eliminate spaces and agregate tokens
+//TODO maybe leaks when input is ""
 
 typedef enum e_token_type
 {
@@ -70,5 +73,6 @@ t_token		**tokenizer_parse(t_tokenizer *toker);
 t_token		**tokenize_input(char *input);
 
 void		tokens_print(t_token **tokens);
+int			tokens_size(t_token **tokens);
 
 #endif
