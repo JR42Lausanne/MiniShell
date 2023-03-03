@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 16:00:32 by graux             #+#    #+#             */
-/*   Updated: 2023/03/03 16:58:05 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/03 17:29:20 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ t_token	*tokenizer_next_token(t_tokenizer *toker)
 	tok = malloc(sizeof(t_token));
 	if (!tok)
 		return (NULL);
-	printf("rest: %s\n", &toker->input[toker->pos]);
 	if (toker->input[toker->pos] == ' ' || toker->input[toker->pos] == '\t')
 		token_handle_space(toker, tok);
 	else if (toker->input[toker->pos] == '\'')

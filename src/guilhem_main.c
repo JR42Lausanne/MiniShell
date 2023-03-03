@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 15:52:35 by graux             #+#    #+#             */
-/*   Updated: 2023/03/02 12:20:05 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/03 17:23:59 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 int	main(int argc, char *argv[], char *envp[])
 {
 	t_token		**tokens;
-	t_tokenizer	*toker;
 
 	ms_envsetup(envp);
 	if (argc != 2)
@@ -26,8 +25,7 @@ int	main(int argc, char *argv[], char *envp[])
 		return (1);
 	}
 	printf("%s\n", argv[1]);
-	toker = tokenizer_create(argv[1]);
-	tokens = tokenizer_parse(toker);
+	tokens = tokenize_input(argv[1]);
 	tokens_print(tokens);
 	return (0);
 }

@@ -30,6 +30,7 @@ SRC = ast_execute_cmd.c 		\
 	  tokenizer_next_token.c	\
 	  tokenizer_parse.c			\
 	  tokenizer_as_array.c		\
+	  tokenize_input.c			\
 	  tokens_print.c
 SRC_DIR = $(addprefix src/, $(SRC))
 OBJ = ${SRC_DIR:.c=.o}
@@ -56,7 +57,7 @@ $(JULIEN_BIN): ${LIB} $(OBJ) src/julien_main.o
 	$(CC) ${FLAGS} src/julien_main.o $(OBJ) -L. -lft -o $(JULIEN_BIN) -fsanitize=address
 
 $(GUILHEM_BIN): ${LIB} $(OBJ) src/guilhem_main.o
-	$(CC) ${FLAGS} src/guilhem_main.o $(OBJ) -L. -lft -o $(GUILHEM_BIN)
+	$(CC) ${FLAGS} src/guilhem_main.o $(OBJ) -L. -lft -o $(GUILHEM_BIN) -fsanitize=address
 
 re: fclean all
 

@@ -6,11 +6,12 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 15:57:40 by graux             #+#    #+#             */
-/*   Updated: 2023/03/01 17:43:05 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/03 17:27:47 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/tokenizer.h"
+#include "../include/libft.h"
 #include <stdlib.h>
 
 t_tokenizer	*tokenizer_create(char *input)
@@ -21,7 +22,7 @@ t_tokenizer	*tokenizer_create(char *input)
 	if (!toker)
 		return (NULL);
 	toker->tokens = NULL;
-	toker->input = input;
+	toker->input = ft_strdup(input);
 	toker->pos = 0;
 	return (toker);
 }

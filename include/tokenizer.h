@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 15:46:12 by graux             #+#    #+#             */
-/*   Updated: 2023/03/03 16:47:46 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/03 17:21:48 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ void		tokenizer_destroy(t_tokenizer *toker);
 t_token		*tokenizer_next_token(t_tokenizer *toker);
 t_token		**tokenizer_as_array(t_tokenizer *toker);
 t_token		**tokenizer_parse(t_tokenizer *toker);
+t_token		**tokenize_input(char *input);
 
 void		tokens_print(t_token **tokens);
 

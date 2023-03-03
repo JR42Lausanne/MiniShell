@@ -1,20 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   token_void_dest.c                                  :+:      :+:    :+:   */
+/*   tokenize_input.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/28 16:25:26 by graux             #+#    #+#             */
-/*   Updated: 2023/03/03 17:31:30 by graux            ###   ########.fr       */
+/*   Created: 2023/03/03 17:21:59 by graux             #+#    #+#             */
+/*   Updated: 2023/03/03 17:24:49 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/tokenizer.h"
 
-// we can't clear the tokens in the linked list
-// because they are used later on during the ast generation
-void	token_void_dest(void *tok)
+t_token	**tokenize_input(char *input)
 {
-	(void) tok;
+	t_tokenizer	*toker;
+	t_token		**tokens;
+
+	toker = tokenizer_create(input);
+	tokens = tokenizer_parse(toker);
+	tokenizer_destroy(toker);
+	return (tokens);
 }
