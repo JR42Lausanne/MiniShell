@@ -5,6 +5,7 @@ RM = rm -rf
 SRC = ast_execute_cmd.c 		\
 	  ast_execute_built.c 		\
 	  ast_execute.c 			\
+	  ast_find_type.c 			\
 	  ast_generate.c 			\
 	  ast_node_create.c 		\
 	  ast_print.c	 			\

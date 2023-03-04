@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 18:06:09 by graux             #+#    #+#             */
-/*   Updated: 2023/03/03 18:32:12 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/04 15:43:32 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ void	ast_print(t_ast_node *node, int depth)
 {
 	if (!node)
 		return ;
-	printf("%*s%d -> %s\n", depth, "  ", depth, g_ast_string[node->type]);
+	printf("%*c%d -> %s START\n", depth, ' ', depth, g_ast_string[node->type]);
 	ast_print(node->children[0], depth + 1);
 	ast_print(node->children[1], depth + 1);
-	printf("%*s%d -> %s no more childrens\n", depth, "  ", depth,
+	printf("%*c%d -> %s END\n", depth, ' ', depth,
 		g_ast_string[node->type]);
 }

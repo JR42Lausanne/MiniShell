@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 15:52:35 by graux             #+#    #+#             */
-/*   Updated: 2023/03/03 18:28:20 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/04 15:41:55 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,6 @@ int	main(int argc, char *argv[], char *envp[])
 	printf("\nAST generation:\n");
 	ast_root = ast_generate(tokens); //TODO free tokens
 	printf("\nAST Generated:\n");
-	ast_print(ast_root, 1);
+	ast_print(ast_root, 0);
 	return (0);
 }
