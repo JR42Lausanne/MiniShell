@@ -6,12 +6,14 @@
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 11:44:53 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/03/02 11:46:07 by jlaiti           ###   ########.fr       */
+/*   Updated: 2023/03/03 16:29:54 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 #include "../include/libft.h"
+
+char	*g_env[MAX_ENV];
 
 int	ms_envsetup(char **envp)
 {

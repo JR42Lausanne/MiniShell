@@ -6,12 +6,14 @@
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 13:00:55 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/03/01 18:08:33 by jlaiti           ###   ########.fr       */
+/*   Updated: 2023/03/04 18:02:34 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef AST_H
 # define AST_H
+
+# include "tokenizer.h"
 
 typedef enum e_ast_node_type
 {
@@ -25,22 +27,8 @@ typedef enum e_ast_node_type
 	AST_OUT_REDIR,
 	AST_OUT_APPEND,
 	AST_PIPE,
-	AST_SPLIT,
 	AST_TYPE_SIZE
 }			t_ast_node_type;
-
-const static int	g_ast_prio[AST_TYPE_SIZE] = {
-[AST_ROOT] = 0,
-[AST_BUILTIN] = 4,
-[AST_CMD] = 4,
-[AST_COND_AND] = 3,
-[AST_COND_OR] = 3,
-[AST_IN_REDIR] = 2,
-[AST_HEREDOC] = 2,
-[AST_OUT_REDIR] = 2,
-[AST_OUT_APPEND] = 2,
-[AST_PIPE] = 1
-};
 
 typedef struct s_cmd_cont
 {
@@ -60,7 +48,18 @@ typedef struct s_ast_node
 	t_ast_node_type		type;
 	int					child_number;
 	void				*content;
-	struct s_ast_node	**children;
+	struct s_ast_node	*children[2];
 }			t_ast_node;
+
+t_ast_node		*ast_node_create(t_token **tokens, int start, int size);
+void			ast_node_gen_cmd(t_ast_node *node, t_token **tokens, int start,
+					int size);
+void			ast_node_gen_builtin(t_ast_node *node, t_token **tokens,
+					int start, int size);
+int				ast_find_type(t_ast_node *node, t_token **tokens, int start,
+					int size);
+
+t_ast_node		*ast_generate(t_token **tokens);
+void			ast_print(t_ast_node *root, int depth);
 
 #endif

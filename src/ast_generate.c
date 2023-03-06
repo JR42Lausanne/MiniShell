@@ -1,35 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tokenizer_as_array.c                               :+:      :+:    :+:   */
+/*   ast_generate.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/01 16:09:18 by graux             #+#    #+#             */
-/*   Updated: 2023/03/01 16:47:33 by graux            ###   ########.fr       */
+/*   Created: 2023/03/03 17:43:02 by graux             #+#    #+#             */
+/*   Updated: 2023/03/03 18:00:09 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/tokenizer.h"
+#include "../include/ast.h"
 
-t_token	**tokenizer_as_array(t_tokenizer *toker)
+t_ast_node	*ast_generate(t_token **tokens)
 {
-	t_token	**array;
-	t_list	*lst;
-	int		i;
-	int		len;
+	t_ast_node	*root;
+	int			size;
 
-	len = ft_lstsize(toker->tokens);
-	array = malloc((len + 1) * sizeof(t_token *));
-	if (!array)
+	size = tokens_size(tokens);
+	if (size == 0)
 		return (NULL);
-	lst = toker->tokens;
-	i = 0;
-	while (lst)
-	{
-		array[i++] = lst->content;
-		lst = lst->next;
-	}
-	array[i] = NULL;
-	return (array);
+	root = malloc(sizeof(t_ast_node));
+	if (!root)
+		return (NULL);
+	root->type = AST_ROOT;
+	root->child_number = 1;
+	root->content = NULL;
+	root->children[1] = NULL;
+	root->children[0] = ast_node_create(tokens, 0, size);
+	return (root);
 }

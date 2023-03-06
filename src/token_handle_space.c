@@ -1,35 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tokenizer_as_array.c                               :+:      :+:    :+:   */
+/*   token_handle_space.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/01 16:09:18 by graux             #+#    #+#             */
-/*   Updated: 2023/03/01 16:47:33 by graux            ###   ########.fr       */
+/*   Created: 2023/03/03 16:48:43 by graux             #+#    #+#             */
+/*   Updated: 2023/03/03 16:59:00 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/tokenizer.h"
 
-t_token	**tokenizer_as_array(t_tokenizer *toker)
+void	token_handle_space(t_tokenizer *toker, t_token *tok)
 {
-	t_token	**array;
-	t_list	*lst;
-	int		i;
-	int		len;
-
-	len = ft_lstsize(toker->tokens);
-	array = malloc((len + 1) * sizeof(t_token *));
-	if (!array)
-		return (NULL);
-	lst = toker->tokens;
-	i = 0;
-	while (lst)
-	{
-		array[i++] = lst->content;
-		lst = lst->next;
-	}
-	array[i] = NULL;
-	return (array);
+	tok->type = TOK_SPACE;
+	while (toker->input[toker->pos] == ' ' || toker->input[toker->pos] == '\t')
+		toker->pos += 1;
+	token_gen_content(tok, " ", 1);
 }

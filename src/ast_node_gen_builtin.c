@@ -1,35 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tokenizer_as_array.c                               :+:      :+:    :+:   */
+/*   ast_node_gen_builtin.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/01 16:09:18 by graux             #+#    #+#             */
-/*   Updated: 2023/03/01 16:47:33 by graux            ###   ########.fr       */
+/*   Created: 2023/03/04 18:06:09 by graux             #+#    #+#             */
+/*   Updated: 2023/03/04 18:09:15 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/tokenizer.h"
+#include "../include/ast.h"
 
-t_token	**tokenizer_as_array(t_tokenizer *toker)
+void	ast_node_gen_builtin(t_ast_node *node, t_token **tokens, int start,
+		int size)
 {
-	t_token	**array;
-	t_list	*lst;
-	int		i;
-	int		len;
-
-	len = ft_lstsize(toker->tokens);
-	array = malloc((len + 1) * sizeof(t_token *));
-	if (!array)
-		return (NULL);
-	lst = toker->tokens;
-	i = 0;
-	while (lst)
-	{
-		array[i++] = lst->content;
-		lst = lst->next;
-	}
-	array[i] = NULL;
-	return (array);
 }

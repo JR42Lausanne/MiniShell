@@ -5,21 +5,39 @@ RM = rm -rf
 SRC = ast_execute_cmd.c 		\
 	  ast_execute_built.c 		\
 	  ast_execute.c 			\
+	  ast_find_type.c 			\
+	  ast_generate.c 			\
+	  ast_node_gen_cmd.c		\
+	  ast_node_gen_builtin.c	\
+	  ast_node_create.c 		\
+	  ast_print.c	 			\
 	  builtin_echo.c 			\
 	  builtin_env.c				\
 	  builtin_pwd.c				\
 	  builtin_export.c			\
 	  builtin_unset.c			\
+	  dq_mode.c					\
 	  ms_getenv.c 				\
 	  ms_envsetup.c				\
 	  token_create.c			\
 	  token_destroy.c 			\
 	  token_void_dest.c 		\
+	  token_gen_content.c 		\
+	  token_handle_pipe.c 		\
+	  token_handle_word.c 		\
+	  token_handle_and.c 		\
+	  token_handle_wildcard.c 	\
+	  token_handle_redir_i.c 	\
+	  token_handle_redir_o.c 	\
+	  token_handle_var.c	 	\
+	  token_handle_space.c	 	\
 	  tokenizer_create.c 		\
 	  tokenizer_destroy.c		\
 	  tokenizer_next_token.c	\
 	  tokenizer_parse.c			\
 	  tokenizer_as_array.c		\
+	  tokenize_input.c			\
+	  tokens_size.c				\
 	  tokens_print.c
 SRC_DIR = $(addprefix src/, $(SRC))
 OBJ = ${SRC_DIR:.c=.o}

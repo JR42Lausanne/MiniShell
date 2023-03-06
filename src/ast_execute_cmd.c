@@ -6,7 +6,7 @@
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 16:04:14 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/03/01 18:10:30 by jlaiti           ###   ########.fr       */
+/*   Updated: 2023/03/03 16:31:30 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "../include/minishell.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <sys/wait.h>
 
 static int	check_relative(char *cmd)
 {

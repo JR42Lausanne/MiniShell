@@ -1,35 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tokenizer_as_array.c                               :+:      :+:    :+:   */
+/*   token_handle_redir_o.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/01 16:09:18 by graux             #+#    #+#             */
-/*   Updated: 2023/03/01 16:47:33 by graux            ###   ########.fr       */
+/*   Created: 2023/03/02 10:41:03 by graux             #+#    #+#             */
+/*   Updated: 2023/03/02 10:42:12 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/tokenizer.h"
 
-t_token	**tokenizer_as_array(t_tokenizer *toker)
+void	token_handle_redir_o(t_tokenizer *toker, t_token *tok)
 {
-	t_token	**array;
-	t_list	*lst;
-	int		i;
-	int		len;
-
-	len = ft_lstsize(toker->tokens);
-	array = malloc((len + 1) * sizeof(t_token *));
-	if (!array)
-		return (NULL);
-	lst = toker->tokens;
-	i = 0;
-	while (lst)
+	if (toker->input[toker->pos + 1] == '>')
 	{
-		array[i++] = lst->content;
-		lst = lst->next;
+		tok->type = TOK_REDIR_APP;
+		token_gen_content(tok, ">>", 2);
+		toker->pos += 2;
 	}
-	array[i] = NULL;
-	return (array);
+	else
+	{
+		tok->type = TOK_REDIR_OUT;
+		token_gen_content(tok, ">", 1);
+		toker->pos += 1;
+	}
 }

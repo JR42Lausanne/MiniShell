@@ -1,35 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tokenizer_as_array.c                               :+:      :+:    :+:   */
+/*   tokens_size.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/01 16:09:18 by graux             #+#    #+#             */
-/*   Updated: 2023/03/01 16:47:33 by graux            ###   ########.fr       */
+/*   Created: 2023/03/03 17:53:59 by graux             #+#    #+#             */
+/*   Updated: 2023/03/03 17:55:14 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/tokenizer.h"
 
-t_token	**tokenizer_as_array(t_tokenizer *toker)
+int	tokens_size(t_token **tokens)
 {
-	t_token	**array;
-	t_list	*lst;
-	int		i;
-	int		len;
+	int	size;
 
-	len = ft_lstsize(toker->tokens);
-	array = malloc((len + 1) * sizeof(t_token *));
-	if (!array)
-		return (NULL);
-	lst = toker->tokens;
-	i = 0;
-	while (lst)
-	{
-		array[i++] = lst->content;
-		lst = lst->next;
-	}
-	array[i] = NULL;
-	return (array);
+	if (!tokens)
+		return (0);
+	size = 0;
+	while (tokens[size])
+		size++;
+	return (size);
 }
