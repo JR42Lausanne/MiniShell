@@ -6,19 +6,21 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 18:03:39 by graux             #+#    #+#             */
-/*   Updated: 2023/03/04 18:19:55 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/06 14:08:59 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ast.h"
 #include "../include/libft.h"
 
+// Change return type to return the position of the match
 static char	*find_name(t_token **tokens, int start, int size)
 {
 	char	*name;
 	int		i;
 
 	i = start;
+	//TODO check correct names
 	while (i < size - start)
 	{
 		if (i == start && tokens[i]->type == TOK_WORD)
@@ -45,6 +47,7 @@ void	ast_node_gen_cmd(t_ast_node *node, t_token **tokens, int start,
 	content = malloc(sizeof(t_cmd_cont));
 	if (!content)
 		return ; //TODO protection
+	//TODO pipes and redirs
 	content->cmd_name = find_name(tokens, start, size);
 	content->args = NULL; //TODO change that to the real thing
 	node->content = content;
