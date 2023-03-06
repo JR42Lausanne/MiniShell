@@ -6,7 +6,7 @@
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 15:25:52 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/03/02 14:07:01 by jlaiti           ###   ########.fr       */
+/*   Updated: 2023/03/06 10:59:54 by jlaiti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ int	main(int argc, char *argv[], char *envp[])
 	t_ast_node		*ast;
 	t_ast_node		*child;
 	t_builtin_cont	*cont;
-	char			*arg[] = {"unset", "a"};
 
 	(void) argc;
 	(void) argv;
@@ -37,15 +36,13 @@ int	main(int argc, char *argv[], char *envp[])
 	cont = malloc(sizeof(t_builtin_cont));
 	cont->func_pointer = builtin_export;
 	cont->args = malloc(3 * sizeof(char *));
-	cont->args[0] = "export";
-	cont->args[1] = "a=toto";
+	cont->args[0] = "cd";
+	cont->args[1] = "~";
 	cont->args[2] = NULL;
 	child->content = cont;
 	ast->children = malloc(sizeof(t_ast_node *));
 	ast->children[0] = child;
 	ast_execute(ast);
-	builtin_env(NULL);
-	builtin_unset(arg);
-	builtin_env(NULL);
+//	builtin_env(NULL);
 	return (0);
 }
