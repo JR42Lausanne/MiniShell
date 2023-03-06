@@ -11,6 +11,7 @@ SRC = ast_execute_cmd.c 		\
 	  ast_node_gen_builtin.c	\
 	  ast_node_create.c 		\
 	  ast_print.c	 			\
+	  builtin_cd.c 				\
 	  builtin_echo.c 			\
 	  builtin_env.c				\
 	  builtin_pwd.c				\
@@ -18,6 +19,7 @@ SRC = ast_execute_cmd.c 		\
 	  builtin_unset.c			\
 	  dq_mode.c					\
 	  ms_getenv.c 				\
+	  ms_getenv_cont.c 			\
 	  ms_envsetup.c				\
 	  token_create.c			\
 	  token_destroy.c 			\

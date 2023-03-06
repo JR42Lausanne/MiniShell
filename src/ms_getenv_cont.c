@@ -1,32 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   julien_main.c                                      :+:      :+:    :+:   */
+/*   ms_getenv_cont.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/01 15:25:52 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/03/06 17:20:59 by jlaiti           ###   ########.fr       */
+/*   Created: 2023/03/06 16:45:25 by jlaiti            #+#    #+#             */
+/*   Updated: 2023/03/06 17:10:57 by jlaiti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/ast.h"
-#include "../include/execute.h"
-#include "../include/tokenizer.h"
-#include "../include/builtins.h"
 #include "../include/minishell.h"
 #include "../include/libft.h"
 
-int	main(int argc, char *argv[], char *envp[])
+char	*ms_getenv_cont(char *name)
 {
-	char	*args[2];
+	int		i;
+	char	*match;
 
-	args[0] = "cd";
-	if (argc == 2)
-		args[1] = argv[1];
-	else
-		args[1] = NULL;
-	ms_envsetup(envp);
-	builtin_cd(args);
-	return (0);
+	i = 0;
+	while (g_env[i] != 0)
+	{
+		match = ft_strnstr(g_env[i], name, ft_strlen(g_env[i]));
+		if (match)
+		{
+			if (match == g_env[i])
+				return (ft_strdup(g_env[i] + (ft_strlen(name)) + 1));
+		}
+		i++;
+	}
+	return (NULL);
 }
