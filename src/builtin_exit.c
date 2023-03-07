@@ -6,7 +6,7 @@
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 11:30:08 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/03/07 13:08:07 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/07 14:11:31 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,19 @@ int	builtin_exit(char **args)
 	printf("exit\n");
 	if (!args)
 		return (1);
-	if (args[1] && args[2])
-		status = 1;
-	else if (args[1])
+	if (args[1])
 	{
 		status = check_numeric(args[1]);
 		if (status == 0)
-			status = ft_atoi(args[1]);
+		{
+			if (!args[2])
+				status = ft_atoi(args[1]);
+			else
+			{
+				printf("too many args\n");
+				return (1);
+			}
+		}
 	}
 	else
 		status = 0;
