@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 17:42:23 by graux             #+#    #+#             */
-/*   Updated: 2023/03/07 09:59:44 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/07 15:25:02 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ char	**ast_gen_args(t_token **tokens, int start, int size)
 	int		pos;
 	int		i;
 
-	printf("args gen: start %d size %d\n", start, size);
 	args = malloc((size + 1) * sizeof(char *));
 	if (!args)
 		return (NULL);

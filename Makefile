@@ -63,7 +63,7 @@ ${LIB}:
 	cd libft/ && make && cp -v libft.a ../
 
 $(NAME): ${LIB} $(OBJ) src/main.o
-	$(CC) ${FLAGS} src/main.o $(OBJ) -L. -lft -o $(NAME) -fsanitize=address
+	$(CC) ${FLAGS} src/main.o $(OBJ) -L. -lft -lreadline -o $(NAME) -fsanitize=address
 
 $(JULIEN_BIN): ${LIB} $(OBJ) src/julien_main.o
 	$(CC) ${FLAGS} src/julien_main.o $(OBJ) -L. -lft -o $(JULIEN_BIN) -fsanitize=address

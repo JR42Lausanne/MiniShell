@@ -6,7 +6,7 @@
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 11:30:08 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/03/07 14:11:31 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/07 15:37:21 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	builtin_exit(char **args)
 				status = ft_atoi(args[1]);
 			else
 			{
-				printf("too many args\n");
+				printf("Too many args\n"); //TODO error handling
 				return (1);
 			}
 		}

@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 18:01:47 by graux             #+#    #+#             */
-/*   Updated: 2023/03/07 11:35:54 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/07 15:25:16 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ t_ast_node	*ast_node_create(t_token **tokens, int start, int size)
 	t_ast_node	*node;
 	int			type_pos;
 
-	printf("AST node: start %d size %d\n", start, size);
 	node = malloc(sizeof(t_ast_node));
 	if (!node)
 		return (NULL);
