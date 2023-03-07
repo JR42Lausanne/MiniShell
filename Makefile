@@ -6,7 +6,9 @@ SRC = ast_execute_cmd.c 		\
 	  ast_execute_built.c 		\
 	  ast_execute.c 			\
 	  ast_find_type.c 			\
+	  ast_find_name_pos.c 		\
 	  ast_generate.c 			\
+	  ast_gen_args.c 			\
 	  ast_node_gen_cmd.c		\
 	  ast_node_gen_builtin.c	\
 	  ast_node_create.c 		\

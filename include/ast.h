@@ -6,7 +6,7 @@
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 13:00:55 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/03/04 18:02:34 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/07 10:08:34 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ typedef struct s_builtin_cont
 typedef struct s_ast_node
 {
 	t_ast_node_type		type;
-	int					child_number;
 	void				*content;
 	struct s_ast_node	*children[2];
 }			t_ast_node;
@@ -58,6 +57,8 @@ void			ast_node_gen_builtin(t_ast_node *node, t_token **tokens,
 					int start, int size);
 int				ast_find_type(t_ast_node *node, t_token **tokens, int start,
 					int size);
+int				ast_find_name_pos(t_token **tokens, int start, int size);
+char			**ast_gen_args(t_token **tokens, int start, int size);
 
 t_ast_node		*ast_generate(t_token **tokens);
 void			ast_print(t_ast_node *root, int depth);

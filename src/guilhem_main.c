@@ -6,13 +6,14 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 15:52:35 by graux             #+#    #+#             */
-/*   Updated: 2023/03/04 15:41:55 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/07 10:06:36 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/tokenizer.h"
 #include "../include/ast.h"
 #include "../include/minishell.h"
+#include "../include/execute.h"
 #include <stdio.h>
 
 int	main(int argc, char *argv[], char *envp[])
@@ -33,5 +34,7 @@ int	main(int argc, char *argv[], char *envp[])
 	ast_root = ast_generate(tokens); //TODO free tokens
 	printf("\nAST Generated:\n");
 	ast_print(ast_root, 0);
+	printf("\nRunning input:\n");
+	ast_execute(ast_root);
 	return (0);
 }
