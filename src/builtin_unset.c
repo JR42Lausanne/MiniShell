@@ -6,7 +6,7 @@
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 13:17:14 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/03/07 16:27:25 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/07 16:39:56 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,25 +33,40 @@ static int	max(int a, int b)
 	return (a);
 }
 
+static void	remove_from_env(int pos)
+{
+	while (pos < MAX_ENV - 1)
+	{
+		g_env[pos] = g_env[pos + 1];
+		pos++;
+	}
+	g_env[MAX_ENV - 1] = NULL;
+}
+
 int	builtin_unset(char	**args)
 {
 	int	i;
+	int	arg_num;
 
 	if (args && !args[1])
 		return (1);
-	i = 0;
-	while (i < MAX_ENV)
+	arg_num = 0;
+	while (args[++arg_num])
 	{
-		if (!g_env[i])
-			return (0);
-		if (ft_strncmp(g_env[i], args[1], max(var_name_len(g_env[i]),
-					var_name_len(args[1]))) == 0)
-		{	
-			free(g_env[i]);
-			g_env[i] = NULL;
-			break ;
+		i = 0;
+		while (i < MAX_ENV)
+		{
+			if (!g_env[i])
+				break ;
+			if (ft_strncmp(g_env[i], args[arg_num], max(var_name_len(g_env[i]),
+						var_name_len(args[arg_num]))) == 0)
+			{	
+				free(g_env[i]);
+				remove_from_env(i);
+				break ;
+			}
+			i++;
 		}
-		i++;
 	}
 	return (0);
 }	
