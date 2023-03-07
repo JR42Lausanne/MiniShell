@@ -6,7 +6,7 @@
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 10:36:04 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/03/06 19:08:17 by jlaiti           ###   ########.fr       */
+/*   Updated: 2023/03/07 11:25:09 by jlaiti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,29 +38,7 @@ static char	*expand_path(char *new_path, char *arg)
 		input = ft_strdup(arg);
 	if (input[0] != '/')
 		input = ft_strjoin(ms_getenv_cont("PWD"), arg);
-	while (arg[++i])
-	{	
-		if (ft_strnstr(input, "./", ft_strlen(input)))
-		{
-			while (input[j])
-			{
-				j = 0;
-				if (input[j] == ft_strnstr(input, "./", ft_strlen(input)))
-					j++;
-				else
-					new_a[j] = input[j];
-			}
-		}
-		else if (ft_strnstr(input, "../", ft_strlen(input)))
-		{
-			j = 0
-			if (input[j] == ft_strnstr(input , "../", ft_strlen(input)))
-				j++;
-			else
-				new_b[j] = input[j];
 
-		}
-	}
 	return (total_path);
 }
 
