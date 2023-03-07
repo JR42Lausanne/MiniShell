@@ -1,31 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ast_node_gen_cmd.c                                 :+:      :+:    :+:   */
+/*   ast_gen_args.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/04 18:03:39 by graux             #+#    #+#             */
-/*   Updated: 2023/03/06 17:51:02 by graux            ###   ########.fr       */
+/*   Created: 2023/03/06 17:42:23 by graux             #+#    #+#             */
+/*   Updated: 2023/03/07 09:59:44 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ast.h"
-#include "../include/libft.h"
 
-void	ast_node_gen_cmd(t_ast_node *node, t_token **tokens, int start,
-		int size)
+char	**ast_gen_args(t_token **tokens, int start, int size)
 {
-	t_cmd_cont	*content;
-	int			pos;
+	char	**args;
+	int		pos;
+	int		i;
 
-	content = malloc(sizeof(t_cmd_cont));
-	if (!content)
-		return ;
-	//TODO pipes and redirs
+	printf("args gen: start %d size %d\n", start, size);
+	args = malloc((size + 1) * sizeof(char *));
+	if (!args)
+		return (NULL);
+	i = 0;
 	pos = ast_find_name_pos(tokens, start, size);
-	if (pos != -1)
-		content->cmd_name = ft_strdup(tokens[pos]->content);
-	content->args = ast_gen_args(tokens, start, size);
-	node->content = content;
+	while (pos != -1)
+	{
+		args[i++] = ft_strdup(tokens[pos]->content);
+		pos = ast_find_name_pos(tokens, pos + 1, size - (pos - start) - 1);
+	}
+	args[i] = NULL;
+	return (args);
 }

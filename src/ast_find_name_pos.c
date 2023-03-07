@@ -1,31 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ast_node_gen_cmd.c                                 :+:      :+:    :+:   */
+/*   ast_find_name_pos.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/04 18:03:39 by graux             #+#    #+#             */
-/*   Updated: 2023/03/06 17:51:02 by graux            ###   ########.fr       */
+/*   Created: 2023/03/06 17:15:17 by graux             #+#    #+#             */
+/*   Updated: 2023/03/07 10:03:41 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ast.h"
-#include "../include/libft.h"
 
-void	ast_node_gen_cmd(t_ast_node *node, t_token **tokens, int start,
-		int size)
+int	ast_find_name_pos(t_token **tokens, int start, int size)
 {
-	t_cmd_cont	*content;
-	int			pos;
+	int		i;
 
-	content = malloc(sizeof(t_cmd_cont));
-	if (!content)
-		return ;
-	//TODO pipes and redirs
-	pos = ast_find_name_pos(tokens, start, size);
-	if (pos != -1)
-		content->cmd_name = ft_strdup(tokens[pos]->content);
-	content->args = ast_gen_args(tokens, start, size);
-	node->content = content;
+	i = 0;
+	//TODO check correct names
+	while (i < size)
+	{
+		if (i == 0 && tokens[i + start]->type == TOK_WORD)
+			return (i + start);
+		else if (tokens[i + start]->type == TOK_WORD
+			&& tokens[i - 1 + start]->type < TOK_REDIR_IN
+			&& tokens[i - 1 + start]->type > TOK_HEREDOC)
+		{
+			return (i + start);
+		}
+		i++;
+	}
+	return (-1);
 }

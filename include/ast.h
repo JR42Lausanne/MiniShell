@@ -6,7 +6,7 @@
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 13:00:55 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/03/04 18:02:34 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/06 17:42:02 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ void			ast_node_gen_builtin(t_ast_node *node, t_token **tokens,
 					int start, int size);
 int				ast_find_type(t_ast_node *node, t_token **tokens, int start,
 					int size);
+int				ast_find_name_pos(t_token **tokens, int start, int size);
+char			**ast_gen_args(t_token **tokens, int start, int size);
 
 t_ast_node		*ast_generate(t_token **tokens);
 void			ast_print(t_ast_node *root, int depth);
