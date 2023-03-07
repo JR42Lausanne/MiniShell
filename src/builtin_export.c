@@ -6,7 +6,7 @@
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 21:39:02 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/03/02 13:09:03 by jlaiti           ###   ########.fr       */
+/*   Updated: 2023/03/07 16:20:38 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,13 @@ static int	var_name_len(char *var)
 	return (size);
 }
 
+static int	max(int a, int b)
+{
+	if (a < b)
+		return (b);
+	return (a);
+}
+
 //TODO check exporting same var multiple times and mulitple var
 int	builtin_export(char **args)
 {	
@@ -36,7 +43,8 @@ int	builtin_export(char **args)
 	{		
 		while (g_env[++i] != NULL)
 		{
-			if (ft_strncmp(g_env[i], args[1], var_name_len(args[1])) == 0)
+			if (ft_strncmp(g_env[i], args[1], max(var_name_len(g_env[i]),
+						var_name_len(args[1]))) == 0)
 				break ;
 		}
 		if (i < MAX_ENV - 1)
@@ -52,6 +60,3 @@ int	builtin_export(char **args)
 	printf("Invalid variable\n");
 	return (1);
 }
-	//check if args[1] contains an =
-	//check if the variable is already set in g_env
-	//if it is replace g_env[?] where it matched
