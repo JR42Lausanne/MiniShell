@@ -6,7 +6,7 @@
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 21:39:02 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/03/07 16:20:38 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/07 16:47:17 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,28 +35,28 @@ static int	max(int a, int b)
 int	builtin_export(char **args)
 {	
 	int	i;
+	int	arg_num;
 
-	if (args && !args[1])
-		return (1);
-	i = -1;
-	if (ft_strchr(args[1], '='))
-	{		
-		while (g_env[++i] != NULL)
-		{
-			if (ft_strncmp(g_env[i], args[1], max(var_name_len(g_env[i]),
-						var_name_len(args[1]))) == 0)
-				break ;
+	arg_num = 0;
+	while (args[++arg_num])
+	{
+		i = -1;
+		if (ft_strchr(args[arg_num], '='))
+		{		
+			while (g_env[++i] != NULL)
+			{
+				if (ft_strncmp(g_env[i], args[arg_num],
+						max(var_name_len(g_env[i]),
+							var_name_len(args[arg_num]))) == 0)
+					break ;
+			}
+			if (i < MAX_ENV - 1)
+			{
+				if (g_env[i])
+					free(g_env[i]);
+				g_env[i] = ft_strdup(args[arg_num]);
+			}
 		}
-		if (i < MAX_ENV - 1)
-		{
-			if (g_env[i])
-				free(g_env[i]);
-			g_env[i] = ft_strdup(args[1]);
-			return (0);
-		}
-		printf("No more room in env\n");
-		return (1);
 	}
-	printf("Invalid variable\n");
-	return (1);
+	return (0);
 }
