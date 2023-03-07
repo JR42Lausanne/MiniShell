@@ -6,7 +6,7 @@
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 13:22:42 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/03/07 10:11:44 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/07 18:51:07 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 
 void	ast_execute(t_ast_node *node)
 {
+	int	pipe_fd[2];
+
 	if (!node)
 		return ;
 	if (node->type == AST_ROOT)
@@ -24,6 +26,15 @@ void	ast_execute(t_ast_node *node)
 		return ;
 	}
 	//TODO specifics before calling childrens
+	if (node->type == AST_PIPE)
+	{
+		//TODO donner tout le pipe aux childs pour close
+		pipe(pipe_fd);
+		node->children[0]->pipe_redir.fd_old = 1;
+		node->children[0]->pipe_redir.fd_new = pipe_fd[1];
+		node->children[1]->pipe_redir.fd_old = 0;
+		node->children[1]->pipe_redir.fd_new = pipe_fd[0];
+	}
 	ast_execute(node->children[0]);
 	ast_execute(node->children[1]);
 	if (node->type == AST_CMD)

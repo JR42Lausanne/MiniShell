@@ -6,7 +6,7 @@
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 13:00:55 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/03/07 14:35:11 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/07 18:41:30 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,18 @@ typedef struct s_builtin_cont
 	char	**args;
 }			t_builtin_cont;
 
+typedef struct s_redir
+{
+	int	fd_old;
+	int	fd_new;
+}			t_redir;
+
 typedef struct s_ast_node
 {
 	t_ast_node_type		type;
 	void				*content;
+	t_redir				**redirs;
+	t_redir				pipe_redir;
 	struct s_ast_node	*children[2];
 }			t_ast_node;
 
@@ -58,6 +66,9 @@ int				ast_find_type(t_ast_node *node, t_token **tokens, int start,
 					int size);
 int				ast_find_name_pos(t_token **tokens, int start, int size);
 char			**ast_gen_args(t_token **tokens, int start, int size);
+
+// for a value in redirs_fd [0] -> is the new fd and [1] the old
+int				ast_node_redirect(t_redir **redirs, t_redir pipe_redir);
 
 t_ast_node		*ast_generate(t_token **tokens);
 void			ast_print(t_ast_node *root, int depth);

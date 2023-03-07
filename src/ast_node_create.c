@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 18:01:47 by graux             #+#    #+#             */
-/*   Updated: 2023/03/07 15:25:16 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/07 18:29:44 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ t_ast_node	*ast_node_create(t_token **tokens, int start, int size)
 	if (!node)
 		return (NULL);
 	type_pos = ast_find_type(node, tokens, start, size);
+	node->redirs = NULL;
 	if (type_pos != -1)
 	{
 		node->children[0] = ast_node_create(tokens, start, type_pos - start);
@@ -70,6 +71,9 @@ t_ast_node	*ast_node_create(t_token **tokens, int start, int size)
 				size - (type_pos - start) - 1);
 	}
 	else
+	{
 		ast_node_gen_content(node, tokens, start, size);
+		//TODO after that populate redirs
+	}
 	return (node);
 }

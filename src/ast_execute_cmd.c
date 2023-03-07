@@ -6,7 +6,7 @@
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 16:04:14 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/03/07 17:54:20 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/07 18:41:48 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,9 @@ void	ast_execute_cmd(t_ast_node *node)
 		return ;
 	}
 	pid = fork();
-	//TODO do redirs and pipes here
 	if (pid == 0)
 	{
+		ast_node_redirect(node->redirs, node->pipe_redir);
 		execve(cmd_full_path, content->args, g_env);
 		perror(cmd_full_path);
 	}
