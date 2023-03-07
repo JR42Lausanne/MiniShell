@@ -6,7 +6,7 @@
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 13:00:55 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/03/06 17:42:02 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/07 10:08:34 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ typedef struct s_builtin_cont
 typedef struct s_ast_node
 {
 	t_ast_node_type		type;
-	int					child_number;
 	void				*content;
 	struct s_ast_node	*children[2];
 }			t_ast_node;
