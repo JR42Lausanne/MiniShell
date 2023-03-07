@@ -6,7 +6,7 @@
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 16:04:14 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/03/07 14:54:11 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/07 16:58:10 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,12 @@ static char	*get_cmd(char *cmd)
 
 	if (check_relative(cmd))
 		return (ft_strdup(cmd));
-	env_path = getenv("PATH");
+	env_path = ms_getenv_cont("PATH");
+	if (!env_path)
+		return (NULL);
 	path = ft_split(env_path, ':');
-	i = 0;
-	while (path[i])
+	i = -1;
+	while (path[++i])
 	{
 		tmp = ft_strjoin(path[i], "/");
 		command = ft_strjoin(tmp, cmd);
@@ -47,7 +49,6 @@ static char	*get_cmd(char *cmd)
 		if (access(command, 0) == 0)
 			return (command);
 		free(command);
-		i++;
 	}
 	return (NULL);
 }
@@ -61,7 +62,10 @@ void	ast_execute_cmd(t_ast_node *node)
 	content = (t_cmd_cont *) node->content;
 	cmd_full_path = get_cmd(content->cmd_name);
 	if (!cmd_full_path)
-		perror(content->cmd_name);
+	{
+		printf("Command not found\n"); //TODO set errno and use perror
+		return ;
+	}
 	pid = fork();
 	if (pid == 0)
 	{
