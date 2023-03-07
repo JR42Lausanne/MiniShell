@@ -6,7 +6,7 @@
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 19:09:38 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/03/01 16:56:57 by jlaiti           ###   ########.fr       */
+/*   Updated: 2023/03/07 17:59:55 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,17 @@
 void	ast_execute_built(t_ast_node *node)
 {
 	t_builtin_cont	*content;
+	pid_t			pid;
+	int				status;
 
-	content = (t_builtin_cont *) node->content;
-	content->func_pointer(content->args);
+	pid = fork();
+	//TODO do redirs and pipes here
+	if (pid == 0)
+	{
+		content = (t_builtin_cont *) node->content;
+		status = content->func_pointer(content->args);
+		exit(status);
+	}
+	else
+		waitpid(pid, NULL, 0);
 }
