@@ -18,6 +18,7 @@ SRC = ast_execute_cmd.c 		\
 	  builtin_env.c				\
 	  builtin_pwd.c				\
 	  builtin_export.c			\
+	  builtin_exit.c			\
 	  builtin_unset.c			\
 	  dq_mode.c					\
 	  ms_getenv.c 				\
