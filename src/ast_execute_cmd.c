@@ -6,7 +6,7 @@
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 16:04:14 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/03/03 16:31:30 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/07 14:54:11 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,7 @@ void	ast_execute_cmd(t_ast_node *node)
 	content = (t_cmd_cont *) node->content;
 	cmd_full_path = get_cmd(content->cmd_name);
 	if (!cmd_full_path)
-	{
-		perror("Command not found");
-		exit(EXIT_FAILURE);
-	}
+		perror(content->cmd_name);
 	pid = fork();
 	if (pid == 0)
 	{

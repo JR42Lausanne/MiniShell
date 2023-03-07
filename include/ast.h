@@ -6,7 +6,7 @@
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 13:00:55 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/03/07 10:08:34 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/07 14:35:11 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ typedef struct s_cmd_cont
 {
 	char	*cmd_name;
 	char	**args;
-	int		pipe_fd[2];
 }			t_cmd_cont;
 
 typedef struct s_builtin_cont
