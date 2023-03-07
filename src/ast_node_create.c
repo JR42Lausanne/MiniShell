@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 18:01:47 by graux             #+#    #+#             */
-/*   Updated: 2023/03/06 13:39:10 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/07 11:35:54 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ static void	ast_node_gen_content(t_ast_node *node, t_token **tokens, int start,
 		int size)
 {
 	node->type = find_exec_type(tokens, start, size);
+	//TODO populate redirections
 	if (node->type == AST_CMD)
 		ast_node_gen_cmd(node, tokens, start, size);
 	else
