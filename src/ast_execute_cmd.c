@@ -6,7 +6,7 @@
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 16:04:14 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/03/07 18:41:48 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/09 12:42:51 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ void	ast_execute_cmd(t_ast_node *node)
 {
 	t_cmd_cont	*content;
 	char		*cmd_full_path;
-	pid_t		pid;
 
 	content = (t_cmd_cont *) node->content;
 	cmd_full_path = get_cmd(content->cmd_name);
@@ -66,16 +65,12 @@ void	ast_execute_cmd(t_ast_node *node)
 		printf("Command not found\n"); //TODO set errno and use perror
 		return ;
 	}
-	pid = fork();
-	if (pid == 0)
+	node->pid = fork();
+	if (node->pid == 0)
 	{
 		ast_node_redirect(node->redirs, node->pipe_redir);
 		execve(cmd_full_path, content->args, g_env);
 		perror(cmd_full_path);
 	}
-	else
-	{
-		waitpid(pid, NULL, 0);
-		free(cmd_full_path);
-	}
+	//free(cmd_full_path); //Maybe free after wait
 }

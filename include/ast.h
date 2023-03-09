@@ -6,7 +6,7 @@
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 13:00:55 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/03/07 18:41:30 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/09 11:22:28 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef struct s_redir
 {
 	int	fd_old;
 	int	fd_new;
+	int	fd_pipe_other;
 }			t_redir;
 
 typedef struct s_ast_node
@@ -54,6 +55,7 @@ typedef struct s_ast_node
 	void				*content;
 	t_redir				**redirs;
 	t_redir				pipe_redir;
+	pid_t				pid;
 	struct s_ast_node	*children[2];
 }			t_ast_node;
 
