@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 16:04:36 by graux             #+#    #+#             */
-/*   Updated: 2023/03/09 12:54:35 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/09 13:17:12 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int	main(int argc, char *argv[], char *envp[])
 		ast_root = ast_generate(tokens);
 		//ast_print(ast_root, 0);
 		ast_execute(ast_root);
+		ast_wait(ast_root);
 		//waitpid(-1, NULL, 0);
 		//TODO free tokens and ast
 		free(line);
