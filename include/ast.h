@@ -6,7 +6,7 @@
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 13:00:55 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/03/15 11:15:17 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/15 16:30:18 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,25 @@ typedef struct s_ast_node
 {
 	t_ast_node_type		type;
 	void				*content;
-	t_redir				**redirs;
+	int					fd_in;
+	int					fd_out;
+	//int					fd_to_close[4];
+	int					pipe_count;
+	int					*pipe_index;
+	int					*all_pipes;
 	pid_t				pid;
 	struct s_ast_node	*children[2];
 }			t_ast_node;
 
-t_ast_node		*ast_node_create(t_token **tokens, int start, int size);
+typedef struct s_packed
+{
+	int	pipe_count;
+	int	*p;
+	int	*all_pipes;
+}			t_packed;
+
+t_ast_node		*ast_node_create(t_token **tokens, int start, int size,
+					t_packed packed);
 void			ast_node_gen_cmd(t_ast_node *node, t_token **tokens, int start,
 					int size);
 void			ast_node_gen_builtin(t_ast_node *node, t_token **tokens,
@@ -74,5 +87,7 @@ int				ast_node_redirect(t_ast_node *node);
 t_ast_node		*ast_generate(t_token **tokens);
 void			ast_print(t_ast_node *root, int depth);
 void			ast_wait(t_ast_node *node);
+void			ast_close(t_ast_node *node);
+void			ast_close_all_pipes(t_ast_node *node);
 
 #endif

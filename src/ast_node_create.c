@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 18:01:47 by graux             #+#    #+#             */
-/*   Updated: 2023/03/15 11:15:52 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/15 16:28:03 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static void	ast_node_gen_content(t_ast_node *node, t_token **tokens, int start,
 	node->children[1] = NULL;
 }
 
-t_ast_node	*ast_node_create(t_token **tokens, int start, int size)
+t_ast_node	*ast_node_create(t_token **tokens, int start, int size, t_packed p)
 {
 	t_ast_node	*node;
 	int			type_pos;
@@ -63,13 +63,21 @@ t_ast_node	*ast_node_create(t_token **tokens, int start, int size)
 	if (!node)
 		return (NULL);
 	type_pos = ast_find_type(node, tokens, start, size);
-	node->redirs = NULL;
 	node->pid = -1;
+	node->fd_in = STDIN_FILENO;
+	node->fd_out = STDOUT_FILENO;
+	//node->fd_to_close[0] = -1;
+	//node->fd_to_close[1] = -1;
+	//node->fd_to_close[2] = -1;
+	//node->fd_to_close[3] = -1;
+	node->pipe_index = p.p;
+	node->pipe_count = p.pipe_count;
+	node->all_pipes = p.all_pipes;
 	if (type_pos != -1)
 	{
-		node->children[0] = ast_node_create(tokens, start, type_pos - start);
+		node->children[0] = ast_node_create(tokens, start, type_pos - start, p);
 		node->children[1] = ast_node_create(tokens, type_pos + 1,
-				size - (type_pos - start) - 1);
+				size - (type_pos - start) - 1, p);
 	}
 	else
 	{
