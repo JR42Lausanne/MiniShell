@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 18:14:44 by graux             #+#    #+#             */
-/*   Updated: 2023/03/15 17:06:17 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/15 17:13:30 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,7 @@ void	ast_close_all_pipes(t_ast_node *node)
 
 	i = -1;
 	while (++i < node->pipe_count * 2)
-	{
 		close(node->all_pipes[i]);
-		fprintf(stderr, "closing: %d\n", node->all_pipes[i]);
-	}
 }
 
 int	ast_node_redirect(t_ast_node *node)
