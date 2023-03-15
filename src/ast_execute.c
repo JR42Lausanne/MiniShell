@@ -6,7 +6,7 @@
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 13:22:42 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/03/15 16:45:48 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/15 17:06:47 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,21 +20,15 @@ static void	first_pipe(t_ast_node *node)
 	fprintf(stderr, "pipe_fd[0] = %d pipe_fd[1] = %d\n", node->all_pipes[*(node->pipe_index)], node->all_pipes[*(node->pipe_index) + 1]);
 	node->children[0]->fd_in = STDIN_FILENO;
 	node->children[0]->fd_out = node->all_pipes[*(node->pipe_index) + 1];
-	//node->children[0]->fd_to_close[0] = node->all_pipes[*(node->pipe_index)];
-	//node->children[0]->fd_to_close[1] = node->all_pipes[*(node->pipe_index) + 1];
 	if (node->pipe_count == 1)
 	{
 		node->children[1]->fd_in = node->all_pipes[*(node->pipe_index)];
 		node->children[1]->fd_out = STDOUT_FILENO;
-		//node->children[1]->fd_to_close[0] = node->all_pipes[*(node->pipe_index) + 1];
-		//node->children[1]->fd_to_close[1] = node->all_pipes[*(node->pipe_index)];
 	}
 	else
 	{
 		node->children[1]->fd_in = node->all_pipes[*(node->pipe_index)];
 		node->children[1]->fd_out = node->all_pipes[*(node->pipe_index) + 3];
-		//node->children[1]->fd_to_close[0] = node->all_pipes[*(node->pipe_index)];
-		//node->children[1]->fd_to_close[1] = node->all_pipes[*(node->pipe_index) + 1];
 	}
 }
 
@@ -44,14 +38,8 @@ static void	last_pipe(t_ast_node *node)
 	fprintf(stderr, "pipe_fd[0] = %d pipe_fd[1] = %d\n", node->all_pipes[*(node->pipe_index)], node->all_pipes[*(node->pipe_index) + 1]);
 	node->children[0]->fd_in = node->fd_in;
 	node->children[0]->fd_out = node->all_pipes[*(node->pipe_index) + 1];
-	//node->children[0]->fd_to_close[0] = node->fd_to_close[0];
-	//node->children[0]->fd_to_close[1] = node->fd_to_close[1];
-	//node->children[0]->fd_to_close[2] = node->all_pipes[*(node->pipe_index)];
-	//node->children[0]->fd_to_close[3] = node->all_pipes[*(node->pipe_index) + 1];
 	node->children[1]->fd_in = node->all_pipes[*(node->pipe_index)];
 	node->children[1]->fd_out = STDOUT_FILENO;
-	//node->children[1]->fd_to_close[0] = node->all_pipes[*(node->pipe_index) + 1];
-	//node->children[1]->fd_to_close[1] = node->all_pipes[*(node->pipe_index)];
 }
 
 static void	default_pipe(t_ast_node *node)

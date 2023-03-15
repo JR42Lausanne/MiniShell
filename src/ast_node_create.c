@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 18:01:47 by graux             #+#    #+#             */
-/*   Updated: 2023/03/15 16:28:03 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/15 17:08:30 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,10 +66,6 @@ t_ast_node	*ast_node_create(t_token **tokens, int start, int size, t_packed p)
 	node->pid = -1;
 	node->fd_in = STDIN_FILENO;
 	node->fd_out = STDOUT_FILENO;
-	//node->fd_to_close[0] = -1;
-	//node->fd_to_close[1] = -1;
-	//node->fd_to_close[2] = -1;
-	//node->fd_to_close[3] = -1;
 	node->pipe_index = p.p;
 	node->pipe_count = p.pipe_count;
 	node->all_pipes = p.all_pipes;

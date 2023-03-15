@@ -6,7 +6,7 @@
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 13:00:55 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/03/15 16:30:18 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/15 17:06:24 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ typedef struct s_ast_node
 	void				*content;
 	int					fd_in;
 	int					fd_out;
-	//int					fd_to_close[4];
 	int					pipe_count;
 	int					*pipe_index;
 	int					*all_pipes;
