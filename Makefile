@@ -26,6 +26,7 @@ SRC = ast_execute_cmd.c 		\
 	  ms_getenv.c 				\
 	  ms_getenv_cont.c 			\
 	  ms_envsetup.c				\
+	  signal.c					\
 	  token_create.c			\
 	  token_destroy.c 			\
 	  token_void_dest.c 		\
@@ -53,7 +54,7 @@ NAME = minishell
 JULIEN_BIN = ms_julien
 GUILHEM_BIN = ms_guilhem
 
-INCLUDES = -Iinclude/
+INCLUDES = -Iinclude/ -I/goinfre/graux/.brew/opt/readline/include
 LIB = libft.a
 
 %.o: %.c
@@ -65,7 +66,7 @@ ${LIB}:
 	cd libft/ && make && cp -v libft.a ../
 
 $(NAME): ${LIB} $(OBJ) src/main.o
-	$(CC) ${FLAGS} src/main.o $(OBJ) -L. -lft -lreadline -o $(NAME) -fsanitize=address
+	$(CC) ${FLAGS} src/main.o $(OBJ) $(INCLUDES) -L. -L/goinfre/graux/.brew/opt/readline/lib -lft -lreadline -o $(NAME) -fsanitize=address
 
 $(JULIEN_BIN): ${LIB} $(OBJ) src/julien_main.o
 	$(CC) ${FLAGS} src/julien_main.o $(OBJ) -L. -lft -o $(JULIEN_BIN) -fsanitize=address

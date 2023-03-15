@@ -6,7 +6,7 @@
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 13:25:03 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/03/06 16:55:47 by jlaiti           ###   ########.fr       */
+/*   Updated: 2023/03/15 18:23:01 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,13 @@
 
 # define MAX_ENV 1000
 
-extern char	*g_env[MAX_ENV];
+extern char	*g_env[MAX_ENV + 1];
 
 char	*ms_getenv(char *name);
 char	*ms_getenv_cont(char *name);
 int		ms_envsetup(char **envp);
+
+void	signal_handler(int sig);
+int		signal_setup(void);
 
 #endif
