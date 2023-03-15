@@ -6,7 +6,7 @@
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 13:22:42 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/03/09 14:20:33 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/15 11:13:10 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,35 +16,8 @@
 
 static void	handle_pipe(t_ast_node *node)
 {
-	//TODO donner tout le pipe aux childs pour close
-	if (node->pipe_out[0] == -1 && node->pipe_out[0])
-		pipe(node->pipe_out);
-	if (node->children[1]->type == AST_PIPE)
-	{
-		node->children[1]->pipe_in[0] = node->pipe_out[0];
-		node->children[1]->pipe_in[1] = node->pipe_out[1];
-	}
-	if (node->pipe_in[0] == -1 && node->pipe_in[1] == -1)
-	{
-		node->children[0]->pipe_redir_out.fd_old = 1;
-		node->children[0]->pipe_redir_out.fd_new = node->pipe_out[1];
-		node->children[0]->pipe_redir_out.fd_pipe_other = node->pipe_out[0];
-		node->children[1]->pipe_redir_in.fd_old = 0;
-		node->children[1]->pipe_redir_in.fd_new = node->pipe_out[0];
-		node->children[1]->pipe_redir_in.fd_pipe_other = node->pipe_out[1];
-	}
-	else
-	{
-		node->children[0]->pipe_redir_in.fd_old = 0;
-		node->children[0]->pipe_redir_in.fd_new = node->pipe_in[0];
-		node->children[0]->pipe_redir_in.fd_pipe_other = node->pipe_in[1];
-		node->children[0]->pipe_redir_out.fd_old = 1;
-		node->children[0]->pipe_redir_out.fd_new = node->pipe_out[1];
-		node->children[0]->pipe_redir_out.fd_pipe_other = node->pipe_out[0];
-		node->children[1]->pipe_redir_in.fd_old = 0;
-		node->children[1]->pipe_redir_in.fd_new = node->pipe_out[0];
-		node->children[1]->pipe_redir_in.fd_pipe_other = node->pipe_out[1];
-	}
+	if (!node)
+		return ;
 }
 
 void	ast_execute(t_ast_node *node)

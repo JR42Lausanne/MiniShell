@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 18:01:47 by graux             #+#    #+#             */
-/*   Updated: 2023/03/09 14:27:34 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/15 11:15:52 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,16 +65,6 @@ t_ast_node	*ast_node_create(t_token **tokens, int start, int size)
 	type_pos = ast_find_type(node, tokens, start, size);
 	node->redirs = NULL;
 	node->pid = -1;
-	node->pipe_redir_out.fd_old = -1;
-	node->pipe_redir_out.fd_new = -1;
-	node->pipe_redir_out.fd_pipe_other = -1;
-	node->pipe_redir_in.fd_old = -1;
-	node->pipe_redir_in.fd_new = -1;
-	node->pipe_redir_in.fd_pipe_other = -1;
-	node->pipe_in[0] = -1;
-	node->pipe_in[1] = -1;
-	node->pipe_out[0] = -1;
-	node->pipe_out[1] = -1;
 	if (type_pos != -1)
 	{
 		node->children[0] = ast_node_create(tokens, start, type_pos - start);
