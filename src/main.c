@@ -6,13 +6,14 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 16:04:36 by graux             #+#    #+#             */
-/*   Updated: 2023/03/15 18:22:51 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/16 13:27:41 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/tokenizer.h"
 #include "../include/ast.h"
 #include "../include/minishell.h"
+#include "../include/builtins.h"
 #include "../include/execute.h"
 #include <stdio.h>
 #include <readline/readline.h>
@@ -33,6 +34,13 @@ int	main(int argc, char *argv[], char *envp[])
 	{
 		g_env[MAX_ENV] = "p";
 		line = readline("$> ");
+		if (!line)
+			builtin_exit(NULL);
+		if (ft_strlen(line) == 0)
+		{
+			free(line);
+			continue ;
+		}
 		add_history(line);
 		tokens = tokenize_input(line);
 		//tokens_print(tokens);

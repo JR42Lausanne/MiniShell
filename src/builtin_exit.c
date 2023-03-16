@@ -6,7 +6,7 @@
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 11:30:08 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/03/07 15:37:21 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/16 13:24:19 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	builtin_exit(char **args)
 
 	printf("exit\n");
 	if (!args)
-		return (1);
+		exit(0); //-> when ctrl-D is pressed //TODO free everything
 	if (args[1])
 	{
 		status = check_numeric(args[1]);
