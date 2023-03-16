@@ -6,7 +6,7 @@
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 16:45:25 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/03/06 17:10:57 by jlaiti           ###   ########.fr       */
+/*   Updated: 2023/03/16 14:42:16 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*ms_getenv_cont(char *name)
 		match = ft_strnstr(g_env[i], name, ft_strlen(g_env[i]));
 		if (match)
 		{
-			if (match == g_env[i])
+			if (match == g_env[i] && match[ft_strlen(name)] == '=')
 				return (ft_strdup(g_env[i] + (ft_strlen(name)) + 1));
 		}
 		i++;
