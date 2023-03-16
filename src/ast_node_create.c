@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 18:01:47 by graux             #+#    #+#             */
-/*   Updated: 2023/03/15 17:08:30 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/16 13:38:06 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ static t_ast_node_type	find_exec_type(t_token **tokens, int start, int size)
 	int				i;
 
 	i = start;
-	//TODO skip redirections correctly
-	while (tokens[i]->type != TOK_WORD && i < size - start)
+	//TODO skip redirections correctly and check if i = size + start
+	while (i < size + start && tokens[i]->type != TOK_WORD)
 		i++;
 	if (!ft_strncmp(tokens[i]->content, "echo", ft_strlen("echo")))
 		type = AST_BUILTIN;

@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 15:29:55 by graux             #+#    #+#             */
-/*   Updated: 2023/03/02 16:20:59 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/16 14:38:17 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ static char	*var_mode(t_tokenizer *toker)
 {
 	char	*var_name;
 	char	*var_value;
-	char	*tot;
 	int		size;
 
 	toker->pos += 1;
@@ -39,14 +38,10 @@ static char	*var_mode(t_tokenizer *toker)
 	toker->pos += size;
 	if (var_name)
 	{
-		var_value = ms_getenv(var_name);
-		if (var_value)
-		{
-			tot = ft_substr(var_value, size + 1, ft_strlen(var_value + size + 1));
-			free(var_name);
-			free(var_value);
-			return (tot);
-		}
+		var_value = ms_getenv_cont(var_name);
+		printf("%s\n", var_value);
+		free(var_name);
+		return (var_value);
 	}
 	var_value = malloc(1 * sizeof(char));
 	var_value[0] = '\0';

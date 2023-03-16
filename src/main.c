@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 16:04:36 by graux             #+#    #+#             */
-/*   Updated: 2023/03/16 13:27:41 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/16 13:40:41 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,12 @@ int	main(int argc, char *argv[], char *envp[])
 		}
 		add_history(line);
 		tokens = tokenize_input(line);
-		//tokens_print(tokens);
+		tokens_print(tokens);
+		//tokens_check_syntax(tokens);
 		ast_root = ast_generate(tokens);
-		//ast_print(ast_root, 0);
+		ast_print(ast_root, 0);
 		g_env[MAX_ENV] = "e";
 		ast_execute(ast_root);
-		//ast_close(ast_root);
 		ast_close_all_pipes(ast_root);
 		ast_wait(ast_root);
 		//TODO free tokens and ast
