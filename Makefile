@@ -54,11 +54,15 @@ NAME = minishell
 JULIEN_BIN = ms_julien
 GUILHEM_BIN = ms_guilhem
 
-INCLUDES = -Iinclude/ -I/goinfre/graux/.brew/opt/readline/include
+INCLUDES = -Iinclude/
 LIB = libft.a
 
 %.o: %.c
-	${CC} ${FLAGS} ${INCLUDES} -c $< -o $@
+ifeq ($(shell whoami), graux)
+	${CC} ${FLAGS} ${INCLUDES} -c $< -o $@ -I/goinfre/graux/.brew/opt/readline/include -fsanitize=address
+else
+	${CC} ${FLAGS} ${INCLUDES} -c $< -o $@ -I$(HOME)/.brew/opt/readline/include -fsanitize=address
+endif
 
 all: ${NAME}
 
@@ -66,7 +70,11 @@ ${LIB}:
 	cd libft/ && make && cp -v libft.a ../
 
 $(NAME): ${LIB} $(OBJ) src/main.o
-	$(CC) ${FLAGS} src/main.o $(OBJ) $(INCLUDES) -L. -L/goinfre/graux/.brew/opt/readline/lib -lft -lreadline -o $(NAME) -fsanitize=address
+ifeq ($(shell whoami), graux)
+	$(CC) ${FLAGS} src/main.o $(OBJ) $(INCLUDES) -I/goinfre/graux/.brew/opt/readline/include -L. -L/goinfre/graux/.brew/opt/readline/lib -lft -lreadline -o $(NAME) -fsanitize=address
+else
+	$(CC) ${FLAGS} src/main.o $(OBJ) $(INCLUDES) -I$(HOME)/.brew/opt/readline/include -L. -L$(HOME)/.brew/opt/readline/lib -lft -lreadline -o $(NAME) -fsanitize=address
+endif
 
 $(JULIEN_BIN): ${LIB} $(OBJ) src/julien_main.o
 	$(CC) ${FLAGS} src/julien_main.o $(OBJ) -L. -lft -o $(JULIEN_BIN) -fsanitize=address

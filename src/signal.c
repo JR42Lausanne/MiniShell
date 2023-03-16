@@ -6,12 +6,12 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 17:31:35 by graux             #+#    #+#             */
-/*   Updated: 2023/03/15 18:23:24 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/16 12:49:07 by jlaiti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-#include "stdlib.h"
+#include <stdlib.h>
 #include <signal.h>
 #include <stdio.h>
 #include <readline/readline.h>
