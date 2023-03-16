@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 15:46:12 by graux             #+#    #+#             */
-/*   Updated: 2023/03/04 12:17:47 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/16 15:26:59 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,6 @@
 # define TOKENIZER_H
 
 # include "libft.h"
-
-//TODO eliminate spaces and agregate tokens
-//TODO maybe leaks when input is ""
 
 typedef enum e_token_type
 {
@@ -64,6 +61,9 @@ void		token_handle_redir_o(t_tokenizer *toker, t_token *tok);
 void		token_handle_var(t_tokenizer *toker, t_token *tok);
 void		token_handle_space(t_tokenizer *toker, t_token *tok);
 void		dq_mode(t_tokenizer *toker, t_token *tok);
+
+t_token		**agregate_spaces(t_token **tokens, int size);
+void		agregate_redirs(t_token **tokens, int size);
 
 t_tokenizer	*tokenizer_create(char *input);
 void		tokenizer_destroy(t_tokenizer *toker);
