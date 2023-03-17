@@ -6,13 +6,13 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 10:00:50 by graux             #+#    #+#             */
-/*   Updated: 2023/03/03 16:17:11 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/17 14:48:45 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/tokenizer.h"
 
-static const char	*g_special_chars = "|$\'\"<>&* \t";
+static const char	*g_special_chars = "|$\'\"<>& \t";
 
 static int	in_tok_word(char c)
 {
@@ -27,13 +27,15 @@ static int	in_tok_word(char c)
 	return (1);
 }
 
-static int	word_size(t_tokenizer *toker)
+static int	word_size(t_tokenizer *toker, t_token *tok)
 {
 	int	size;
 
 	size = -1;
 	while (toker->input[toker->pos + ++size])
 	{
+		if (toker->input[toker->pos + size] == '*')
+			tok->type = TOK_WILDCARD;
 		if (!in_tok_word(toker->input[toker->pos + size]))
 			break ;
 	}
@@ -45,7 +47,7 @@ void	token_handle_word(t_tokenizer *toker, t_token *tok)
 	int	size;
 
 	tok->type = TOK_WORD;
-	size = word_size(toker);
+	size = word_size(toker, tok);
 	token_gen_content(tok, toker->input + toker->pos, size);
 	toker->pos += size;
 }

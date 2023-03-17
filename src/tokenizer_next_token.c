@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 16:00:32 by graux             #+#    #+#             */
-/*   Updated: 2023/03/03 17:29:20 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/17 14:50:44 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@ static void	normal_mode(t_tokenizer *toker, t_token *tok)
 		token_handle_pipe(toker, tok);
 	else if (toker->input[toker->pos] == '&')
 		token_handle_and(toker, tok);
-	else if (toker->input[toker->pos] == '*')
-		token_handle_wildcard(toker, tok);
 	else if (toker->input[toker->pos] == '<')
 		token_handle_redir_i(toker, tok);
 	else if (toker->input[toker->pos] == '>')

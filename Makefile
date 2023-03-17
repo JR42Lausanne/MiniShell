@@ -36,7 +36,6 @@ SRC = ast_execute_cmd.c 		\
 	  token_handle_pipe.c 		\
 	  token_handle_word.c 		\
 	  token_handle_and.c 		\
-	  token_handle_wildcard.c 	\
 	  token_handle_redir_i.c 	\
 	  token_handle_redir_o.c 	\
 	  token_handle_var.c	 	\
