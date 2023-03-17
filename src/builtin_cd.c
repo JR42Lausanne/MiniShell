@@ -6,7 +6,7 @@
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 13:06:09 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/03/17 17:02:08 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/17 17:09:42 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ int	builtin_cd(char **args)
 	char	current_path[NAME_MAX];
 	char	*export_args[3];
 
+	if (args && !args[1])
+		return (1);
 	status = chdir(args[1]);
 	if (status == -1)
 	{
@@ -34,6 +36,7 @@ int	builtin_cd(char **args)
 		export_args[1] = ft_strjoin("PWD=", current_path);
 		export_args[2] = NULL;
 		builtin_export(export_args);
+		free(export_args[1]);
 	}	
 	return (0);
 }
