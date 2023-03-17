@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 15:22:26 by graux             #+#    #+#             */
-/*   Updated: 2023/03/16 15:25:39 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/17 14:40:59 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ t_token	**agregate_spaces(t_token **tokens, int size)
 	j = 0;
 	while (i < size)
 	{
+		if (!tokens[i])
+			break ;
 		if (!tokens[i + 1] || tokens[i + 1]->type == TOK_SPACE)
 		{
 			tokens[i]->tok_num = j;
