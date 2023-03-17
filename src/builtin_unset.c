@@ -6,12 +6,12 @@
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 13:17:14 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/03/07 16:39:56 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/17 11:35:02 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-#include "../include/minishell.h"
+#include "../include/builtins.h"
 #include "../include/libft.h"
 
 static int	var_name_len(char *var)
@@ -43,6 +43,7 @@ static void	remove_from_env(int pos)
 	g_env[MAX_ENV - 1] = NULL;
 }
 
+//TODO fix it, it does not work
 int	builtin_unset(char	**args)
 {
 	int	i;

@@ -28,6 +28,7 @@ SRC = ast_execute_cmd.c 		\
 	  ms_envsetup.c				\
 	  signal.c					\
 	  agregate_spaces.c			\
+	  agregate_redirs.c			\
 	  token_create.c			\
 	  token_destroy.c 			\
 	  token_void_dest.c 		\

@@ -6,7 +6,7 @@
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 21:39:02 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/03/07 16:47:17 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/17 11:33:56 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static int	max(int a, int b)
 	return (a);
 }
 
-//TODO check exporting same var multiple times and mulitple var
+//TODO fix it, it does not work
 int	builtin_export(char **args)
 {	
 	int	i;
@@ -48,10 +48,14 @@ int	builtin_export(char **args)
 				if (ft_strncmp(g_env[i], args[arg_num],
 						max(var_name_len(g_env[i]),
 							var_name_len(args[arg_num]))) == 0)
+				{
+					fprintf(stderr, "MATCH FOUND\n");
 					break ;
+				}
 			}
 			if (i < MAX_ENV - 1)
 			{
+				fprintf(stderr, "ADDING %s TO ENV at pos %d\n", args[arg_num], i);
 				if (g_env[i])
 					free(g_env[i]);
 				g_env[i] = ft_strdup(args[arg_num]);
