@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 15:28:35 by graux             #+#    #+#             */
-/*   Updated: 2023/03/17 15:47:54 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/17 15:52:55 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	replace_rest(t_token **tokens, int pos)
 	tokens[pos] = NULL;
 }
 
-static int	is_redir(t_token *tok)
+int	is_redir(t_token *tok)
 {
 	if (tok->type == TOK_REDIR_IN)
 		return (1);

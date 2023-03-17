@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 15:46:12 by graux             #+#    #+#             */
-/*   Updated: 2023/03/17 15:39:30 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/17 15:52:32 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ void		dq_mode(t_tokenizer *toker, t_token *tok);
 
 t_token		**agregate_spaces(t_token **tokens, int size);
 void		agregate_redirs(t_token ***tokens, int size);
+int			is_redir(t_token *tok);
 
 t_tokenizer	*tokenizer_create(char *input);
 void		tokenizer_destroy(t_tokenizer *toker);
