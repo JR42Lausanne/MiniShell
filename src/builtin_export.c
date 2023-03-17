@@ -6,7 +6,7 @@
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 21:39:02 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/03/17 12:48:42 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/17 13:57:00 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ static int	max(int a, int b)
 	return (a);
 }
 
-//TODO fix it, it does not work
 int	builtin_export(char **args)
 {	
 	int	i;

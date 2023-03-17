@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 16:04:36 by graux             #+#    #+#             */
-/*   Updated: 2023/03/17 12:03:59 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/17 14:16:14 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,33 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 
+static void	show_debug(int argc, char **argv, t_token **tokens, t_ast_node *ast_root, char c)
+{
+	if (argc == 2)
+	{
+		if (c == 't')
+			printf("-------------------- DEBUG --------------------\n");
+		if ((argv[1][0] == 't' || argv[1][1] == 't') && c == 't')
+		{
+			printf("\t\t---> TOKENS <---\n");
+			tokens_print(tokens);
+		}
+		if ((argv[1][0] == 'a' || argv[1][1] == 'a') && c == 'a')
+		{
+			printf("\t\t-----> AST <----\n");
+			ast_print(ast_root, 0);
+		}
+		if (c == 'a')
+			printf("------------------- DEBUG END -----------------\n");
+	}
+}
+
 int	main(int argc, char *argv[], char *envp[])
 {
 	char			*line;
 	t_token			**tokens;
 	t_ast_node		*ast_root;
 
-	(void) argc;
-	(void) argv;
 	ms_envsetup(envp);
 	if (signal_setup() == -1)
 		return (-1);
@@ -43,10 +62,10 @@ int	main(int argc, char *argv[], char *envp[])
 		}
 		add_history(line);
 		tokens = tokenize_input(line);
-		tokens_print(tokens);
+		show_debug(argc, argv, tokens, ast_root, 't');
 		//tokens_check_syntax(tokens);
 		ast_root = ast_generate(tokens);
-		ast_print(ast_root, 0);
+		show_debug(argc, argv, tokens, ast_root, 'a');
 		g_env[MAX_ENV] = "e";
 		ast_execute(ast_root);
 		ast_close_all_pipes(ast_root);
