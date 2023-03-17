@@ -29,6 +29,7 @@ SRC = ast_execute_cmd.c 		\
 	  signal.c					\
 	  agregate_spaces.c			\
 	  agregate_redirs.c			\
+	  expand_wildcards.c		\
 	  token_create.c			\
 	  token_destroy.c 			\
 	  token_void_dest.c 		\
