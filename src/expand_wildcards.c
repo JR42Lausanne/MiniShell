@@ -6,11 +6,12 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 16:12:14 by graux             #+#    #+#             */
-/*   Updated: 2023/03/17 16:57:29 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/17 17:20:54 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/tokenizer.h"
+#include <dirent.h>
 
 static int	matches_len(char **matches)
 {
@@ -27,13 +28,38 @@ static int	matches_len(char **matches)
 	return (len);
 }
 
+static int	is_match(char *name, char *expr)
+{
+	printf("%s compared to %s\n", name, expr);
+	return (0);
+}
+
+static void	add_to_matches(char ***matches, char *to_add)
+{
+	(void) matches;
+	(void) to_add;
+}
+
 static char	**match_wildcard(t_token *tok)
 {
-	char	**matches;
-	char	*str;
+	char			**matches;
+	DIR				*dirp;
+	struct dirent	*entry;
 
-	str = tok->content;
 	matches = NULL;
+	dirp = opendir(".");
+	if (dirp)
+	{
+		entry = readdir(dirp);
+		while (entry)
+		{
+			if (is_match(entry->d_name, tok->content))
+				add_to_matches(&matches, entry->d_name);
+			entry = readdir(dirp);
+		}
+	}
+	closedir(dirp);
+	token_destroy(tok);
 	return (matches);
 }
 
