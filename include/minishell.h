@@ -6,7 +6,7 @@
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 13:25:03 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/03/15 18:23:01 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/17 11:48:44 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # define MAX_ENV 1000
 
-extern char	*g_env[MAX_ENV + 1];
+extern char	**g_env;
 
 char	*ms_getenv(char *name);
 char	*ms_getenv_cont(char *name);
