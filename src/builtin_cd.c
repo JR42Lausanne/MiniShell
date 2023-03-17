@@ -6,7 +6,7 @@
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 13:06:09 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/03/07 14:44:38 by jlaiti           ###   ########.fr       */
+/*   Updated: 2023/03/17 17:02:08 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	builtin_cd(char **args)
 {
 	int		status;
 	char	current_path[NAME_MAX];
-	char	*export_args[2];
+	char	*export_args[3];
 
 	status = chdir(args[1]);
 	if (status == -1)
@@ -32,6 +32,7 @@ int	builtin_cd(char **args)
 		getcwd(current_path, NAME_MAX);
 		export_args[0] = "export";
 		export_args[1] = ft_strjoin("PWD=", current_path);
+		export_args[2] = NULL;
 		builtin_export(export_args);
 	}	
 	return (0);

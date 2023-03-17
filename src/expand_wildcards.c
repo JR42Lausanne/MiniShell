@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 16:12:14 by graux             #+#    #+#             */
-/*   Updated: 2023/03/17 16:53:20 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/17 16:57:29 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,12 @@ static int	matches_len(char **matches)
 	return (len);
 }
 
-static char	**match_wildcard(char *regex)
+static char	**match_wildcard(t_token *tok)
 {
 	char	**matches;
+	char	*str;
 
-	(void) regex;
+	str = tok->content;
 	matches = NULL;
 	return (matches);
 }
@@ -62,7 +63,7 @@ static t_token	**expand_one(t_token **tokens, int size)
 		i++;
 	if (tokens[i])
 	{
-		matches = match_wildcard(tokens[i]->content);
+		matches = match_wildcard(tokens[i]);
 		exp = ft_calloc(size + 1 + matches_len(matches), sizeof(t_token *));
 		if (!exp)
 			return (NULL);
