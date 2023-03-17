@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 17:21:59 by graux             #+#    #+#             */
-/*   Updated: 2023/03/16 15:26:42 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/17 15:44:48 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ t_token	**tokenize_input(char *input)
 	to_words(tokens);
 	size = tokens_size(tokens);
 	tokens = agregate_spaces(tokens, size);
-	agregate_redirs(tokens, size);
+	agregate_redirs(&tokens, size);
 	tokenizer_destroy(toker);
 	return (tokens);
 }
