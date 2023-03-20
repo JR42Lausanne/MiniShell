@@ -1,8 +1,3 @@
-echo -n -n -n bonjour
-echo -n -n -n bonjour
-echo -n"-n" bonjour
-echo "-n -n -n"-n bonjour
-echo "-n '-n'" bonjour
 echo ~
 echo ~/123
 echo ~/123/456
