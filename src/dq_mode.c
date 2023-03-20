@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 15:29:55 by graux             #+#    #+#             */
-/*   Updated: 2023/03/16 14:38:17 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/20 13:48:58 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ static char	*var_mode(t_tokenizer *toker)
 	if (var_name)
 	{
 		var_value = ms_getenv_cont(var_name);
-		printf("%s\n", var_value);
 		free(var_name);
 		return (var_value);
 	}

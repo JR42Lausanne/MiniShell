@@ -6,7 +6,7 @@
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 19:09:38 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/03/17 12:50:55 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/20 13:40:55 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ static int	check_built_fork(void *cont)
 	if (ft_strncmp(name, "pwd", 3) == 0)
 		return (1);
 	else if (ft_strncmp(name, "env", 3) == 0)
+		return (1);
+	else if (ft_strncmp(name, "echo", 4) == 0)
 		return (1);
 	else
 		return (0);

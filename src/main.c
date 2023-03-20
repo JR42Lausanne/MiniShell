@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 16:04:36 by graux             #+#    #+#             */
-/*   Updated: 2023/03/17 14:16:14 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/20 14:09:56 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,10 @@ int	main(int argc, char *argv[], char *envp[])
 	t_ast_node		*ast_root;
 
 	ms_envsetup(envp);
+	/*
 	if (signal_setup() == -1)
 		return (-1);
+		*/
 	while (1)
 	{
 		g_env[MAX_ENV] = "p";
