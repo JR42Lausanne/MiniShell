@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 16:04:36 by graux             #+#    #+#             */
-/*   Updated: 2023/03/20 14:09:56 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/20 16:15:56 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,19 @@ static void	show_debug(int argc, char **argv, t_token **tokens, t_ast_node *ast_
 	}
 }
 
+static int	not_interactive(char *cmd)
+{
+	t_token			**tokens;
+	t_ast_node		*ast_root;
+
+	tokens = tokenize_input(cmd);
+	ast_root = ast_generate(tokens);
+	ast_execute(ast_root);
+	ast_close_all_pipes(ast_root);
+	ast_wait(ast_root);
+	return (0);
+}
+
 int	main(int argc, char *argv[], char *envp[])
 {
 	char			*line;
@@ -47,10 +60,10 @@ int	main(int argc, char *argv[], char *envp[])
 	t_ast_node		*ast_root;
 
 	ms_envsetup(envp);
-	/*
+	if (argc == 3 && !ft_strncmp(argv[1], "-c", 3))
+		exit(not_interactive(argv[2]));
 	if (signal_setup() == -1)
 		return (-1);
-		*/
 	while (1)
 	{
 		g_env[MAX_ENV] = "p";

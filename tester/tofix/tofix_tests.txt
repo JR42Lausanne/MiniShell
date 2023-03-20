@@ -1,0 +1,14 @@
+echo -n -n -n bonjour
+echo -n -n -n bonjour
+echo -n"-n" bonjour
+echo "-n -n -n"-n bonjour
+echo "-n '-n'" bonjour
+echo ~
+echo ~/123
+echo ~/123/456
+echo \" \" \" \"\"\" \'\'\'
+echo " $USER $ "'$PWD'
+echo $?
+echo $USER $123456789USER $USER123456789
+echo $USER $USER9999 $USER8888 $USER7777
+echo $USER $USER9999 $USER8888 $USER7777 "$USER"

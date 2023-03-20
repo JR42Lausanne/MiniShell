@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 12:08:53 by graux             #+#    #+#             */
-/*   Updated: 2023/03/02 15:05:36 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/20 15:06:03 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ static int	var_len(t_tokenizer *toker)
 {
 	int	size;
 
+	if (toker->input[toker->pos] && ft_isdigit(toker->input[toker->pos]))
+		return (1);
 	size = 0;
 	while (toker->input[toker->pos + size] == '_'
 		|| ft_isalnum(toker->input[toker->pos + size]))

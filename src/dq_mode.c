@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 15:29:55 by graux             #+#    #+#             */
-/*   Updated: 2023/03/20 13:48:58 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/20 14:52:13 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ static int	var_len(t_tokenizer *toker)
 {
 	int	size;
 
+	if (toker->input[toker->pos] && ft_isdigit(toker->input[toker->pos]))
+		return (1);
 	size = 0;
 	while (toker->input[toker->pos + size] == '_'
 		|| ft_isalnum(toker->input[toker->pos + size]))
@@ -39,6 +41,11 @@ static char	*var_mode(t_tokenizer *toker)
 	if (var_name)
 	{
 		var_value = ms_getenv_cont(var_name);
+		if (!var_value)
+		{
+			var_value = malloc(1 * sizeof(char));
+			var_value[0] = '\0';
+		}
 		free(var_name);
 		return (var_value);
 	}
