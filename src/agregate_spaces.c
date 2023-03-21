@@ -6,22 +6,29 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 15:22:26 by graux             #+#    #+#             */
-/*   Updated: 2023/03/17 14:40:59 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/20 17:51:37 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/tokenizer.h"
 
-static void	agreg_two(t_token **tokens, int pos)
+static void	agreg_two(t_token **tokens, int *pos)
 {
 	char	*temp;
+	int		i;
 
-	temp = tokens[pos]->content;
-	tokens[pos]->content = ft_strjoin(temp, tokens[pos + 1]->content);
-	free(temp);
-	token_destroy(tokens[pos + 1]);
-	while (tokens[++pos])
-		tokens[pos] = tokens[pos + 1];
+	i = *pos;
+	if (!tokens[*pos]->to_be_removed)
+	{
+		temp = tokens[*pos]->content;
+		tokens[*pos]->content = ft_strjoin(temp, tokens[*pos + 1]->content);
+		free(temp);
+		token_destroy(tokens[*pos + 1]);
+		while (tokens[++i])
+			tokens[i] = tokens[i + 1];
+	}
+	else
+		(*pos)++;
 }
 
 t_token	**agregate_spaces(t_token **tokens, int size)
@@ -47,7 +54,7 @@ t_token	**agregate_spaces(t_token **tokens, int size)
 			i += 2;
 		}
 		else
-			agreg_two(tokens, i);
+			agreg_two(tokens, &i);
 	}
 	agreg[j] = NULL;
 	free(tokens);

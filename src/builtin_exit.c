@@ -6,7 +6,7 @@
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 11:30:08 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/03/16 13:24:19 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/20 18:20:09 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	builtin_exit(char **args)
 {
 	int	status;
 
-	printf("exit\n");
+	ft_putstr_fd("exit\n", 2);
 	if (!args)
 		exit(0); //-> when ctrl-D is pressed //TODO free everything
 	if (args[1])
@@ -44,7 +44,7 @@ int	builtin_exit(char **args)
 				status = ft_atoi(args[1]);
 			else
 			{
-				printf("Too many args\n"); //TODO error handling
+				ft_putstr_fd("Too many args\n", 2); //TODO error handling
 				return (1);
 			}
 		}

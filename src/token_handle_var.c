@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 12:08:53 by graux             #+#    #+#             */
-/*   Updated: 2023/03/20 15:06:03 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/20 17:48:36 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void	token_handle_var(t_tokenizer *toker, t_token *tok)
 		{
 			token_gen_content(tok, "", 0);
 			toker->pos += size_in_input;
+			tok->to_be_removed = 1;
 			return ;
 		}
 		token_gen_content(tok, var_value + size_in_input + 1,

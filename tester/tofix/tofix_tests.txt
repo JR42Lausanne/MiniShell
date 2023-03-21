@@ -1,9 +1,14 @@
-echo ~
-echo ~/123
-echo ~/123/456
-echo \" \" \" \"\"\" \'\'\'
-echo " $USER $ "'$PWD'
-echo $?
-echo $USER $123456789USER $USER123456789
-echo $USER $USER9999 $USER8888 $USER7777
-echo $USER $USER9999 $USER8888 $USER7777 "$USER"
+env | grep "_="
+env | grep "SHLVL"
+echo oui | echo non | echo something | grep oui
+echo oui | echo non | echo something | grep non
+cd .. | pwd
+ifconfig | grep nothing
+whoami | grep $USER > tmp/file
+whoami | cat -e | cat -e > tmp/file
+cat Makefile | grep "FLAGS"
+whereis ls | cat -e | cat -e > test
+whereis grep > tmp/file
+whereis grep > tmp/file
+ls -la > tmp/file
+ls -la > tmp/file

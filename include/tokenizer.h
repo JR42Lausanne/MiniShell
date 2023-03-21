@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 15:46:12 by graux             #+#    #+#             */
-/*   Updated: 2023/03/17 16:24:22 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/20 17:07:56 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct s_token
 	t_token_type	type;
 	char			*content;
 	int				tok_num;
+	int				to_be_removed;
 }			t_token;
 
 typedef struct s_tokenizer
