@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 16:04:36 by graux             #+#    #+#             */
-/*   Updated: 2023/03/21 13:40:58 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/21 13:57:08 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,7 @@ static int	not_interactive(char *cmd)
 	ast_root = ast_generate(tokens);
 	ast_execute(ast_root);
 	ast_close_all_pipes(ast_root);
-	ast_wait(ast_root);
-	return (0);
+	return (ast_wait(ast_root));
 }
 
 int	main(int argc, char *argv[], char *envp[])
@@ -86,7 +85,7 @@ int	main(int argc, char *argv[], char *envp[])
 		g_env[MAX_ENV] = "e";
 		ast_execute(ast_root);
 		ast_close_all_pipes(ast_root);
-		ast_wait(ast_root);
+		status = ast_wait(ast_root);
 		//TODO free tokens and ast
 		free(line);
 	}

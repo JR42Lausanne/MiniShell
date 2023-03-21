@@ -6,7 +6,7 @@
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 13:00:55 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/03/15 17:31:16 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/21 13:56:45 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int				ast_node_redirect(t_ast_node *node);
 
 t_ast_node		*ast_generate(t_token **tokens);
 void			ast_print(t_ast_node *root, int depth);
-void			ast_wait(t_ast_node *node);
+int				ast_wait(t_ast_node *node);
 void			ast_close_all_pipes(t_ast_node *node);
 
 #endif
