@@ -6,28 +6,12 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 15:29:55 by graux             #+#    #+#             */
-/*   Updated: 2023/03/21 13:14:40 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/21 13:18:25 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/tokenizer.h"
 #include "../include/minishell.h"
-
-static int	var_len(t_tokenizer *toker)
-{
-	int	size;
-
-	if (toker->input[toker->pos] && (!ft_isalpha(toker->input[toker->pos])
-			&& toker->input[toker->pos] != '_'))
-		return (1);
-	size = 0;
-	while (toker->input[toker->pos + size] == '_'
-		|| ft_isalnum(toker->input[toker->pos + size]))
-	{
-		size++;
-	}
-	return (size);
-}
 
 static int	handle_size_one(t_tokenizer *toker, char **var_value)
 {
@@ -53,7 +37,7 @@ static char	*var_mode(t_tokenizer *toker)
 	int		size;
 
 	toker->pos += 1;
-	size = var_len(toker);
+	size = token_var_len(toker);
 	if (handle_size_one(toker, &var_value))
 		return (var_value);
 	var_name = ft_substr(toker->input, toker->pos, size);

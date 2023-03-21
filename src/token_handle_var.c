@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 12:08:53 by graux             #+#    #+#             */
-/*   Updated: 2023/03/21 13:08:56 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/21 13:18:13 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "../include/minishell.h"
 #include "../include/libft.h"
 
-static int	var_len(t_tokenizer *toker)
+int	token_var_len(t_tokenizer *toker)
 {
 	int	size;
 
@@ -56,7 +56,7 @@ void	token_handle_var(t_tokenizer *toker, t_token *tok)
 	var_value = NULL;
 	tok->type = TOK_VAR;
 	toker->pos++;
-	size_in_input = var_len(toker);
+	size_in_input = token_var_len(toker);
 	if (handle_size_one(toker, tok))
 		return ;
 	var_name = ft_substr(toker->input, toker->pos, size_in_input);
