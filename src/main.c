@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 16:04:36 by graux             #+#    #+#             */
-/*   Updated: 2023/03/21 15:53:52 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/21 15:59:39 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,19 +68,15 @@ static void	gen_prompt(char prompt[PROMPT_SIZE], int status)
 	prompt[pos + 1] = ' ';
 	pos += 2;
 	str = ms_getenv_cont("PWD");
+	offset = 0;
 	if (ft_strlen(str) + pos > PROMPT_SIZE - 5)
 	{
 		offset = ft_strlen(str) - (PROMPT_SIZE - 5 - pos) + 4;
 		ft_memcpy(prompt + pos, "/...", 4);
 		pos += 4;
-		ft_memcpy(prompt + pos, str + offset, ft_strlen(str + offset));
-		pos += ft_strlen(str + offset);
 	}
-	else
-	{
-		ft_memcpy(prompt + pos, str, ft_strlen(str));
-		pos += ft_strlen(str);
-	}
+	ft_memcpy(prompt + pos, str + offset, ft_strlen(str + offset));
+	pos += ft_strlen(str + offset);
 	free(str);
 	ft_memcpy(prompt + pos, "\n$> \0", 5);
 }
