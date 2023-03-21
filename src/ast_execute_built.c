@@ -6,37 +6,18 @@
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 19:09:38 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/03/21 16:08:37 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/21 18:22:10 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ast.h"
-
-static int	check_built_fork(void *cont)
-{
-	char	*name;
-
-	if (!cont)
-		return (0);
-	name = ((t_builtin_cont *)cont)->args[0];
-	if (!name)
-		return (0);
-	if (ft_strncmp(name, "pwd", 3) == 0)
-		return (1);
-	else if (ft_strncmp(name, "env", 3) == 0)
-		return (1);
-	else if (ft_strncmp(name, "echo", 4) == 0)
-		return (1);
-	else
-		return (0);
-}
 
 void	ast_execute_built(t_ast_node *node)
 {
 	t_builtin_cont	*content;
 	int				status;
 
-	if (check_built_fork(node->content))
+	if (node->pipe_count > 0)
 		node->pid = fork();
 	if (node->pid == 0)
 	{
