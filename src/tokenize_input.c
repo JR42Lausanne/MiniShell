@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 17:21:59 by graux             #+#    #+#             */
-/*   Updated: 2023/03/20 17:39:58 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/21 13:40:19 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,13 @@ static void	remove_useless(t_token **tokens)
 	}
 }
 
-t_token	**tokenize_input(char *input)
+t_token	**tokenize_input(char *input, int status)
 {
 	t_tokenizer	*toker;
 	t_token		**tokens;
 	int			size;
 
-	toker = tokenizer_create(input);
+	toker = tokenizer_create(input, status);
 	tokens = tokenizer_parse(toker);
 	to_words(tokens);
 	size = tokens_size(tokens);

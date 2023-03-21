@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 16:04:36 by graux             #+#    #+#             */
-/*   Updated: 2023/03/21 10:56:06 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/21 13:40:58 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static int	not_interactive(char *cmd)
 	t_token			**tokens;
 	t_ast_node		*ast_root;
 
-	tokens = tokenize_input(cmd);
+	tokens = tokenize_input(cmd, 0);
 	ast_root = ast_generate(tokens);
 	ast_execute(ast_root);
 	ast_close_all_pipes(ast_root);
@@ -58,12 +58,14 @@ int	main(int argc, char *argv[], char *envp[])
 	char			*line;
 	t_token			**tokens;
 	t_ast_node		*ast_root;
+	int				status;
 
 	ms_envsetup(envp);
 	if (argc == 3 && !ft_strncmp(argv[1], "-c", 3))
 		exit(not_interactive(argv[2]));
 	if (signal_setup() == -1)
 		return (-1);
+	status = 0;
 	while (1)
 	{
 		g_env[MAX_ENV] = "p";
@@ -76,7 +78,7 @@ int	main(int argc, char *argv[], char *envp[])
 			continue ;
 		}
 		add_history(line);
-		tokens = tokenize_input(line);
+		tokens = tokenize_input(line, status);
 		show_debug(argc, argv, tokens, ast_root, 't');
 		//tokens_check_syntax(tokens);
 		ast_root = ast_generate(tokens);

@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 12:08:53 by graux             #+#    #+#             */
-/*   Updated: 2023/03/21 13:18:13 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/21 13:50:19 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ int	token_var_len(t_tokenizer *toker)
 
 static int	handle_size_one(t_tokenizer *toker, t_token *tok)
 {
+	char	*str_status;
+
 	if (toker->input[toker->pos] == '~')
 	{
 		token_gen_content(tok, "$~", 2);
@@ -42,6 +44,14 @@ static int	handle_size_one(t_tokenizer *toker, t_token *tok)
 		|| toker->input[toker->pos] == '\t')
 	{
 		token_gen_content(tok, "$", 1);
+		return (1);
+	}
+	else if (toker->input[toker->pos] == '?')
+	{
+		str_status = ft_itoa(toker->status);
+		token_gen_content(tok, str_status, ft_strlen(str_status));
+		free(str_status);
+		toker->pos++;
 		return (1);
 	}
 	return (0);

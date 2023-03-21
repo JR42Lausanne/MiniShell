@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 15:29:55 by graux             #+#    #+#             */
-/*   Updated: 2023/03/21 13:18:25 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/21 13:53:02 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,12 @@ static int	handle_size_one(t_tokenizer *toker, char **var_value)
 		|| toker->input[toker->pos] == '\t')
 	{
 		*var_value = ft_strdup("$");
+		return (1);
+	}
+	else if (toker->input[toker->pos] == '?')
+	{
+		*var_value = ft_itoa(toker->status);
+		toker->pos++;
 		return (1);
 	}
 	return (0);

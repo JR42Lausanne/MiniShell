@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 15:46:12 by graux             #+#    #+#             */
-/*   Updated: 2023/03/21 13:23:14 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/21 13:39:48 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ typedef struct s_tokenizer
 {
 	t_list		*tokens;
 	char		*input;
+	int			status;
 	int			pos;
 }			t_tokenizer;
 
@@ -69,12 +70,12 @@ void		agregate_redirs(t_token ***tokens, int size);
 t_token		**expand_wildcards(t_token **tokens);
 int			is_redir(t_token *tok);
 
-t_tokenizer	*tokenizer_create(char *input);
+t_tokenizer	*tokenizer_create(char *input, int status);
 void		tokenizer_destroy(t_tokenizer *toker);
 t_token		*tokenizer_next_token(t_tokenizer *toker);
 t_token		**tokenizer_as_array(t_tokenizer *toker);
 t_token		**tokenizer_parse(t_tokenizer *toker);
-t_token		**tokenize_input(char *input);
+t_token		**tokenize_input(char *input, int status);
 
 void		tokens_print(t_token **tokens);
 int			tokens_size(t_token **tokens);
