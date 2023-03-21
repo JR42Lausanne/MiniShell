@@ -6,7 +6,7 @@
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 13:06:09 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/03/17 17:09:42 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/21 16:24:31 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,9 @@ int	builtin_cd(char **args)
 	char	*export_args[3];
 
 	if (args && !args[1])
-		return (1);
-	status = chdir(args[1]);
+		status = chdir(ms_getenv_cont("HOME"));
+	else
+		status = chdir(args[1]);
 	if (status == -1)
 	{
 		perror(args[1]);
