@@ -1,24 +1,0 @@
-[1;32mMakefile successfully created, your executable minishell is ready.
-
-[1;32m- Echo part : For next tests, you will need : [0;33mcd, pwd and semicolons (;).[0m
-[?25l[J[0;32m1: echo[0m[?25l[J[0;32m2: echo echo[0m[?25l[J[0;32m3: eCho[0m[?25l[J[0;32m4: eChO[0m[?25l[J[0;32m5: eCHO[0m[?25l[J[0;32m6: ECHO[0m[?25l[J[0;32m7: echo rhobebou[0m[?25l[J[0;32m8: echo stop barking[0m[?25l[J[0;32m9: echo "bonjour"[0m[?25l[J[0;32m10: echo bonjour[0m[?25l[J[0;32m11: echo 'bonjour'[0m[?25l[J[0;32m12: echo -n bonjour[0m[?25l[J[0;32m13: echo -nn bonjour[0m[?25l[J[0;32m14: echo -n -n -n bonjour[0m[?25l[J[0;32m15: echo -n -n -n bonjour[0m[?25l[J[0;32m16: echo "-n" bonjour[0m[?25l[J[0;32m17: echo -n"-n" bonjour[0m[?25l[J[0;32m18: echo "-nnnn" bonjour[0m[?25l[J[0;32m19: echo "-n -n -n"-n bonjour[0m[?25l[J[0;32m20: echo "-n '-n'" bonjour[0m[0;31m21:        [echo ~]
-bash     : [/Users/graux][0;32m[0][0;31m
-minishell: [~][0;32m[0]
-[?25l[J[0;32m22: echo "~"[0m[?25l[J[0;32m23: echo '~'[0m[?25l[J[0;32m24: echo ~123[0m[?25l[J[0;32m25: echo 123~[0m[0;31m26:        [echo ~/123]
-bash     : [/Users/graux/123][0;32m[0][0;31m
-minishell: [~/123][0;32m[0]
-[0;31m27:        [echo ~/123/456]
-bash     : [/Users/graux/123/456][0;32m[0][0;31m
-minishell: [~/123/456][0;32m[0]
-[?25l[J[0;32m28: echo $USER[0m[?25l[J[0;32m29: echo "$USER"[0m[?25l[J[0;32m30: echo "'$USER'"[0m[?25l[J[0;32m31: echo " '$USER' "[0m[?25l[J[0;32m32: echo text"$USER"[0m[?25l[J[0;32m33: echo text"'$USER'" ' $USER '[0m[?25l[J[0;32m34: echo "text"   "$USER"    "$USER"[0m[?25l[J[0;32m35: echo '              $USER          '[0m[?25l[J[0;32m36: echo               text "$USER"            "$USER"text[0m[?25l[J[0;32m37: echo ''''''''''$USER''''''''''[0m[?25l[J[0;32m38: echo """"""""$USER""""""""[0m[?25l[J[0;32m39: echo $USER'$USER'text oui oui     oui  oui $USER oui      $USER ''[0m[?25l[J[0;32m40: echo $USER '' $USER $USER '' $USER '' $USER -n $USER[0m[?25l[J[0;32m41: echo ' ' ' '[0m[?25l[J[0;32m42: echo '" ' " """[0m[0;31m43:        [echo " " " """ ''']
-bash     : [" " " """ '''][0;32m[0][0;31m
-minishell: [\ \ \ \\ \\Invalid sq string][0;32m[0]
-[?25l[J[0;32m44: echo "$USER""$USER""$USER"[0m[?25l[J[0;32m45: echo text"$USER"test[0m[?25l[J[0;32m46: echo '$USER' "$USER" "text ' text"[0m[?25l[J[0;32m47: echo '$USER'[0m[?25l[J[0;32m48: echo $USER " "[0m[?25l[J[0;32m49: echo "$USER""Users/$USER/file""'$USER'"'$USER'[0m[?25l[J[0;32m50: echo "$USER$USER$USER"[0m[?25l[J[0;32m51: echo '$USER'"$USER"'$USER'[0m[?25l[J[0;32m52: echo '"$USER"''$USER'"""$USER"[0m[?25l[J[0;32m53: echo " $USER  "'$PWD'[0m[0;31m54:        [echo " $USER  $ "'$PWD']
-bash     : [ graux  $ $PWD][0;32m[0][0;31m
-minishell: [ graux   $PWD][0;32m[0]
-[?25l[J[0;32m55: echo $USER=4[0m[?25l[J[0;32m56: echo $USER=thallard[0m[?25l[J[0;32m57: echo $USER[0m[0;31m58:        [echo $?]
-bash     : [0][0;32m[0][0;31m
-minishell: [][0;32m[0]
-[?25l[J[0;32m59: echo $USER213[0m[?25l[J[0;32m60: echo $USER$12USER$USER=4$USER12[0m[?25l[J[0;32m61: echo $USER $123456789USER $USER123456789[0m[?25l[J[0;32m62: echo $USER $9999USER $8888USER $7777USER[0m[?25l[J[0;32m63: echo $USER $USER9999 $USER8888 $USER7777[0m[?25l[J[0;32m64: echo $USER $USER9999 $USER8888 $USER7777 "$USER"[0m[?25l[J[0;32m65: echo "$USER=12$USER"[0m[?25l[J[0;32m66: echo "$9USER" "'$USER=12$SOMETHING'"[0m[?25l[J[0;32m67: echo $PWD/file[0m[?25l[J[0;32m68: echo "$PWD/file"[0m[?25l[J[0;32m69: echo "text" "text$USER" ... "$USER"[0m[?25l[J[0;32m70: echo $PWD[0m
-[0;32mConclusion : 64/70 tests passed.
-6 wrong tests were added in "[0;33m./tofix/tofix_tests.txt[0;32m".
