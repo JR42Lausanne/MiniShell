@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 15:22:26 by graux             #+#    #+#             */
-/*   Updated: 2023/03/20 17:51:37 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/21 17:11:31 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,17 @@ t_token	**agregate_spaces(t_token **tokens, int size)
 	{
 		if (!tokens[i])
 			break ;
-		if (!tokens[i + 1] || tokens[i + 1]->type == TOK_SPACE)
+		if (!tokens[i + 1] || tokens[i + 1]->type == TOK_SPACE || is_redir(tokens[i]))
 		{
 			tokens[i]->tok_num = j;
 			agreg[j++] = tokens[i];
-			token_destroy(tokens[i + 1]);
-			i += 2;
+			if (tokens[i + 1] && tokens[i + 1]->type == TOK_SPACE)
+			{
+				token_destroy(tokens[i + 1]);
+				i += 2;
+			}
+			else
+				i++;
 		}
 		else
 			agreg_two(tokens, &i);
