@@ -30,6 +30,7 @@ SRCS =        ft_isalpha.c \
 			  ft_strncmp.c \
 			  ft_strnstr.c \
 			  ft_atoi.c \
+			  ft_atol.c \
 			  ft_striteri.c \
 			  ft_strmapi.c \
 			  ft_itoa.c \
