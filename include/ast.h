@@ -6,7 +6,7 @@
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 13:00:55 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/03/21 13:56:45 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/21 16:08:58 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ typedef struct s_ast_node
 	int					pipe_count;
 	int					*pipe_index;
 	int					*all_pipes;
+	int					exit_status;
 	pid_t				pid;
 	struct s_ast_node	*children[2];
 }			t_ast_node;

@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 18:01:47 by graux             #+#    #+#             */
-/*   Updated: 2023/03/17 16:02:25 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/21 16:09:57 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ t_ast_node	*ast_node_create(t_token **tokens, int start, int size, t_packed p)
 	node->pipe_index = p.p;
 	node->pipe_count = p.pipe_count;
 	node->all_pipes = p.all_pipes;
+	node->exit_status = -1;
 	if (type_pos != -1)
 	{
 		node->children[0] = ast_node_create(tokens, start, type_pos - start, p);

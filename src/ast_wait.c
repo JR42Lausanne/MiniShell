@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 13:11:59 by graux             #+#    #+#             */
-/*   Updated: 2023/03/21 15:57:38 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/21 16:08:20 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ int	ast_wait(t_ast_node *node)
 		waitpid(node->pid, &stat_loc, 0);
 		status = convert_stat_loc(stat_loc);
 	}
+	else if (node->exit_status != -1)
+		status = node->exit_status;
 	ast_wait(node->children[0]);
 	if (node->children[1])
 		status = ast_wait(node->children[1]);
