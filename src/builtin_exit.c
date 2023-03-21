@@ -6,13 +6,24 @@
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 11:30:08 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/03/20 18:20:09 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/21 14:56:26 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/builtins.h"
 #include "../include/libft.h"
 #include <stdlib.h>
+#include <limits.h>
+
+static int	check_too_long(char *arg)
+{
+	long	l_val;
+
+	l_val = ft_atol(arg);
+	if (l_val < INT_MIN || l_val > INT_MAX)
+		return (1);
+	return (0);
+}
 
 int	check_numeric(char *arg)
 {
@@ -21,8 +32,18 @@ int	check_numeric(char *arg)
 	i = -1;
 	while (arg[++i])
 	{
+		if (i == 0 && (arg[i] == '-' || arg[i] == '+'))
+			continue ;
 		if (!ft_isdigit(arg[i]))
+		{
+			ft_putstr_fd("numeric argument required\n", 2); //TODO error handling
 			return (255);
+		}
+	}
+	if (check_too_long(arg))
+	{
+		ft_putstr_fd("numeric argument required\n", 2); //TODO error handling
+		return (255);
 	}
 	return (0);
 }
