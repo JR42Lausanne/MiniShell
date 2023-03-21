@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 16:04:36 by graux             #+#    #+#             */
-/*   Updated: 2023/03/21 13:57:08 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/21 15:53:52 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,46 @@ static int	not_interactive(char *cmd)
 	return (ast_wait(ast_root));
 }
 
+static void	gen_prompt(char prompt[PROMPT_SIZE], int status)
+{
+	int		pos;
+	char	*str;
+	int		offset;
+
+	prompt[0] = '(';
+	pos = 1;
+	str = ft_itoa(status);
+	ft_memcpy(prompt + pos, str, ft_strlen(str));
+	pos += ft_strlen(str);
+	free(str);
+	prompt[pos] = ')';
+	prompt[pos + 1] = ' ';
+	pos += 2;
+	str = ms_getenv_cont("PWD");
+	if (ft_strlen(str) + pos > PROMPT_SIZE - 5)
+	{
+		offset = ft_strlen(str) - (PROMPT_SIZE - 5 - pos) + 4;
+		ft_memcpy(prompt + pos, "/...", 4);
+		pos += 4;
+		ft_memcpy(prompt + pos, str + offset, ft_strlen(str + offset));
+		pos += ft_strlen(str + offset);
+	}
+	else
+	{
+		ft_memcpy(prompt + pos, str, ft_strlen(str));
+		pos += ft_strlen(str);
+	}
+	free(str);
+	ft_memcpy(prompt + pos, "\n$> \0", 5);
+}
+
 int	main(int argc, char *argv[], char *envp[])
 {
 	char			*line;
 	t_token			**tokens;
 	t_ast_node		*ast_root;
 	int				status;
+	char			prompt[PROMPT_SIZE];
 
 	ms_envsetup(envp);
 	if (argc == 3 && !ft_strncmp(argv[1], "-c", 3))
@@ -68,7 +102,8 @@ int	main(int argc, char *argv[], char *envp[])
 	while (1)
 	{
 		g_env[MAX_ENV] = "p";
-		line = readline("$> ");
+		gen_prompt(prompt, status);
+		line = readline(prompt);
 		if (!line)
 			builtin_exit(NULL);
 		if (ft_strlen(line) == 0)

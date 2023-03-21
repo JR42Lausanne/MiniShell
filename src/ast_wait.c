@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 13:11:59 by graux             #+#    #+#             */
-/*   Updated: 2023/03/21 14:27:29 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/21 15:57:38 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	ast_wait(t_ast_node *node)
 	int	status;
 	int	stat_loc;
 
-	status = 1;
+	status = 69;
 	if (!node)
 		return (1111);
 	if (node->type == AST_ROOT)
