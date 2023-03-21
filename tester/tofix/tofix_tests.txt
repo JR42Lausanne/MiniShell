@@ -1,14 +1,5 @@
-env | grep "_="
-env | grep "SHLVL"
-echo oui | echo non | echo something | grep oui
-echo oui | echo non | echo something | grep non
-cd .. | pwd
-ifconfig | grep nothing
-whoami | grep $USER > tmp/file
-whoami | cat -e | cat -e > tmp/file
-cat Makefile | grep "FLAGS"
-whereis ls | cat -e | cat -e > test
-whereis grep > tmp/file
-whereis grep > tmp/file
-ls -la > tmp/file
-ls -la > tmp/file
+echo ~
+echo ~/123
+echo ~/123/456
+echo \" \" \" \"\"\" \'\'\'
+echo $?

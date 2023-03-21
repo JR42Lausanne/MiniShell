@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 12:08:53 by graux             #+#    #+#             */
-/*   Updated: 2023/03/20 17:48:36 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/21 13:08:56 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ static int	var_len(t_tokenizer *toker)
 {
 	int	size;
 
-	if (toker->input[toker->pos] && ft_isdigit(toker->input[toker->pos]))
+	if (toker->input[toker->pos] && (!ft_isalpha(toker->input[toker->pos])
+			&& toker->input[toker->pos] != '_'))
 		return (1);
 	size = 0;
 	while (toker->input[toker->pos + size] == '_'
@@ -27,6 +28,23 @@ static int	var_len(t_tokenizer *toker)
 		size++;
 	}
 	return (size);
+}
+
+static int	handle_size_one(t_tokenizer *toker, t_token *tok)
+{
+	if (toker->input[toker->pos] == '~')
+	{
+		token_gen_content(tok, "$~", 2);
+		toker->pos++;
+		return (1);
+	}
+	else if (toker->input[toker->pos] == ' '
+		|| toker->input[toker->pos] == '\t')
+	{
+		token_gen_content(tok, "$", 1);
+		return (1);
+	}
+	return (0);
 }
 
 void	token_handle_var(t_tokenizer *toker, t_token *tok)
@@ -39,6 +57,8 @@ void	token_handle_var(t_tokenizer *toker, t_token *tok)
 	tok->type = TOK_VAR;
 	toker->pos++;
 	size_in_input = var_len(toker);
+	if (handle_size_one(toker, tok))
+		return ;
 	var_name = ft_substr(toker->input, toker->pos, size_in_input);
 	if (var_name)
 	{

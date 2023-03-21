@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 15:29:55 by graux             #+#    #+#             */
-/*   Updated: 2023/03/20 14:52:13 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/21 13:14:40 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ static int	var_len(t_tokenizer *toker)
 {
 	int	size;
 
-	if (toker->input[toker->pos] && ft_isdigit(toker->input[toker->pos]))
+	if (toker->input[toker->pos] && (!ft_isalpha(toker->input[toker->pos])
+			&& toker->input[toker->pos] != '_'))
 		return (1);
 	size = 0;
 	while (toker->input[toker->pos + size] == '_'
@@ -28,6 +29,23 @@ static int	var_len(t_tokenizer *toker)
 	return (size);
 }
 
+static int	handle_size_one(t_tokenizer *toker, char **var_value)
+{
+	if (toker->input[toker->pos] == '~')
+	{
+		*var_value = ft_strdup("$~");
+		toker->pos++;
+		return (1);
+	}
+	else if (toker->input[toker->pos] == ' '
+		|| toker->input[toker->pos] == '\t')
+	{
+		*var_value = ft_strdup("$");
+		return (1);
+	}
+	return (0);
+}
+
 static char	*var_mode(t_tokenizer *toker)
 {
 	char	*var_name;
@@ -36,6 +54,8 @@ static char	*var_mode(t_tokenizer *toker)
 
 	toker->pos += 1;
 	size = var_len(toker);
+	if (handle_size_one(toker, &var_value))
+		return (var_value);
 	var_name = ft_substr(toker->input, toker->pos, size);
 	toker->pos += size;
 	if (var_name)
