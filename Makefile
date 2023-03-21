@@ -15,6 +15,10 @@ SRC = ast_execute_cmd.c 		\
 	  ast_node_redirect.c 		\
 	  ast_print.c	 			\
 	  ast_wait.c	 			\
+	  redir_create_i.c			\
+	  redir_create_o.c			\
+	  redir_create_h.c			\
+	  redir_create_a.c			\
 	  builtin_cd.c 				\
 	  builtin_echo.c 			\
 	  builtin_env.c				\

@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 17:43:02 by graux             #+#    #+#             */
-/*   Updated: 2023/03/15 16:31:45 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/21 17:27:00 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,16 +29,56 @@ static int	count_pipes(t_token **tokens)
 	return (count);
 }
 
-static void	setup_all_pipes(t_ast_node *root)
+static void	setup_all_pipes(t_ast_node *root, t_token **tokens)
 {
 	int	i;
 
+	root->pipe_index = malloc(sizeof(int));
+	root->pipe_count = count_pipes(tokens);
 	root->all_pipes = malloc(sizeof(int) * (2 * root->pipe_count));
 	if (!root->all_pipes)
 		return ;
 	i = -1;
 	while (++i < root->pipe_count)
 		pipe(root->all_pipes + (i * 2));
+}
+
+static int	count_redirs(t_token **tokens)
+{
+	int	i;
+	int	count;
+
+	i = -1;
+	count = 0;
+	while (tokens[++i])
+	{
+		if (is_redir(tokens[i]))
+			count++;
+	}
+	return (count);
+}
+
+static void	setup_all_redirs(t_ast_node *root, t_token **tokens)
+{
+	int	i;
+	int	j;
+
+	root->all_redirs = malloc(sizeof(int) * count_redirs(tokens));
+	if (!root->all_redirs)
+		return ;
+	i = -1;
+	j = 0;
+	while (tokens[++i])
+	{
+		if (tokens[i]->type == TOK_REDIR_IN)
+			root->all_redirs[j++] = redir_create_i(tokens[i]);
+		else if (tokens[i]->type == TOK_REDIR_OUT)
+			root->all_redirs[j++] = redir_create_o(tokens[i]);
+		else if (tokens[i]->type == TOK_HEREDOC)
+			root->all_redirs[j++] = redir_create_h(tokens[i]);
+		else if (tokens[i]->type == TOK_REDIR_APP)
+			root->all_redirs[j++] = redir_create_a(tokens[i]);
+	}
 }
 
 t_ast_node	*ast_generate(t_token **tokens)
@@ -55,9 +95,8 @@ t_ast_node	*ast_generate(t_token **tokens)
 		return (NULL);
 	root->type = AST_ROOT;
 	root->content = NULL;
-	root->pipe_index = malloc(sizeof(int));
-	root->pipe_count = count_pipes(tokens);
-	setup_all_pipes(root);
+	setup_all_pipes(root, tokens);
+	setup_all_redirs(root, tokens);
 	p.pipe_count = root->pipe_count;
 	p.p = root->pipe_index;
 	p.all_pipes = root->all_pipes;
