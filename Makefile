@@ -15,6 +15,7 @@ SRC = ast_execute_cmd.c 		\
 	  ast_node_redirect.c 		\
 	  ast_print.c	 			\
 	  ast_wait.c	 			\
+	  error_put.c				\
 	  redir_create_i.c			\
 	  redir_create_o.c			\
 	  redir_create_h.c			\
