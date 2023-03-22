@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 15:28:35 by graux             #+#    #+#             */
-/*   Updated: 2023/03/17 15:52:55 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/22 10:55:48 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	replace_rest(t_token **tokens, int pos)
 {
 	if (tokens[pos])
 		token_destroy(tokens[pos]);
-	while (tokens[pos + 1])
+	while (tokens[pos] && tokens[pos + 1])
 	{
 		tokens[pos] = tokens[pos + 1];
 		pos++;
@@ -50,7 +50,10 @@ void	agregate_redirs(t_token ***tokens, int size)
 		if (is_redir((*tokens)[i]))
 		{
 			free((*tokens)[i]->content);
-			(*tokens)[i]->content = ft_strdup((*tokens)[i + 1]->content);
+			if ((*tokens)[i + 1])
+				(*tokens)[i]->content = ft_strdup((*tokens)[i + 1]->content);
+			else
+				(*tokens)[i]->content = NULL;
 			replace_rest(*tokens, i + 1);
 		}
 		i++;
