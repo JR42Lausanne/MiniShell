@@ -6,7 +6,7 @@
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 13:25:03 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/03/22 09:53:51 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/22 14:10:51 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,9 @@
 
 # define MAX_ENV 1000
 # define PROMPT_SIZE 50
+
+# define GREEN "\033[38;5;10m"
+# define RESET "\033[0m"
 
 extern char	**g_env;
 

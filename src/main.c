@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 16:04:36 by graux             #+#    #+#             */
-/*   Updated: 2023/03/22 13:02:31 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/22 14:10:58 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ static void	gen_prompt(char prompt[PROMPT_SIZE], int status)
 	char	*str;
 	int		offset;
 
+	printf("%s", GREEN);
 	prompt[0] = '(';
 	pos = 1;
 	str = ft_itoa(status);
@@ -83,7 +84,8 @@ static void	gen_prompt(char prompt[PROMPT_SIZE], int status)
 	ft_memcpy(prompt + pos, str + offset, ft_strlen(str + offset));
 	pos += ft_strlen(str + offset);
 	free(str);
-	ft_memcpy(prompt + pos, "\n$> \0", 5);
+	ft_memcpy(prompt + pos, "\n$> ", 4);
+	ft_memcpy(prompt + pos + 4, RESET, 5);
 }
 
 int	main(int argc, char *argv[], char *envp[])
@@ -92,7 +94,7 @@ int	main(int argc, char *argv[], char *envp[])
 	t_token			**tokens;
 	t_ast_node		*ast_root;
 	int				status;
-	char			prompt[PROMPT_SIZE];
+	char			prompt[PROMPT_SIZE + 4];
 
 	ms_envsetup(envp);
 	if (argc == 3 && !ft_strncmp(argv[1], "-c", 3))
