@@ -1,9 +1,2 @@
-| test
-echo | |
-|
-| | |
 ||||||||
 .
-..
-|echo|
-| echo -n oui

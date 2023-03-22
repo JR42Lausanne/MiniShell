@@ -6,16 +6,55 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 10:14:53 by graux             #+#    #+#             */
-/*   Updated: 2023/03/22 11:56:28 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/22 13:30:03 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/tokenizer.h"
 #include "../include/minishell.h"
 
+static int	check_words_around(t_token **tokens, int pos)
+{
+	int	i;
+	int	valid_right;
+	int	valid_left;
+
+	i = pos;
+	valid_right = 0;
+	valid_left = 0;
+	while (tokens[++i])
+	{
+		if (tokens[i]->type == TOK_WORD)
+			valid_right = 1;
+		else if (tokens[i]->type == TOK_PIPE || tokens[i]->type == TOK_OR
+			|| tokens[i]->type == TOK_AND)
+			break ;
+	}
+	i = pos;
+	while (--i >= 0)
+	{
+		if (tokens[i]->type == TOK_WORD)
+			valid_left = 1;
+		else if (tokens[i]->type == TOK_PIPE || tokens[i]->type == TOK_OR
+			|| tokens[i]->type == TOK_AND)
+			break ;
+	}
+	return (valid_left && valid_right);
+}
+
 static int	check_pipes(t_token **tokens)
 {
-	(void) tokens;
+	int	i;
+
+	i = -1;
+	while (tokens[++i])
+	{
+		if (tokens[i]->type == TOK_PIPE && !check_words_around(tokens, i))
+		{
+			error_put("syntax error", "invalid pipe");
+			return (0);
+		}
+	}
 	return (1);
 }
 

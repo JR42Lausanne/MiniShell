@@ -6,7 +6,7 @@
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 16:04:14 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/03/22 10:19:37 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/22 13:15:58 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,11 @@
 #include <sys/wait.h>
 #include <sys/stat.h>
 
-
 static int	check_relative(char *cmd)
 {
-	if (ft_strnstr(cmd, "./", ft_strlen(cmd)))
+	if (ft_strncmp(cmd, "./", 2) == 0)
 		return (1);
-	else if (ft_strnstr(cmd, "../", ft_strlen(cmd)))
+	else if (ft_strncmp(cmd, "../", 3) == 0)
 		return (1);
 	else if (cmd[0] == '/')
 		return (1);
@@ -63,7 +62,7 @@ static char	*get_cmd(char *cmd)
 		tmp = ft_strjoin(path[i], "/");
 		command = ft_strjoin(tmp, cmd);
 		free(tmp);
-		if (access(command, X_OK) == 0)
+		if (access(command, X_OK) == 0 && !check_access(command))
 			return (command);
 		free(command);
 	}
