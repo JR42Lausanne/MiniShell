@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 16:04:36 by graux             #+#    #+#             */
-/*   Updated: 2023/03/22 12:54:27 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/22 13:02:31 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,17 @@ static int	not_interactive(char *cmd)
 {
 	t_token			**tokens;
 	t_ast_node		*ast_root;
+	int				status;
 
 	tokens = tokenize_input(cmd, 0);
+	status = tokens_check_syntax(tokens) - 1;
+	if (status + 1)
+		return (status);
 	ast_root = ast_generate(tokens);
 	ast_execute(ast_root);
 	ast_close_all_pipes(ast_root);
-	return (ast_wait(ast_root));
+	status = ast_wait(ast_root);
+	return (status);
 }
 
 static void	gen_prompt(char prompt[PROMPT_SIZE], int status)
