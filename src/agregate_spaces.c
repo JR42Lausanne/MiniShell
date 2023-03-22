@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 15:22:26 by graux             #+#    #+#             */
-/*   Updated: 2023/03/22 11:06:43 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/22 13:40:28 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,9 @@ t_token	**agregate_spaces(t_token **tokens, int size)
 	{
 		if (!tokens[i])
 			break ;
-		if (!tokens[i + 1] || tokens[i + 1]->type == TOK_SPACE || is_redir(tokens[i]) || is_redir(tokens[i + 1]))
+		if (tokens[i + 1] && tokens[i]->type == TOK_WORD && tokens[i + 1]->type == TOK_WORD)
+			agreg_two(tokens, &i);
+		else //(!tokens[i + 1] || tokens[i + 1]->type == TOK_SPACE || is_redir(tokens[i]) || is_redir(tokens[i + 1]))
 		{
 			tokens[i]->tok_num = j;
 			agreg[j++] = tokens[i];
@@ -58,8 +60,6 @@ t_token	**agregate_spaces(t_token **tokens, int size)
 			else
 				i++;
 		}
-		else
-			agreg_two(tokens, &i);
 	}
 	agreg[j] = NULL;
 	free(tokens);

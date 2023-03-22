@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 10:14:53 by graux             #+#    #+#             */
-/*   Updated: 2023/03/22 13:30:03 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/22 13:48:00 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static int	check_words_around(t_token **tokens, int pos)
 	return (valid_left && valid_right);
 }
 
-static int	check_pipes(t_token **tokens)
+static int	check_control(t_token **tokens)
 {
 	int	i;
 
@@ -51,7 +51,17 @@ static int	check_pipes(t_token **tokens)
 	{
 		if (tokens[i]->type == TOK_PIPE && !check_words_around(tokens, i))
 		{
-			error_put("syntax error", "invalid pipe");
+			error_put("syntax error", "invalid |");
+			return (0);
+		}
+		else if (tokens[i]->type == TOK_OR && !check_words_around(tokens, i))
+		{
+			error_put("syntax error", "invalid ||");
+			return (0);
+		}
+		else if (tokens[i]->type == TOK_AND && !check_words_around(tokens, i))
+		{
+			error_put("syntax error", "invalid &&");
 			return (0);
 		}
 	}
@@ -85,11 +95,22 @@ static int	check_redirs(t_token **tokens)
 
 int	tokens_check_syntax(t_token **tokens)
 {
+	int	i;
+
 	if (tokens && !tokens[0])
 		return (1);
 	else if (!check_redirs(tokens))
 		return (3);
-	else if (!check_pipes(tokens))
+	else if (!check_control(tokens))
 		return (3);
+	i = -1;
+	while (tokens[++i])
+	{
+		if (tokens[i]->type == TOK_INVALID)
+		{
+			error_put("syntax error", "unterminated quote");
+			return (3);
+		}
+	}
 	return (0);
 }
