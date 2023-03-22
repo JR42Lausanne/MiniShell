@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 17:43:02 by graux             #+#    #+#             */
-/*   Updated: 2023/03/22 11:49:43 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/22 16:38:59 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,24 +61,19 @@ static int	count_redirs(t_token **tokens)
 static void	setup_all_redirs(t_ast_node *root, t_token **tokens)
 {
 	int	i;
-	int	j;
+	int	size;
 
-	root->all_redirs = malloc(sizeof(int) * count_redirs(tokens));
+	size = count_redirs(tokens) + 1;
+	root->all_redirs = malloc(sizeof(int) * size);
 	if (!root->all_redirs)
 		return ;
 	i = -1;
-	j = 0;
-	while (tokens[++i])
-	{
-		if (tokens[i]->type == TOK_REDIR_IN)
-			root->all_redirs[j++] = redir_create_i(tokens[i]);
-		else if (tokens[i]->type == TOK_REDIR_OUT)
-			root->all_redirs[j++] = redir_create_o(tokens[i]);
-		else if (tokens[i]->type == TOK_HEREDOC)
-			root->all_redirs[j++] = redir_create_h(tokens[i]);
-		else if (tokens[i]->type == TOK_REDIR_APP)
-			root->all_redirs[j++] = redir_create_a(tokens[i]);
-	}
+	while (++i < size)
+		root->all_redirs[i] = -2;
+	root->redir_index = malloc(sizeof(int));
+	if (!root->all_redirs)
+		return ; //TODO better protection
+	*(root->redir_index) = 0;
 }
 
 t_ast_node	*ast_generate(t_token **tokens)
@@ -100,6 +95,8 @@ t_ast_node	*ast_generate(t_token **tokens)
 	p.pipe_count = root->pipe_count;
 	p.p = root->pipe_index;
 	p.all_pipes = root->all_pipes;
+	p.all_redirs = root->all_redirs;
+	p.redir_index = root->redir_index;
 	if (!root->pipe_index)
 		return (NULL);
 	*(root->pipe_index) = 0;

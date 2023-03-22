@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 18:01:47 by graux             #+#    #+#             */
-/*   Updated: 2023/03/21 16:09:57 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/22 17:19:32 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,28 @@ static void	ast_node_gen_content(t_ast_node *node, t_token **tokens, int start,
 	node->children[1] = NULL;
 }
 
+static void	ast_node_gen_redir(t_ast_node *node, t_token **tokens, int start,
+		int size)
+{
+	int	i;
+
+	i = -1;
+	while (++i < size)
+	{
+		if (tokens[i + start]->type == TOK_REDIR_IN)
+		{
+			node->redir_fd_in = redir_create(tokens[i + start]);
+			node->all_redirs[*(node->redir_index)++] = node->redir_fd_in;
+		}
+		else if (tokens[i + start]->type == TOK_REDIR_OUT
+			|| tokens[i]->type == TOK_REDIR_APP)
+		{
+			node->redir_fd_out = redir_create(tokens[i + start]);
+			node->all_redirs[*(node->redir_index)++] = node->redir_fd_out;
+		}
+	}
+}
+
 t_ast_node	*ast_node_create(t_token **tokens, int start, int size, t_packed p)
 {
 	t_ast_node	*node;
@@ -67,9 +89,13 @@ t_ast_node	*ast_node_create(t_token **tokens, int start, int size, t_packed p)
 	node->pid = -1;
 	node->fd_in = STDIN_FILENO;
 	node->fd_out = STDOUT_FILENO;
+	node->redir_fd_in = -1;
+	node->redir_fd_out = -1;
 	node->pipe_index = p.p;
 	node->pipe_count = p.pipe_count;
 	node->all_pipes = p.all_pipes;
+	node->all_redirs = p.all_redirs;
+	node->redir_index = p.redir_index;
 	node->exit_status = -1;
 	if (type_pos != -1)
 	{
@@ -80,7 +106,7 @@ t_ast_node	*ast_node_create(t_token **tokens, int start, int size, t_packed p)
 	else
 	{
 		ast_node_gen_content(node, tokens, start, size);
-		//TODO after that populate redirs
+		ast_node_gen_redir(node, tokens, start, size);
 	}
 	return (node);
 }

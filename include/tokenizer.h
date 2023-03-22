@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 15:46:12 by graux             #+#    #+#             */
-/*   Updated: 2023/03/22 10:13:24 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/22 14:46:19 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ t_token		*token_create(t_token_type type, char *cont, int num);
 void		token_void_dest(void *tok);
 void		token_destroy(t_token *tok);
 void		token_gen_content(t_token *tok, char *src, int size);
+int			token_is_control(t_token *tok);
 //handlers for next token generation
 void		token_handle_pipe(t_tokenizer *toker, t_token *tok);
 void		token_handle_word(t_tokenizer *toker, t_token *tok);
@@ -79,6 +80,7 @@ t_token		**tokenize_input(char *input, int status);
 
 void		tokens_print(t_token **tokens);
 int			tokens_size(t_token **tokens);
+int			tokens_count_control(t_token **tokens);
 int			tokens_check_syntax(t_token **tokens);
 
 //TODO tilde expansion maybe ????

@@ -6,7 +6,7 @@
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 13:00:55 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/03/21 17:31:32 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/22 16:23:10 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,23 +42,19 @@ typedef struct s_builtin_cont
 	char	**args;
 }			t_builtin_cont;
 
-typedef struct s_redir
-{
-	int	fd_old;
-	int	fd_new;
-	int	fd_pipe_other;
-}			t_redir;
-
 typedef struct s_ast_node
 {
 	t_ast_node_type		type;
 	void				*content;
 	int					fd_in;
 	int					fd_out;
+	int					redir_fd_in;
+	int					redir_fd_out;
 	int					pipe_count;
 	int					*pipe_index;
 	int					*all_pipes;
 	int					*all_redirs;
+	int					*redir_index;
 	int					exit_status;
 	pid_t				pid;
 	struct s_ast_node	*children[2];
@@ -69,6 +65,8 @@ typedef struct s_packed
 	int	pipe_count;
 	int	*p;
 	int	*all_pipes;
+	int	*all_redirs;
+	int	*redir_index;
 }			t_packed;
 
 t_ast_node		*ast_node_create(t_token **tokens, int start, int size,
@@ -88,10 +86,12 @@ int				redir_create_i(t_token *tok);
 int				redir_create_o(t_token *tok);
 int				redir_create_h(t_token *tok);
 int				redir_create_a(t_token *tok);
+int				redir_create(t_token *tok);
 
 t_ast_node		*ast_generate(t_token **tokens);
 void			ast_print(t_ast_node *root, int depth);
 int				ast_wait(t_ast_node *node);
 void			ast_close_all_pipes(t_ast_node *node);
+void			ast_close_all_redirs(t_ast_node *node);
 
 #endif

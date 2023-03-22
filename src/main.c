@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 16:04:36 by graux             #+#    #+#             */
-/*   Updated: 2023/03/22 14:10:58 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/22 16:20:51 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,7 @@ int	main(int argc, char *argv[], char *envp[])
 		g_env[MAX_ENV] = "e";
 		ast_execute(ast_root);
 		ast_close_all_pipes(ast_root);
+		ast_close_all_redirs(ast_root);
 		status = ast_wait(ast_root);
 		//TODO free tokens and ast
 	}
