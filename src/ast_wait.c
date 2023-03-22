@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 13:11:59 by graux             #+#    #+#             */
-/*   Updated: 2023/03/21 16:08:20 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/22 10:20:48 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ static int	convert_stat_loc(int stat_loc)
 {
 	int	status;
 
-	status = 123;
+	status = 231;
 	if (WIFEXITED(stat_loc))
 		status = WEXITSTATUS(stat_loc);
 	else if (WIFSIGNALED(stat_loc))
-		status = WTERMSIG(stat_loc);
+		status = WTERMSIG(stat_loc) + 128;
 	return (status);
 }
 
@@ -32,7 +32,7 @@ int	ast_wait(t_ast_node *node)
 
 	status = 69;
 	if (!node)
-		return (1111);
+		return (2);
 	if (node->type == AST_ROOT)
 	{
 		status = ast_wait(node->children[0]);
