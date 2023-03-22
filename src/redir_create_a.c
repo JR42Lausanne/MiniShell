@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 17:32:56 by graux             #+#    #+#             */
-/*   Updated: 2023/03/21 17:44:31 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/22 11:01:21 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	redir_create_a(t_token *tok)
 {
 	int	fd;
 
-	fd = open(tok->content, O_WRONLY | O_CREAT | O_APPEND);
+	fd = open(tok->content, O_WRONLY | O_CREAT | O_APPEND, 0644);
 	if (fd == -1)
 		perror(tok->content);
 	return (fd);
