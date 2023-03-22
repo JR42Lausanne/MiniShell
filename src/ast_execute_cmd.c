@@ -6,7 +6,7 @@
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 16:04:14 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/03/22 09:54:28 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/22 10:19:37 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,5 @@ void	ast_execute_cmd(t_ast_node *node)
 	{
 		ast_node_redirect(node);
 		execve(cmd_full_path, content->args, g_env);
-		perror(cmd_full_path);
 	}
 }

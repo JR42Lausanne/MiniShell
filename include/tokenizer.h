@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 15:46:12 by graux             #+#    #+#             */
-/*   Updated: 2023/03/21 13:39:48 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/22 10:13:24 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ t_token		**tokenize_input(char *input, int status);
 
 void		tokens_print(t_token **tokens);
 int			tokens_size(t_token **tokens);
+int			tokens_check_syntax(t_token **tokens);
 
 //TODO tilde expansion maybe ????
 
