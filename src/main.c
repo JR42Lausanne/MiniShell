@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 16:04:36 by graux             #+#    #+#             */
-/*   Updated: 2023/03/22 10:14:12 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/22 12:54:27 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,12 @@ int	main(int argc, char *argv[], char *envp[])
 		}
 		add_history(line);
 		tokens = tokenize_input(line, status);
+		status = tokens_check_syntax(tokens) - 1;
+		if (status + 1)
+		{
+			//tokens_destroy(tokens);
+			continue ;
+		}
 		free(line);
 		show_debug(argc, argv, tokens, ast_root, 't');
 		ast_root = ast_generate(tokens);

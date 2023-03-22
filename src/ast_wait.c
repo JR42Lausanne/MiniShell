@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 13:11:59 by graux             #+#    #+#             */
-/*   Updated: 2023/03/22 10:20:48 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/22 11:53:48 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	ast_wait(t_ast_node *node)
 
 	status = 69;
 	if (!node)
-		return (2);
+		return (0);
 	if (node->type == AST_ROOT)
 	{
 		status = ast_wait(node->children[0]);
