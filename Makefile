@@ -67,6 +67,8 @@ LIB = libft.a
 %.o: %.c
 ifeq ($(shell whoami), graux)
 	${CC} ${FLAGS} ${INCLUDES} -c $< -o $@ -I/goinfre/graux/.brew/opt/readline/include -fsanitize=address
+else ifeq ($(shell whoami), julienlaiti)
+	${CC} ${FLAGS} ${INCLUDES} -c $< -o $@ -I/opt/homebrew/opt/readline/include -fsanitize=address
 else
 	${CC} ${FLAGS} ${INCLUDES} -c $< -o $@ -I$(HOME)/.brew/opt/readline/include -fsanitize=address
 endif
@@ -79,6 +81,8 @@ ${LIB}:
 $(NAME): ${LIB} $(OBJ) src/main.o
 ifeq ($(shell whoami), graux)
 	$(CC) ${FLAGS} src/main.o $(OBJ) $(INCLUDES) -I/goinfre/graux/.brew/opt/readline/include -L. -L/goinfre/graux/.brew/opt/readline/lib -lft -lreadline -o $(NAME) -fsanitize=address
+else ifeq ($(shell whoami), julienlaiti)
+	$(CC) ${FLAGS} src/main.o $(OBJ) $(INCLUDES) -I/opt/homebrew/opt/readline/include -L. -L/opt/homebrew/opt/readline/lib -lft -lreadline -o $(NAME) -fsanitize=address
 else
 	$(CC) ${FLAGS} src/main.o $(OBJ) $(INCLUDES) -I$(HOME)/.brew/opt/readline/include -L. -L$(HOME)/.brew/opt/readline/lib -lft -lreadline -o $(NAME) -fsanitize=address
 endif
