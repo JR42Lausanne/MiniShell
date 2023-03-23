@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 16:12:14 by graux             #+#    #+#             */
-/*   Updated: 2023/03/23 13:57:19 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/23 14:08:27 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,7 @@ static int	matches_len(char **matches)
 
 	len = 0;
 	if (!matches)
-	{
-		fprintf(stderr, "matches is null\n");
 		return (0);
-	}
 	while (matches[len])
 		len++;
 	return (len);
@@ -44,24 +41,28 @@ static int	is_match(char *name, char *expr)
 			i += 1;
 		}
 		if (expr[i] && expr[i++] != name[j++])
-		{
-			printf("%s NO  %s\n", name, expr);
 			return (0);
-		}
 	}
 	if (expr[i] == name[j] || expr[i] == '*')
-	{
-		printf("%s YES %s\n", name, expr);
 		return (1);
-	}
-	printf("%s NO %s\n", name, expr);
 	return (0);
 }
 
 static void	add_to_matches(char ***matches, char *to_add)
 {
-	(void) matches;
-	(void) to_add;
+	char	**copy;
+	int		len;
+
+	if (*matches == NULL)
+		*matches = ft_calloc(1, sizeof(char *));
+	if (*matches == NULL)
+		return ;
+	len = matches_len(*matches);
+	copy = ft_calloc(len + 2, sizeof(char *));
+	ft_memcpy(copy, *matches, len * sizeof(char *));
+	copy[len] = ft_strdup(to_add);
+	free(*matches);
+	*matches = copy;
 }
 
 static char	**match_wildcard(t_token *tok)
@@ -106,11 +107,6 @@ static t_token	**expand_one(t_token **tokens, int size)
 	int		i;
 	int		j;
 
-	(void) size;
-	(void) matches;
-	(void) matches_len;
-	(void) match_wildcard;
-	(void) token_from_char;
 	i = 0;
 	j = -1;
 	exp = tokens;
