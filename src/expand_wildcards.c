@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 16:12:14 by graux             #+#    #+#             */
-/*   Updated: 2023/03/17 17:20:54 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/23 13:57:19 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,31 @@ static int	matches_len(char **matches)
 
 static int	is_match(char *name, char *expr)
 {
-	printf("%s compared to %s\n", name, expr);
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (expr[i] && name[j])
+	{
+		if (expr[i] == '*')
+		{
+			while (name[j] && name[j] != expr[i + 1])
+				j++;
+			i += 1;
+		}
+		if (expr[i] && expr[i++] != name[j++])
+		{
+			printf("%s NO  %s\n", name, expr);
+			return (0);
+		}
+	}
+	if (expr[i] == name[j] || expr[i] == '*')
+	{
+		printf("%s YES %s\n", name, expr);
+		return (1);
+	}
+	printf("%s NO %s\n", name, expr);
 	return (0);
 }
 
@@ -82,10 +106,15 @@ static t_token	**expand_one(t_token **tokens, int size)
 	int		i;
 	int		j;
 
+	(void) size;
+	(void) matches;
+	(void) matches_len;
+	(void) match_wildcard;
+	(void) token_from_char;
 	i = 0;
 	j = -1;
 	exp = tokens;
-	while (tokens[i] && tokens[i]->type == TOK_WILDCARD)
+	while (tokens[i] && tokens[i]->type != TOK_WILDCARD)
 		i++;
 	if (tokens[i])
 	{
@@ -121,12 +150,10 @@ t_token	**expand_wildcards(t_token **tokens)
 {
 	t_token	**expanded;
 	int		size;
-	int		max_deb;
 
-	max_deb = 5;
 	expanded = tokens;
 	size = tokens_size(tokens);
-	while (contain_wild(expanded, size) && max_deb--)
+	while (contain_wild(expanded, size))
 	{
 		expanded = expand_one(expanded, size);
 		size = tokens_size(expanded);
