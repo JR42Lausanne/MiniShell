@@ -38,7 +38,6 @@ export TES^T=123
 export TES!T=123
 export TES~T=123
 env | grep "_="
-unset
 unset TES\\T
 unset TES;T
 unset TES.T

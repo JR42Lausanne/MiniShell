@@ -6,11 +6,27 @@
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 19:09:38 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/03/23 11:07:14 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/23 11:46:37 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ast.h"
+
+static void	restore_fds(t_ast_node *node, int out_fd, int in_fd)
+{
+	if (node->redir_fd_in != -1)
+	{
+		if (dup2(in_fd, STDIN_FILENO) == -1)
+			perror("dup in error");
+		close(in_fd);
+	}
+	if (node->redir_fd_out != -1)
+	{
+		if (dup2(out_fd, STDOUT_FILENO) == -1)
+			perror("dup out error");
+		close(out_fd);
+	}
+}
 
 void	ast_execute_built(t_ast_node *node)
 {
@@ -35,17 +51,6 @@ void	ast_execute_built(t_ast_node *node)
 		ast_node_redirect(node);
 		content = (t_builtin_cont *) node->content;
 		node->exit_status = content->func_pointer(content->args);
-		if (node->redir_fd_in != -1)
-		{
-			if (dup2(in_fd, STDIN_FILENO) == -1)
-				perror("dup in error");
-			close(in_fd);
-		}
-		if (node->redir_fd_out != -1)
-		{
-			if (dup2(out_fd, STDOUT_FILENO) == -1)
-				perror("dup out error");
-			close(out_fd);
-		}
+		restore_fds(node, out_fd, in_fd);
 	}
 }
