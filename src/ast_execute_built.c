@@ -6,27 +6,18 @@
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 19:09:38 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/03/22 17:23:48 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/23 11:07:14 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ast.h"
-/*
-static void	chang_last_redir(int *redirs)
-{
-	int	i;
-
-	i = -1;
-	while (redirs[++i] != -2)
-		;
-	redirs[i - 1] = STDOUT_FILENO;
-}
-*/
 
 void	ast_execute_built(t_ast_node *node)
 {
 	t_builtin_cont	*content;
 	int				status;
+	int				out_fd;
+	int				in_fd;
 
 	if (node->pipe_count > 0)
 		node->pid = fork();
@@ -39,15 +30,22 @@ void	ast_execute_built(t_ast_node *node)
 	}
 	else if (node->pid == -1)
 	{
+		out_fd = dup(STDOUT_FILENO);
+		in_fd = dup(STDIN_FILENO);
 		ast_node_redirect(node);
 		content = (t_builtin_cont *) node->content;
 		node->exit_status = content->func_pointer(content->args);
 		if (node->redir_fd_in != -1)
-			dup2(STDIN_FILENO, node->redir_fd_in);
+		{
+			if (dup2(in_fd, STDIN_FILENO) == -1)
+				perror("dup in error");
+			close(in_fd);
+		}
 		if (node->redir_fd_out != -1)
 		{
-			dup2(STDOUT_FILENO, node->redir_fd_out);
-			//chang_last_redir(node->all_redirs);
+			if (dup2(out_fd, STDOUT_FILENO) == -1)
+				perror("dup out error");
+			close(out_fd);
 		}
 	}
 }
