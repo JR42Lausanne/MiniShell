@@ -6,13 +6,12 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 15:22:26 by graux             #+#    #+#             */
-/*   Updated: 2023/03/22 13:52:11 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/23 10:13:18 by jlaiti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "../include/tokenizer.h"
 
-static void	agreg_two(t_token **tokens, int *pos)
+static void	agreg_two_to_one_word(t_token **tokens, int *pos)
 {
 	char	*temp;
 	int		i;
@@ -31,6 +30,20 @@ static void	agreg_two(t_token **tokens, int *pos)
 		(*pos)++;
 }
 
+static	void	remove_spaces(t_token **agreg, t_token **tokens,
+		int *i, int *j)
+{
+	tokens[*i]->tok_num = *j;
+	agreg[(*j)++] = tokens[*i];
+	if (tokens[*i + 1] && tokens[*i + 1]->type == TOK_SPACE)
+	{
+		token_destroy(tokens[*i + 1]);
+		*i += 2;
+	}
+	else
+		*i += 1;
+}	
+
 t_token	**agregate_spaces(t_token **tokens, int size)
 {
 	t_token	**agreg;
@@ -46,20 +59,11 @@ t_token	**agregate_spaces(t_token **tokens, int size)
 	{
 		if (!tokens[i])
 			break ;
-		if (tokens[i + 1] && tokens[i]->type == TOK_WORD && tokens[i + 1]->type == TOK_WORD)
-			agreg_two(tokens, &i);
+		if (tokens[i + 1] && tokens[i]->type == TOK_WORD
+			&& tokens[i + 1]->type == TOK_WORD)
+			agreg_two_to_one_word(tokens, &i);
 		else
-		{
-			tokens[i]->tok_num = j;
-			agreg[j++] = tokens[i];
-			if (tokens[i + 1] && tokens[i + 1]->type == TOK_SPACE)
-			{
-				token_destroy(tokens[i + 1]);
-				i += 2;
-			}
-			else
-				i++;
-		}
+			remove_spaces(agreg, tokens, &i, &j);
 	}
 	agreg[j] = NULL;
 	free(tokens);
