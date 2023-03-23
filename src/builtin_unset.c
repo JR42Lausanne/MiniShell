@@ -6,7 +6,7 @@
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 13:17:14 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/03/17 11:35:02 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/23 11:12:49 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	builtin_unset(char	**args)
 	int	arg_num;
 
 	if (args && !args[1])
-		return (1);
+		return (0);
 	arg_num = 0;
 	while (args[++arg_num])
 	{
