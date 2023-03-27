@@ -6,7 +6,7 @@
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 14:35:57 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/03/27 16:20:00 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/27 16:36:08 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ static int	is_match(char *name, char *expr)
 	j = 0;
 	if (name[0] == '.' && expr[0] != '.')
 		return (0);
-	printf("is match for %s\n", name);
 	while (expr[i] && name[j])
 	{
 		if (expr[i] == '*')

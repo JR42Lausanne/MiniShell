@@ -6,7 +6,7 @@
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 13:17:14 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/03/23 11:12:49 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/27 16:33:26 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,19 +43,44 @@ static void	remove_from_env(int pos)
 	g_env[MAX_ENV - 1] = NULL;
 }
 
-//TODO fix it, it does not work
+static int	is_valid_varname(char *var_name)
+{
+	int			i;
+
+	i = -1;
+	if (ft_isdigit(var_name[++i]))
+	{
+		error_put(var_name, "not a valid indentifier");
+		return (0);
+	}
+	while (var_name[i])
+	{
+		if (var_name[i] != '_' && !ft_isalnum(var_name[i]))
+		{
+			error_put(var_name, "not a valid indentifier");
+			return (0);
+		}
+		i++;
+	}
+	return (1);
+}
+
 int	builtin_unset(char	**args)
 {
 	int	i;
 	int	arg_num;
+	int	status;
 
 	if (args && !args[1])
 		return (0);
 	arg_num = 0;
+	status = 0;
 	while (args[++arg_num])
 	{
-		i = 0;
-		while (i < MAX_ENV)
+		if (!is_valid_varname(args[arg_num]))
+			status = 1;
+		i = -1;
+		while (++i < MAX_ENV)
 		{
 			if (!g_env[i])
 				break ;
@@ -66,8 +91,7 @@ int	builtin_unset(char	**args)
 				remove_from_env(i);
 				break ;
 			}
-			i++;
 		}
 	}
-	return (0);
+	return (status);
 }	
