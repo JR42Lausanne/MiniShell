@@ -1,2 +1,10 @@
-unset TES;T
-unset -TEST
+env | grep "_="
+export | grep "SHLVL"
+export | grep "OLDPWD"
+export | grep "PWD"
+export --TEST=123
+export TE\ST=100
+export -TEST=100
+export | grep "SHLVL"
+export -TEST=123
+export TEST+=100

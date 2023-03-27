@@ -6,7 +6,7 @@
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 21:39:02 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/03/17 13:57:00 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/27 16:49:47 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,41 @@ static int	max(int a, int b)
 	return (a);
 }
 
+static int	is_valid_varname(char *var_name)
+{
+	int			i;
+
+	i = -1;
+	if (ft_isdigit(var_name[++i]))
+	{
+		error_put(var_name, "not a valid indentifier");
+		return (0);
+	}
+	while (var_name[i] && var_name[i] != '=')
+	{
+		if (var_name[i] != '_' && !ft_isalnum(var_name[i]))
+		{
+			error_put(var_name, "not a valid indentifier");
+			return (0);
+		}
+		i++;
+	}
+	return (i > 0);
+}
+
 int	builtin_export(char **args)
 {	
 	int	i;
 	int	arg_num;
+	int	status;
 
 	arg_num = 0;
+	status = 0;
 	while (args[++arg_num])
 	{
 		i = -1;
+		if (!is_valid_varname(args[arg_num]))
+			status = 1;
 		if (ft_strchr(args[arg_num], '='))
 		{		
 			while (g_env[++i] != NULL)
@@ -57,5 +83,5 @@ int	builtin_export(char **args)
 			}
 		}
 	}
-	return (0);
+	return (status);
 }
