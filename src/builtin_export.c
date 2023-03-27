@@ -6,7 +6,7 @@
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 21:39:02 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/03/27 16:49:47 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/27 17:14:39 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ static int	is_valid_varname(char *var_name)
 	return (i > 0);
 }
 
+//TODO export without agrs -> declare -x machin bidule
 int	builtin_export(char **args)
 {	
 	int	i;
