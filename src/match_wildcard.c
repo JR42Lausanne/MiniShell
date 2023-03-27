@@ -6,7 +6,7 @@
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 14:35:57 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/03/27 13:57:09 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/27 14:47:04 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ static int	is_match(char *name, char *expr)
 
 	i = 0;
 	j = 0;
+	if (name[0] == '.' && expr[0] != '.')
+		return (0);
 	while (expr[i] && name[j])
 	{
 		if (expr[i] == '*')
@@ -58,7 +60,6 @@ static void	add_to_matches(char ***matches, char *to_add)
 		*matches = ft_calloc(1, sizeof(char *));
 	if (*matches == NULL)
 		return ;
-	printf("%s\n", to_add);
 	len = matches_len(*matches);
 	copy = ft_calloc(len + 2, sizeof(char *));
 	ft_memcpy(copy, *matches, len * sizeof(char *));

@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 16:12:14 by graux             #+#    #+#             */
-/*   Updated: 2023/03/27 14:07:42 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/27 14:43:21 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,11 @@ static t_token	**expand_one(t_token **tokens, int size)
 	if (tokens[i])
 	{
 		matches = match_wildcard(tokens[i]);
+		if (matches_len(matches) == 0)
+		{
+			tokens[i]->type = TOK_WORD;
+			return (tokens);
+		}
 		exp = ft_calloc(size + 1 + matches_len(matches), sizeof(t_token *));
 		if (!exp)
 			return (NULL);
