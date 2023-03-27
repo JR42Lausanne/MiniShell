@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 18:01:47 by graux             #+#    #+#             */
-/*   Updated: 2023/03/23 11:09:10 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/24 16:39:00 by jlaiti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ static t_ast_node_type	find_exec_type(t_token **tokens, int start, int size)
 	int				i;
 
 	i = start;
-	//TODO skip redirections correctly and check if i = size + start
 	while (i < size + start && (tokens[i]->type != TOK_WORD
 			|| is_redir(tokens[i])))
 		i++;
@@ -46,7 +45,6 @@ static void	ast_node_gen_content(t_ast_node *node, t_token **tokens, int start,
 		int size)
 {
 	node->type = find_exec_type(tokens, start, size);
-	//TODO populate redirections
 	if (node->type == AST_CMD)
 		ast_node_gen_cmd(node, tokens, start, size);
 	else
@@ -77,6 +75,21 @@ static void	ast_node_gen_redir(t_ast_node *node, t_token **tokens, int start,
 	}
 }
 
+static void	setup_node(t_ast_node *node, t_packed *p)
+{
+	node->pid = -1;
+	node->fd_in = STDIN_FILENO;
+	node->fd_out = STDOUT_FILENO;
+	node->redir_fd_in = -1;
+	node->redir_fd_out = -1;
+	node->pipe_index = p->p;
+	node->pipe_count = p->pipe_count;
+	node->all_pipes = p->all_pipes;
+	node->all_redirs = p->all_redirs;
+	node->redir_index = p->redir_index;
+	node->exit_status = -1;
+}
+
 t_ast_node	*ast_node_create(t_token **tokens, int start, int size, t_packed p)
 {
 	t_ast_node	*node;
@@ -86,17 +99,7 @@ t_ast_node	*ast_node_create(t_token **tokens, int start, int size, t_packed p)
 	if (!node)
 		return (NULL);
 	type_pos = ast_find_type(node, tokens, start, size);
-	node->pid = -1;
-	node->fd_in = STDIN_FILENO;
-	node->fd_out = STDOUT_FILENO;
-	node->redir_fd_in = -1;
-	node->redir_fd_out = -1;
-	node->pipe_index = p.p;
-	node->pipe_count = p.pipe_count;
-	node->all_pipes = p.all_pipes;
-	node->all_redirs = p.all_redirs;
-	node->redir_index = p.redir_index;
-	node->exit_status = -1;
+	setup_node(node, &p);
 	if (type_pos != -1)
 	{
 		node->children[0] = ast_node_create(tokens, start, type_pos - start, p);

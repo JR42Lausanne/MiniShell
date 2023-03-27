@@ -6,7 +6,7 @@
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 13:25:03 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/03/22 14:10:51 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/26 16:02:34 by jlaiti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ int		ms_envsetup(char **envp);
 
 void	signal_handler(int sig);
 int		signal_setup(void);
-
 // Error handling
 void	error_put(char *cause, const char *err_msg);
 

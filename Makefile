@@ -29,6 +29,7 @@ SRC = ast_execute_cmd.c 		\
 	  builtin_exit.c			\
 	  builtin_unset.c			\
 	  dq_mode.c					\
+	  match_wildcard.c			\
 	  ms_getenv.c 				\
 	  ms_getenv_cont.c 			\
 	  ms_envsetup.c				\

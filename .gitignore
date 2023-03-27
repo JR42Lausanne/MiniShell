@@ -6,7 +6,7 @@ ms_guilhem
 .*.swp
 */.*.swo
 .*.swo
-
+venv
 .DS_Store
 # Prerequisites
 *.d

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/07 13:06:09 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/03/21 16:24:31 by graux            ###   ########.fr       */
+/*   Created: 2023/03/24 17:05:21 by jlaiti            #+#    #+#             */
+/*   Updated: 2023/03/24 17:05:40 by jlaiti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,3 @@ int	builtin_cd(char **args)
 	}	
 	return (0);
 }
-// si argv[0] == cd fonction ok;
-//prendre le le home path de l'env et mettre dans PWD si arg[1] est NULL ou si arg[1]~;
-//si ../dans agv[1][i] supprimer l'avant dernier /
-//si ./ ou / prendre le path absolue.
-//chdir 

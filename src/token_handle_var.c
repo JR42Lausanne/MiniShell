@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 12:08:53 by graux             #+#    #+#             */
-/*   Updated: 2023/03/21 13:50:19 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/24 17:40:45 by jlaiti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,13 @@ static int	handle_size_one(t_tokenizer *toker, t_token *tok)
 	return (0);
 }
 
+static void	check_is_var_value(t_tokenizer *toker, t_token *tok, int *size)
+{
+	token_gen_content(tok, "", 0);
+	toker->pos += *size;
+	tok->to_be_removed = 1;
+}
+
 void	token_handle_var(t_tokenizer *toker, t_token *tok)
 {
 	int		size_in_input;
@@ -75,9 +82,7 @@ void	token_handle_var(t_tokenizer *toker, t_token *tok)
 		var_value = ms_getenv(var_name); // TODO protection
 		if (!var_value)
 		{
-			token_gen_content(tok, "", 0);
-			toker->pos += size_in_input;
-			tok->to_be_removed = 1;
+			check_is_var_value(toker, tok, &size_in_input);
 			return ;
 		}
 		token_gen_content(tok, var_value + size_in_input + 1,
