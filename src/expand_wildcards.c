@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 16:12:14 by graux             #+#    #+#             */
-/*   Updated: 2023/03/26 14:51:43 by jlaiti           ###   ########.fr       */
+/*   Updated: 2023/03/27 14:07:42 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,13 +55,17 @@ static t_token	**expand_one(t_token **tokens, int size)
 		exp = ft_calloc(size + 1 + matches_len(matches), sizeof(t_token *));
 		if (!exp)
 			return (NULL);
-		while (++j < size + matches_len(matches))
+		while (++j < size - 1 + matches_len(matches))
 		{
-			if (j < i || j >= i + matches_len(matches))
-				exp[j] = tokens[i];
+			if (j < i)
+				exp[j] = tokens[j];
+			else if (j >= i + matches_len(matches))
+				exp[j] = tokens[j - matches_len(matches) + 1];
 			else
 				exp[j] = token_from_char(matches[j - i]);
 		}
+		token_destroy(tokens[i]);
+		//TODO free matches
 	}
 	return (exp);
 }

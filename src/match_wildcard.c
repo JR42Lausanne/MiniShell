@@ -6,7 +6,7 @@
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 14:35:57 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/03/26 14:42:37 by jlaiti           ###   ########.fr       */
+/*   Updated: 2023/03/27 13:57:09 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ static int	matches_len(char **matches)
 
 static int	is_match(char *name, char *expr)
 {
+	//TODO fix echo *e not matching Makefile
 	int	i;
 	int	j;
 
@@ -57,6 +58,7 @@ static void	add_to_matches(char ***matches, char *to_add)
 		*matches = ft_calloc(1, sizeof(char *));
 	if (*matches == NULL)
 		return ;
+	printf("%s\n", to_add);
 	len = matches_len(*matches);
 	copy = ft_calloc(len + 2, sizeof(char *));
 	ft_memcpy(copy, *matches, len * sizeof(char *));
@@ -84,6 +86,5 @@ char	**match_wildcard(t_token *tok)
 		}
 	}
 	closedir(dirp);
-	token_destroy(tok);
 	return (matches);
 }
