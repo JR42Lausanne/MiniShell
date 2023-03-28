@@ -47,6 +47,7 @@ SRC = ast_execute_cmd.c 		\
 	  token_handle_redir_i.c 	\
 	  token_handle_redir_o.c 	\
 	  token_handle_var.c	 	\
+	  token_handle_brackets.c 	\
 	  token_handle_tilde.c	 	\
 	  token_handle_space.c	 	\
 	  tokenizer_create.c 		\

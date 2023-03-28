@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 16:00:32 by graux             #+#    #+#             */
-/*   Updated: 2023/03/21 13:22:20 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/28 13:19:43 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,10 @@
 
 static void	normal_mode(t_tokenizer *toker, t_token *tok)
 {
-	if (toker->input[toker->pos] == '|')
+	if (toker->input[toker->pos] == '('
+		|| toker->input[toker->pos] == ')')
+		token_handle_brackets(toker, tok);
+	else if (toker->input[toker->pos] == '|')
 		token_handle_pipe(toker, tok);
 	else if (toker->input[toker->pos] == '&')
 		token_handle_and(toker, tok);

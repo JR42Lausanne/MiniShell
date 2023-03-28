@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 17:18:05 by graux             #+#    #+#             */
-/*   Updated: 2023/03/03 16:50:35 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/28 13:28:16 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ static const char	*g_tokens_str[] = {
 [TOK_REDIR_APP] = "TOK_REDIR_APP",
 [TOK_HEREDOC] = "TOK_HEREDOC",
 [TOK_SPACE] = "TOK_SPACE",
+[TOK_BRACK_O] = "TOK_BRACK_O",
+[TOK_BRACK_C] = "TOK_BRACK_C",
 [TOK_INVALID] = "TOK_INVALID"
 };
 
