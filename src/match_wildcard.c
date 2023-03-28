@@ -6,7 +6,7 @@
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 14:35:57 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/03/27 16:36:08 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/28 12:20:33 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,30 +25,57 @@ static int	matches_len(char **matches)
 	return (len);
 }
 
-static int	is_match(char *name, char *expr)
+static char	**setup_lookup(int n, int m, char *pattern)
 {
-	//TODO fix echo *e not matching Makefile
-	int	i;
-	int	j;
+	char	**lookup;
+	int		i;
 
-	i = 0;
-	j = 0;
-	if (name[0] == '.' && expr[0] != '.')
-		return (0);
-	while (expr[i] && name[j])
+	lookup = malloc(sizeof(char *) * (n + 1));
+	if (!lookup)
+		return (NULL);
+	i = -1;
+	while (++i <= n)
 	{
-		if (expr[i] == '*')
-		{
-			while (name[j] && name[j] != expr[i + 1])
-				j++;
-			i += 1;
-		}
-		if (expr[i] && expr[i++] != name[j++])
-			return (0);
+		lookup[i] = ft_calloc(m + 1, sizeof(char));
+		if (!lookup[i])
+			return (NULL); //TODO free everything
 	}
-	if (expr[i] == name[j] || expr[i] == '*')
-		return (1);
-	return (0);
+	lookup[0][0] = 1;
+	i = 0;
+	while (++i <= m)
+	{
+		if (pattern[i - 1] == '*')
+			lookup[0][i] = lookup[0][i - 1];
+	}
+	return (lookup);
+}
+
+static int	is_match(char *name, char *pattern, int n, int m)
+{
+	char	**lookup;
+	int		i;
+	int		j;
+
+	lookup = setup_lookup(n, m, pattern);
+	if (!lookup)
+		return (0);
+	i = 0;
+	while (++i <= n)
+	{
+		j = 0;
+		while (++j <= m)
+		{
+			if (pattern[j - 1] == '*')
+				lookup[i][j] = ((lookup[i][j -1] || lookup[i - 1][j])
+						&& !(name[i - 1] == '.' && i == 1 && j == 1));
+			else if (name[i - 1] == pattern[j - 1])
+				lookup[i][j] = lookup[i - 1][j - 1];
+			else
+				lookup[i][j] = 0;
+		}
+	}
+	//TODO free lookup
+	return (lookup[n][m]);
 }
 
 static void	add_to_matches(char ***matches, char *to_add)
@@ -81,7 +108,8 @@ char	**match_wildcard(t_token *tok)
 		entry = readdir(dirp);
 		while (entry)
 		{
-			if (is_match(entry->d_name, tok->content))
+			if (is_match(entry->d_name, tok->content,
+					ft_strlen(entry->d_name), ft_strlen(tok->content)))
 				add_to_matches(&matches, entry->d_name);
 			entry = readdir(dirp);
 		}
