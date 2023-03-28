@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 16:04:36 by graux             #+#    #+#             */
-/*   Updated: 2023/03/28 16:19:11 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/28 17:09:06 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,12 +95,10 @@ int	main(int argc, char *argv[], char *envp[])
 	t_ast_node				*ast_root;
 	char					prompt[PROMPT_SIZE + 4];
 
-	ms_envsetup(envp);
+	if (!ms_envsetup(envp))
+		return (-1);
 	if (argc == 3 && !ft_strncmp(argv[1], "-c", 3))
 		exit(not_interactive(argv[2]));
-	if (signal_setup() == -1)
-		return (-1);
-	g_ms.status = 0;
 	while (1)
 	{
 		g_ms.env[MAX_ENV] = "p";
@@ -122,8 +120,6 @@ int	main(int argc, char *argv[], char *envp[])
 			//tokens_destroy(tokens);
 			continue ;
 		}
-		free(line);
-		//gen_prompt(prompt, status); //TODO looks useless
 		g_ms.env[MAX_ENV] = "e";
 		ast_root = ast_generate(tokens);
 		show_debug(argc, argv, tokens, ast_root, 'a');

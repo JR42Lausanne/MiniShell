@@ -6,7 +6,7 @@
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 11:44:53 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/03/28 16:20:42 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/28 17:08:36 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	ms_envsetup(char **envp)
 
 	g_ms.env = malloc(sizeof(char *) * (MAX_ENV + 1));
 	if (!g_ms.env)
-		return (1);
+		return (0);
 	i = 0;
 	while (i < MAX_ENV && envp[i])
 	{
@@ -53,9 +53,12 @@ int	ms_envsetup(char **envp)
 		i++;
 	}
 	if (envp[i])
-		return (1); //TODO free
+		return (0); //TODO free
 	while (i < MAX_ENV)
 		g_ms.env[i++] = NULL;
+	g_ms.status = 0;
 	increase_shlvl();
-	return (0);
+	if (signal_setup() == -1)
+		return (0);
+	return (1);
 }
