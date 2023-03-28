@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 17:43:02 by graux             #+#    #+#             */
-/*   Updated: 2023/03/22 16:38:59 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/28 14:49:05 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ static int	count_redirs(t_token **tokens)
 	while (tokens[++i])
 	{
 		if (is_redir(tokens[i]))
+			count++;
+		if (tokens[i]->type == TOK_HEREDOC)
 			count++;
 	}
 	return (count);

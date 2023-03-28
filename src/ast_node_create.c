@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 18:01:47 by graux             #+#    #+#             */
-/*   Updated: 2023/03/24 16:39:00 by jlaiti           ###   ########.fr       */
+/*   Updated: 2023/03/28 14:47:51 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,11 @@ static void	ast_node_gen_redir(t_ast_node *node, t_token **tokens, int start,
 	while (++i < size)
 	{
 		if (tokens[i + start]->type == TOK_REDIR_IN)
+		{
+			node->redir_fd_in = redir_create(tokens[i + start]);
+			node->all_redirs[(*(node->redir_index))++] = node->redir_fd_in;
+		}
+		else if (tokens[i + start]->type == TOK_HEREDOC)
 		{
 			node->redir_fd_in = redir_create(tokens[i + start]);
 			node->all_redirs[(*(node->redir_index))++] = node->redir_fd_in;
