@@ -59,6 +59,7 @@ SRC = ast_execute_cmd.c 		\
 	  tokens_size.c				\
 	  tokens_is_control.c		\
 	  tokens_check_syntax.c		\
+	  tokens_check_brackets.c	\
 	  tokens_print.c
 SRC_DIR = $(addprefix src/, $(SRC))
 OBJ = ${SRC_DIR:.c=.o}
