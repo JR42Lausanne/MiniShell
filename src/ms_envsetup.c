@@ -6,7 +6,7 @@
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 11:44:53 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/03/28 17:08:36 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/28 18:17:46 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ static void	increase_shlvl(void)
 	else
 	{
 		i_shlvl = ft_atoi(shlvl) + 1;
+		free(shlvl);
 		temp = ft_itoa(i_shlvl);
 		args[1] = ft_strjoin("SHLVL=", temp);
 		free(temp);

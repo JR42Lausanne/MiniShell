@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 16:04:36 by graux             #+#    #+#             */
-/*   Updated: 2023/03/28 17:09:06 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/28 18:07:58 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,7 @@ int	main(int argc, char *argv[], char *envp[])
 		}
 		add_history(line);
 		tokens = tokenize_input(line, g_ms.status);
+		free(line); //TODO remove with -c option
 		show_debug(argc, argv, tokens, ast_root, 't');
 		g_ms.status = tokens_check_syntax(tokens) - 1;
 		if (g_ms.status + 1)
@@ -127,7 +128,8 @@ int	main(int argc, char *argv[], char *envp[])
 		ast_close_all_pipes(ast_root);
 		ast_close_all_redirs(ast_root);
 		g_ms.status = ast_wait(ast_root);
-		//TODO free tokens and ast
+		tokens_destroy(tokens);
+		ast_node_destroy(ast_root);
 	}
 	return (0);
 }

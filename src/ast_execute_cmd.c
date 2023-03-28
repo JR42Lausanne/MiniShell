@@ -6,7 +6,7 @@
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 16:04:14 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/03/28 16:21:20 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/28 18:12:18 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static char	*get_cmd(char *cmd)
 	env_path = ms_getenv_cont("PATH");
 	if (!env_path)
 		return (NULL);
-	path = ft_split(env_path, ':');
+	path = ft_split(env_path, ':'); //TODO free array of chars
 	i = -1;
 	while (path[++i])
 	{
@@ -66,6 +66,7 @@ static char	*get_cmd(char *cmd)
 			return (command);
 		free(command);
 	}
+	free(env_path);
 	return (NULL);
 }
 
@@ -100,4 +101,5 @@ void	ast_execute_cmd(t_ast_node *node)
 		ast_node_redirect(node);
 		execve(cmd_full_path, content->args, g_ms.env);
 	}
+	free(cmd_full_path);
 }
