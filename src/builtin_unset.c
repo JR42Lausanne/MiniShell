@@ -6,7 +6,7 @@
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 13:17:14 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/03/27 16:42:37 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/28 16:25:23 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,10 @@ static void	remove_from_env(int pos)
 {
 	while (pos < MAX_ENV - 1)
 	{
-		g_env[pos] = g_env[pos + 1];
+		g_ms.env[pos] = g_ms.env[pos + 1];
 		pos++;
 	}
-	g_env[MAX_ENV - 1] = NULL;
+	g_ms.env[MAX_ENV - 1] = NULL;
 }
 
 static int	is_valid_varname(char *var_name)
@@ -82,12 +82,13 @@ int	builtin_unset(char	**args)
 		i = -1;
 		while (++i < MAX_ENV)
 		{
-			if (!g_env[i])
+			if (!g_ms.env[i]) //TODO put in while
 				break ;
-			if (ft_strncmp(g_env[i], args[arg_num], max(var_name_len(g_env[i]),
+			if (ft_strncmp(g_ms.env[i], args[arg_num],
+					max(var_name_len(g_ms.env[i]),
 						var_name_len(args[arg_num]))) == 0)
 			{	
-				free(g_env[i]);
+				free(g_ms.env[i]);
 				remove_from_env(i);
 				break ;
 			}

@@ -6,7 +6,7 @@
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 21:39:02 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/03/27 17:14:39 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/28 16:27:58 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,18 +69,18 @@ int	builtin_export(char **args)
 			status = 1;
 		if (ft_strchr(args[arg_num], '='))
 		{		
-			while (g_env[++i] != NULL)
+			while (g_ms.env[++i] != NULL)
 			{
-				if (ft_strncmp(g_env[i], args[arg_num],
-						max(var_name_len(g_env[i]),
+				if (ft_strncmp(g_ms.env[i], args[arg_num],
+						max(var_name_len(g_ms.env[i]),
 							var_name_len(args[arg_num]))) == 0)
-					break ;
+					break ; //TODO put in while loop
 			}
 			if (i < MAX_ENV - 1)
 			{
-				if (g_env[i])
-					free(g_env[i]);
-				g_env[i] = ft_strdup(args[arg_num]);
+				if (g_ms.env[i])
+					free(g_ms.env[i]);
+				g_ms.env[i] = ft_strdup(args[arg_num]);
 			}
 		}
 	}

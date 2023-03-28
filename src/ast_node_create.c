@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 18:01:47 by graux             #+#    #+#             */
-/*   Updated: 2023/03/28 14:47:51 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/28 14:59:52 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,8 @@ static void	ast_node_gen_content(t_ast_node *node, t_token **tokens, int start,
 static void	ast_node_gen_redir(t_ast_node *node, t_token **tokens, int start,
 		int size)
 {
-	int	i;
+	int		i;
+	t_fds	fds;
 
 	i = -1;
 	while (++i < size)
@@ -68,8 +69,10 @@ static void	ast_node_gen_redir(t_ast_node *node, t_token **tokens, int start,
 		}
 		else if (tokens[i + start]->type == TOK_HEREDOC)
 		{
-			node->redir_fd_in = redir_create(tokens[i + start]);
-			node->all_redirs[(*(node->redir_index))++] = node->redir_fd_in;
+			fds = redir_create_h(tokens[i + start]);
+			node->redir_fd_in = fds.in;
+			node->all_redirs[(*(node->redir_index))++] = fds.in;
+			node->all_redirs[(*(node->redir_index))++] = fds.out;
 		}
 		else if (tokens[i + start]->type == TOK_REDIR_OUT
 			|| tokens[i]->type == TOK_REDIR_APP)

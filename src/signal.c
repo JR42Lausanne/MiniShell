@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 17:31:35 by graux             #+#    #+#             */
-/*   Updated: 2023/03/16 13:18:40 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/28 16:18:02 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,18 @@
 
 static void	handle_sigint(void)
 {
-	if (*g_env[MAX_ENV] == 'p')
+	if (*g_ms.env[MAX_ENV] == 'p')
 	{
 		rl_replace_line("", 0);
 		printf("\n");
 		rl_on_new_line();
 		rl_redisplay();
 	}
-	//else if (*g_env[MAX_ENV] == 'e')
-	//	g_env[M
+	if (*g_ms.env[MAX_ENV] == 'e')
+	{
+		printf("\n");
+		g_ms.status = 130;
+	}
 }
 
 static void	handle_sigquit(void)
@@ -41,7 +44,7 @@ static void	handle_sigquit(void)
 int	signal_setup(void)
 {
 	struct sigaction	sig;
-	struct termios	tp;
+	struct termios		tp;
 
 	//TODO setup ECHOCTL in termios
 	sig.sa_handler = &signal_handler;

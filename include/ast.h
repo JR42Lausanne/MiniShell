@@ -6,7 +6,7 @@
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 13:00:55 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/03/22 16:23:10 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/28 14:54:24 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,12 @@ typedef struct s_packed
 	int	*redir_index;
 }			t_packed;
 
+typedef struct s_fds
+{
+	int	in;
+	int	out;
+}			t_fds;
+
 t_ast_node		*ast_node_create(t_token **tokens, int start, int size,
 					t_packed packed);
 void			ast_node_gen_cmd(t_ast_node *node, t_token **tokens, int start,
@@ -84,8 +90,8 @@ char			**ast_gen_args(t_token **tokens, int start, int size);
 int				ast_node_redirect(t_ast_node *node);
 int				redir_create_i(t_token *tok);
 int				redir_create_o(t_token *tok);
-int				redir_create_h(t_token *tok);
 int				redir_create_a(t_token *tok);
+t_fds			redir_create_h(t_token *tok);
 int				redir_create(t_token *tok);
 
 t_ast_node		*ast_generate(t_token **tokens);

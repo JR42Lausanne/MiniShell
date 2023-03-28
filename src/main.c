@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 16:04:36 by graux             #+#    #+#             */
-/*   Updated: 2023/03/26 16:04:37 by jlaiti           ###   ########.fr       */
+/*   Updated: 2023/03/28 16:19:11 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,22 +90,21 @@ static void	gen_prompt(char prompt[PROMPT_SIZE], int status)
 
 int	main(int argc, char *argv[], char *envp[])
 {
-	char			*line;
-	t_token			**tokens;
-	t_ast_node		*ast_root;
-	int				status;
-	char			prompt[PROMPT_SIZE + 4];
+	char					*line;
+	t_token					**tokens;
+	t_ast_node				*ast_root;
+	char					prompt[PROMPT_SIZE + 4];
 
 	ms_envsetup(envp);
 	if (argc == 3 && !ft_strncmp(argv[1], "-c", 3))
 		exit(not_interactive(argv[2]));
 	if (signal_setup() == -1)
 		return (-1);
-	status = 0;
+	g_ms.status = 0;
 	while (1)
 	{
-		g_env[MAX_ENV] = "p";
-		gen_prompt(prompt, status);
+		g_ms.env[MAX_ENV] = "p";
+		gen_prompt(prompt, g_ms.status);
 		line = readline(prompt);
 		if (!line)
 			builtin_exit(NULL);
@@ -115,22 +114,23 @@ int	main(int argc, char *argv[], char *envp[])
 			continue ;
 		}
 		add_history(line);
-		tokens = tokenize_input(line, status);
+		tokens = tokenize_input(line, g_ms.status);
 		show_debug(argc, argv, tokens, ast_root, 't');
-		status = tokens_check_syntax(tokens) - 1;
-		if (status + 1)
+		g_ms.status = tokens_check_syntax(tokens) - 1;
+		if (g_ms.status + 1)
 		{
 			//tokens_destroy(tokens);
 			continue ;
 		}
 		free(line);
+		//gen_prompt(prompt, status); //TODO looks useless
+		g_ms.env[MAX_ENV] = "e";
 		ast_root = ast_generate(tokens);
 		show_debug(argc, argv, tokens, ast_root, 'a');
-		g_env[MAX_ENV] = "e";
 		ast_execute(ast_root);
 		ast_close_all_pipes(ast_root);
 		ast_close_all_redirs(ast_root);
-		status = ast_wait(ast_root);
+		g_ms.status = ast_wait(ast_root);
 		//TODO free tokens and ast
 	}
 	return (0);

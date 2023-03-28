@@ -6,12 +6,14 @@
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 13:25:03 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/03/26 16:02:34 by jlaiti           ###   ########.fr       */
+/*   Updated: 2023/03/28 16:28:06 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
+
+# include <signal.h>
 
 # define MAX_ENV 1000
 # define PROMPT_SIZE 50
@@ -19,7 +21,13 @@
 # define GREEN "\033[38;5;10m"
 # define RESET "\033[0m"
 
-extern char	**g_env;
+typedef struct s_ms
+{
+	char					**env;
+	volatile sig_atomic_t	status;
+}			t_ms;
+
+extern t_ms	g_ms;
 
 char	*ms_getenv(char *name);
 char	*ms_getenv_cont(char *name);

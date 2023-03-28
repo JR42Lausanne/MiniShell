@@ -6,7 +6,7 @@
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 18:11:33 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/03/07 15:32:44 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/28 16:22:40 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-//using g_env
 int	builtin_pwd(char **args)
 {
 	char	*cwd;
