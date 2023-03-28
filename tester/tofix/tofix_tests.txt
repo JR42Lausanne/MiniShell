@@ -1,7 +1,4 @@
 env | grep "_="
-export | grep "SHLVL"
 export | grep "OLDPWD"
 export | grep "PWD"
-export --TEST=123
-export | grep "SHLVL"
 env | grep "_="

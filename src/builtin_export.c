@@ -6,7 +6,7 @@
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 21:39:02 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/03/28 16:27:58 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/28 16:47:43 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,19 @@ static int	is_valid_varname(char *var_name)
 	return (i > 0);
 }
 
+static void	export_without_args(void)
+{
+	int	i;
+
+	i = -1;
+	while (++i < MAX_ENV && g_ms.env[i])
+	{
+		printf("declare -x ");
+		printf("%.*s", var_name_len(g_ms.env[i]), g_ms.env[i]);
+		printf("=\"%s\"\n", g_ms.env[i] + var_name_len(g_ms.env[i]) + 1);
+	}
+}
+
 //TODO export without agrs -> declare -x machin bidule
 int	builtin_export(char **args)
 {	
@@ -84,5 +97,7 @@ int	builtin_export(char **args)
 			}
 		}
 	}
+	if (arg_num == 1)
+		export_without_args();
 	return (status);
 }
