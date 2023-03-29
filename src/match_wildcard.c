@@ -6,24 +6,12 @@
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 14:35:57 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/03/28 12:20:33 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/29 16:47:09 by jlaiti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/tokenizer.h"
 #include <dirent.h>
-
-static int	matches_len(char **matches)
-{
-	int	len;
-
-	len = 0;
-	if (!matches)
-		return (0);
-	while (matches[len])
-		len++;
-	return (len);
-}
 
 static char	**setup_lookup(int n, int m, char *pattern)
 {
