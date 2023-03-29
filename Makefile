@@ -16,6 +16,7 @@ SRC = ast_execute_cmd.c 		\
 	  ast_print.c	 			\
 	  ast_wait.c	 			\
 	  error_put.c				\
+	  export_without_args.c		\
 	  redir_create_i.c			\
 	  redir_create_o.c			\
 	  redir_create_h.c			\
@@ -29,6 +30,7 @@ SRC = ast_execute_cmd.c 		\
 	  builtin_exit.c			\
 	  builtin_unset.c			\
 	  dq_mode.c					\
+	  matches_len.c				\
 	  match_wildcard.c			\
 	  ms_getenv.c 				\
 	  ms_getenv_cont.c 			\

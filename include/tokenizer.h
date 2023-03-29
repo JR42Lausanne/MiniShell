@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 15:46:12 by graux             #+#    #+#             */
-/*   Updated: 2023/03/28 13:56:51 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/29 16:43:32 by jlaiti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ void		agregate_redirs(t_token ***tokens, int size);
 t_token		**expand_wildcards(t_token **tokens);
 char		**match_wildcard(t_token *tok);
 int			is_redir(t_token *tok);
+int			matches_len(char **matches);
 
 t_tokenizer	*tokenizer_create(char *input, int status);
 void		tokenizer_destroy(t_tokenizer *toker);

@@ -6,24 +6,12 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 16:12:14 by graux             #+#    #+#             */
-/*   Updated: 2023/03/27 14:43:21 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/29 17:33:48 by jlaiti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/tokenizer.h"
 #include <dirent.h>
-
-static int	matches_len(char **matches)
-{
-	int	len;
-
-	len = 0;
-	if (!matches)
-		return (0);
-	while (matches[len])
-		len++;
-	return (len);
-}
 
 static t_token	*token_from_char(char *str)
 {

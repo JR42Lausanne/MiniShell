@@ -1,4 +1,0 @@
-env | grep "_="
-export | grep "OLDPWD"
-export | grep "PWD"
-env | grep "_="

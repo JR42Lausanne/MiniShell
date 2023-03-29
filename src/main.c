@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 16:04:36 by graux             #+#    #+#             */
-/*   Updated: 2023/03/28 17:09:06 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/29 14:45:05 by jlaiti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ static int	not_interactive(char *cmd)
 	ast_root = ast_generate(tokens);
 	ast_execute(ast_root);
 	ast_close_all_pipes(ast_root);
+	ast_close_all_redirs(ast_root);
 	status = ast_wait(ast_root);
 	return (status);
 }
