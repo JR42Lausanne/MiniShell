@@ -6,7 +6,7 @@
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 13:00:55 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/03/29 10:00:42 by jlaiti           ###   ########.fr       */
+/*   Updated: 2023/03/29 12:06:08 by jlaiti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,6 @@ typedef struct s_fds
 t_ast_node		*ast_node_create(t_token **tokens, int start, int size,
 					t_packed packed);
 void			ast_node_destroy(t_ast_node *node);
-void			free_args(char **args);
 void			ast_node_gen_cmd(t_ast_node *node, t_token **tokens, int start,
 					int size);
 void			ast_node_gen_builtin(t_ast_node *node, t_token **tokens,

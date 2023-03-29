@@ -6,13 +6,13 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 17:56:09 by graux             #+#    #+#             */
-/*   Updated: 2023/03/29 10:00:07 by jlaiti           ###   ########.fr       */
+/*   Updated: 2023/03/29 12:04:46 by jlaiti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ast.h"
 
-void	free_args(char **args)
+static void	free_args(char **args)
 {
 	int	i;
 

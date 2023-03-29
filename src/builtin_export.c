@@ -6,7 +6,7 @@
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 21:39:02 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/03/28 16:47:43 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/29 11:47:20 by jlaiti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,7 @@ static void	export_without_args(void)
 		printf("=\"%s\"\n", g_ms.env[i] + var_name_len(g_ms.env[i]) + 1);
 	}
 }
-
-//TODO export without agrs -> declare -x machin bidule
+//TODO = modif 
 int	builtin_export(char **args)
 {	
 	int	i;
