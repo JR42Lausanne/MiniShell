@@ -6,7 +6,7 @@
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 21:39:02 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/03/28 16:47:43 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/29 16:25:06 by jlaiti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,12 @@
 #include "../include/builtins.h"
 #include "../include/libft.h"
 
-static int	var_name_len(char *var)
+int	var_name_len(char *var)
 {
 	int	size;
 
+	if (!var)
+		return (0);
 	size = 0;
 	while (var[size] && var[size] != '=')
 		size++;
@@ -53,20 +55,18 @@ static int	is_valid_varname(char *var_name)
 	return (i > 0);
 }
 
-static void	export_without_args(void)
+static	void	check_is_match(int *arg_num, int *i, char **args)
 {
-	int	i;
-
-	i = -1;
-	while (++i < MAX_ENV && g_ms.env[i])
+	while (g_ms.env[*i] != NULL)
 	{
-		printf("declare -x ");
-		printf("%.*s", var_name_len(g_ms.env[i]), g_ms.env[i]);
-		printf("=\"%s\"\n", g_ms.env[i] + var_name_len(g_ms.env[i]) + 1);
-	}
+		if (ft_strncmp(g_ms.env[*i], args[*arg_num],
+				max(var_name_len(g_ms.env[*i]),
+					var_name_len(args[*arg_num]))) == 0)
+			break ;
+		(*i)++;
+	}	
 }
 
-//TODO export without agrs -> declare -x machin bidule
 int	builtin_export(char **args)
 {	
 	int	i;
@@ -77,24 +77,18 @@ int	builtin_export(char **args)
 	status = 0;
 	while (args[++arg_num])
 	{
-		i = -1;
+		i = 0;
 		if (!is_valid_varname(args[arg_num]))
 			status = 1;
 		if (ft_strchr(args[arg_num], '='))
 		{		
-			while (g_ms.env[++i] != NULL)
-			{
-				if (ft_strncmp(g_ms.env[i], args[arg_num],
-						max(var_name_len(g_ms.env[i]),
-							var_name_len(args[arg_num]))) == 0)
-					break ; //TODO put in while loop
-			}
-			if (i < MAX_ENV - 1)
-			{
-				if (g_ms.env[i])
-					free(g_ms.env[i]);
-				g_ms.env[i] = ft_strdup(args[arg_num]);
-			}
+			check_is_match(&arg_num, &i, args);
+		}
+		if (i < MAX_ENV - 1)
+		{
+			if (g_ms.env[i])
+				free(g_ms.env[i]);
+			g_ms.env[i] = ft_strdup(args[arg_num]);
 		}
 	}
 	if (arg_num == 1)
