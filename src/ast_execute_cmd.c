@@ -6,7 +6,7 @@
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 16:04:14 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/03/28 18:12:18 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/29 10:17:11 by jlaiti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ static char	*get_cmd(char *cmd)
 		free(command);
 	}
 	free(env_path);
+	free_args(path);
 	return (NULL);
 }
 

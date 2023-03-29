@@ -76,7 +76,7 @@ ifeq ($(shell whoami), graux)
 else ifeq ($(shell whoami), julienlaiti)
 	${CC} ${FLAGS} ${INCLUDES} -c $< -o $@ -I/opt/homebrew/opt/readline/include -fsanitize=address
 else
-	${CC} ${FLAGS} ${INCLUDES} -c $< -o $@ -I$(HOME)/.brew/opt/readline/include -fsanitize=address
+	${CC} ${FLAGS} ${INCLUDES} -c $< -o $@ -I$(HOME)/.brew/opt/readline/include
 endif
 
 all: ${NAME}
@@ -90,7 +90,7 @@ ifeq ($(shell whoami), graux)
 else ifeq ($(shell whoami), julienlaiti)
 	$(CC) ${FLAGS} src/main.o $(OBJ) $(INCLUDES) -I/opt/homebrew/opt/readline/include -L. -L/opt/homebrew/opt/readline/lib -lft -lreadline -o $(NAME) -fsanitize=address
 else
-	$(CC) ${FLAGS} src/main.o $(OBJ) $(INCLUDES) -I$(HOME)/.brew/opt/readline/include -L. -L$(HOME)/.brew/opt/readline/lib -lft -lreadline -o $(NAME) -fsanitize=address
+	$(CC) ${FLAGS} src/main.o $(OBJ) $(INCLUDES) -I$(HOME)/.brew/opt/readline/include -L. -L$(HOME)/.brew/opt/readline/lib -lft -lreadline -o $(NAME)
 endif
 
 re: fclean all

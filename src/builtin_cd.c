@@ -6,7 +6,7 @@
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 17:05:21 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/03/28 16:57:43 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/29 11:07:26 by jlaiti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,13 @@ static void	change_old_pwd(char *old_pwd)
 	builtin_export(export_args);
 	free(export_args[1]);
 	free(old_pwd);
+}
+
+static void	export_arg(char *export_args[3], char *current_path)
+{
+		export_args[0] = "export";
+		export_args[1] = ft_strjoin("PWD=", current_path);
+		export_args[2] = NULL;
 }
 
 int	builtin_cd(char **args)
@@ -47,9 +54,7 @@ int	builtin_cd(char **args)
 	{
 		getcwd(current_path, NAME_MAX);
 		old_pwd = ms_getenv_cont("PWD");
-		export_args[0] = "export";
-		export_args[1] = ft_strjoin("PWD=", current_path);
-		export_args[2] = NULL;
+		export_arg(export_args, current_path);
 		builtin_export(export_args);
 		change_old_pwd(old_pwd);
 		free(export_args[1]);
