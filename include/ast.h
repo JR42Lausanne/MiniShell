@@ -6,7 +6,7 @@
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 13:00:55 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/03/30 12:36:35 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/30 14:52:53 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ int				ast_find_type(t_ast_node *node, t_token **tokens, int start,
 int				ast_find_name_pos(t_token **tokens, int start, int size);
 char			**ast_gen_args(t_token **tokens, int start, int size);
 
+char			*get_full_cmd(char *directory, char *cmd_name);
 // for a value in redirs_fd [0] -> is the new fd and [1] the old
 int				ast_node_redirect(t_ast_node *node);
 int				redir_create_i(t_token *tok);

@@ -34,6 +34,7 @@ SRC = ast_execute_cmd.c 		\
 	  match_wildcard.c			\
 	  ms_getenv.c 				\
 	  ms_getenv_cont.c 			\
+	  get_full_cmd.c			\
 	  ms_envsetup.c				\
 	  signal.c					\
 	  agregate_spaces.c			\

@@ -6,7 +6,7 @@
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 16:04:14 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/03/30 11:10:11 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/30 14:53:01 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,19 +40,6 @@ static int	check_access(char *cmd)
 	if (S_ISDIR(file_stat.st_mode))
 		return (126);
 	return (0);
-}
-
-static char	*get_full_cmd(char *directory, char *cmd_name)
-{
-	char	*tmp;
-	char	*command;
-
-	tmp = ft_strjoin(directory, "/");
-	if (!tmp)
-		return (NULL);
-	command = ft_strjoin(tmp, cmd_name);
-	free(tmp);
-	return (command);
 }
 
 static char	*get_cmd(char *cmd)
