@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 16:04:36 by graux             #+#    #+#             */
-/*   Updated: 2023/03/28 18:07:58 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/30 09:23:07 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,8 @@ int	main(int argc, char *argv[], char *envp[])
 		return (-1);
 	if (argc == 3 && !ft_strncmp(argv[1], "-c", 3))
 		exit(not_interactive(argv[2]));
+	if (signal_setup() == -1) //TODO put that in ms_envsetup when done with tester
+		return (-1);
 	while (1)
 	{
 		g_ms.env[MAX_ENV] = "p";
