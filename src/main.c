@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 16:04:36 by graux             #+#    #+#             */
-/*   Updated: 2023/03/30 09:23:07 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/30 11:57:54 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,8 @@ static void	gen_prompt(char prompt[PROMPT_SIZE], int status)
 	ft_memcpy(prompt + pos, str + offset, ft_strlen(str + offset));
 	pos += ft_strlen(str + offset);
 	free(str);
-	ft_memcpy(prompt + pos, "\n$> ", 4);
-	ft_memcpy(prompt + pos + 4, RESET, 5);
+	ft_memcpy(prompt + pos, RESET, 4);
+	ft_memcpy(prompt + pos + 4, "\n$> ", 5);
 }
 
 int	main(int argc, char *argv[], char *envp[])
@@ -120,7 +120,7 @@ int	main(int argc, char *argv[], char *envp[])
 		g_ms.status = tokens_check_syntax(tokens) - 1;
 		if (g_ms.status + 1)
 		{
-			//tokens_destroy(tokens);
+			tokens_destroy(tokens);
 			continue ;
 		}
 		g_ms.env[MAX_ENV] = "e";
