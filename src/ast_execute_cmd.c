@@ -6,7 +6,7 @@
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 16:04:14 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/03/28 18:12:18 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/30 11:10:11 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,21 @@ static int	check_access(char *cmd)
 	return (0);
 }
 
-static char	*get_cmd(char *cmd)
+static char	*get_full_cmd(char *directory, char *cmd_name)
 {
 	char	*tmp;
+	char	*command;
+
+	tmp = ft_strjoin(directory, "/");
+	if (!tmp)
+		return (NULL);
+	command = ft_strjoin(tmp, cmd_name);
+	free(tmp);
+	return (command);
+}
+
+static char	*get_cmd(char *cmd)
+{
 	char	*command;
 	char	*env_path;
 	char	**path;
@@ -55,18 +67,20 @@ static char	*get_cmd(char *cmd)
 	env_path = ms_getenv_cont("PATH");
 	if (!env_path)
 		return (NULL);
-	path = ft_split(env_path, ':'); //TODO free array of chars
+	path = ft_split(env_path, ':');
+	free(env_path);
 	i = -1;
 	while (path[++i])
 	{
-		tmp = ft_strjoin(path[i], "/");
-		command = ft_strjoin(tmp, cmd);
-		free(tmp);
-		if (access(command, X_OK) == 0 && !check_access(command))
+		command = get_full_cmd(path[i], cmd);
+		if (!check_access(command) && access(command, X_OK) == 0)
+		{
+			//TODO free all Path array
 			return (command);
+		}
 		free(command);
 	}
-	free(env_path);
+	//TODO free all Path array
 	return (NULL);
 }
 
