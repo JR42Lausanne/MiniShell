@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 12:08:53 by graux             #+#    #+#             */
-/*   Updated: 2023/03/24 17:40:45 by jlaiti           ###   ########.fr       */
+/*   Updated: 2023/03/30 13:41:08 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,12 +79,9 @@ void	token_handle_var(t_tokenizer *toker, t_token *tok)
 	var_name = ft_substr(toker->input, toker->pos, size_in_input);
 	if (var_name)
 	{
-		var_value = ms_getenv(var_name); // TODO protection
+		var_value = ms_getenv(var_name);
 		if (!var_value)
-		{
-			check_is_var_value(toker, tok, &size_in_input);
-			return ;
-		}
+			return (check_is_var_value(toker, tok, &size_in_input));
 		token_gen_content(tok, var_value + size_in_input + 1,
 			ft_strlen(var_value + size_in_input + 1));
 		free(var_name);

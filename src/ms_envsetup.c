@@ -6,7 +6,7 @@
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 11:44:53 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/03/30 09:22:13 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/30 13:38:51 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	ms_envsetup(char **envp)
 		i++;
 	}
 	if (envp[i])
-		return (0); //TODO free
+		return (0); //TODO free with free_args
 	while (i < MAX_ENV)
 		g_ms.env[i++] = NULL;
 	g_ms.status = 0;
