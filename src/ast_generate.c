@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 17:43:02 by graux             #+#    #+#             */
-/*   Updated: 2023/03/28 14:49:05 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/30 12:50:04 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ static void	setup_all_redirs(t_ast_node *root, t_token **tokens)
 	while (++i < size)
 		root->all_redirs[i] = -2;
 	root->redir_index = malloc(sizeof(int));
-	if (!root->all_redirs)
+	if (!root->redir_index)
 		return ; //TODO better protection
 	*(root->redir_index) = 0;
 }

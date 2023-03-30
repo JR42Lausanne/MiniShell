@@ -6,11 +6,12 @@
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 11:30:08 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/03/21 14:56:26 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/30 12:54:25 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/builtins.h"
+#include "../include/minishell.h"
 #include "../include/libft.h"
 #include <stdlib.h>
 #include <limits.h>
@@ -36,26 +37,25 @@ int	check_numeric(char *arg)
 			continue ;
 		if (!ft_isdigit(arg[i]))
 		{
-			ft_putstr_fd("numeric argument required\n", 2); //TODO error handling
+			error_put("exit", "numeric argument required");
 			return (255);
 		}
 	}
 	if (check_too_long(arg))
 	{
-		ft_putstr_fd("numeric argument required\n", 2); //TODO error handling
+		error_put("exit", "numeric argument required");
 		return (255);
 	}
 	return (0);
 }
 
-//TODO error handling for invalid inputs
 int	builtin_exit(char **args)
 {
 	int	status;
 
 	ft_putstr_fd("exit\n", 2);
 	if (!args)
-		exit(0); //-> when ctrl-D is pressed //TODO free everything
+		exit(0);
 	if (args[1])
 	{
 		status = check_numeric(args[1]);
@@ -65,7 +65,7 @@ int	builtin_exit(char **args)
 				status = ft_atoi(args[1]);
 			else
 			{
-				ft_putstr_fd("Too many args\n", 2); //TODO error handling
+				error_put("exit", "too many arguments");
 				return (1);
 			}
 		}

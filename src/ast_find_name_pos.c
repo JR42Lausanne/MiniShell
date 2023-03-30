@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 17:15:17 by graux             #+#    #+#             */
-/*   Updated: 2023/03/17 16:04:00 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/30 12:47:51 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ int	ast_find_name_pos(t_token **tokens, int start, int size)
 	int		i;
 
 	i = 0;
-	//TODO check correct names
 	while (i < size)
 	{
 		if (i == 0 && tokens[i + start]->type == TOK_WORD)
