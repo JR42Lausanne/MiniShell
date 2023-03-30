@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 15:28:35 by graux             #+#    #+#             */
-/*   Updated: 2023/03/22 10:55:48 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/30 12:43:40 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,10 @@ int	is_redir(t_token *tok)
 		return (0);
 }
 
-//TODO when redir take next word and put it's content in the redir content
-void	agregate_redirs(t_token ***tokens, int size)
+void	agregate_redirs(t_token ***tokens)
 {
 	int	i;
 
-	(void) size;
 	i = 0;
 	while ((*tokens)[i])
 	{

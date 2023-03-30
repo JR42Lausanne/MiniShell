@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 15:46:12 by graux             #+#    #+#             */
-/*   Updated: 2023/03/28 17:31:53 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/30 12:43:22 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void		token_handle_space(t_tokenizer *toker, t_token *tok);
 void		dq_mode(t_tokenizer *toker, t_token *tok);
 
 t_token		**agregate_spaces(t_token **tokens, int size);
-void		agregate_redirs(t_token ***tokens, int size);
+void		agregate_redirs(t_token ***tokens);
 t_token		**expand_wildcards(t_token **tokens);
 char		**match_wildcard(t_token *tok);
 int			is_redir(t_token *tok);
@@ -90,7 +90,5 @@ int			tokens_check_syntax(t_token **tokens);
 int			check_brackets_num(t_token **tokens);
 int			check_brackets_c(t_token **tokens);
 int			check_brackets_o(t_token **tokens);
-
-//TODO tilde expansion maybe ????
 
 #endif

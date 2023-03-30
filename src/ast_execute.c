@@ -6,7 +6,7 @@
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 13:22:42 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/03/30 12:38:09 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/30 12:41:12 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ void	ast_execute(t_ast_node *node)
 		ast_execute(node->children[0]);
 		return ;
 	}
-	//TODO specifics before calling childrens
 	if (node->type == AST_PIPE)
 		ast_handle_pipe(node);
 	ast_execute(node->children[0]);
