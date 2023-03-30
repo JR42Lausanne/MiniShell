@@ -40,6 +40,7 @@ SRC = ast_execute_cmd.c 		\
 	  agregate_spaces.c			\
 	  agregate_redirs.c			\
 	  expand_wildcards.c		\
+	  expand_one.c				\
 	  export_without_args.c		\
 	  token_create.c			\
 	  token_destroy.c 			\

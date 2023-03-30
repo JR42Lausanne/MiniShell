@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 15:46:12 by graux             #+#    #+#             */
-/*   Updated: 2023/03/30 13:46:42 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/30 15:01:06 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ int			token_var_len(t_tokenizer *toker);
 void		token_handle_tilde(t_tokenizer *toker, t_token *tok);
 void		token_handle_space(t_tokenizer *toker, t_token *tok);
 void		dq_mode(t_tokenizer *toker, t_token *tok);
+t_token		**expand_one(t_token **tokens, int size);
 
 t_token		**agregate_spaces(t_token **tokens, int size);
 void		agregate_redirs(t_token ***tokens);
