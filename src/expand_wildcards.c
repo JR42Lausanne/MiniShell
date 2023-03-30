@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 16:12:14 by graux             #+#    #+#             */
-/*   Updated: 2023/03/30 09:52:49 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/30 13:00:44 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,15 +101,17 @@ static int	contain_wild(t_token **tokens, int size)
 t_token	**expand_wildcards(t_token **tokens)
 {
 	t_token	**expanded;
+	t_token	**tmp;
 	int		size;
 
 	expanded = tokens;
 	size = tokens_size(tokens);
 	while (contain_wild(expanded, size))
 	{
-		expanded = expand_one(expanded, size);
+		tmp = expanded;
+		expanded = expand_one(tmp, size);
+		free(tmp);
 		size = tokens_size(expanded);
 	}
-	//free(tokens); //TODO uncomment
 	return (expanded);
 }

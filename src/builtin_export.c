@@ -6,7 +6,7 @@
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 21:39:02 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/03/28 16:47:43 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/30 12:56:48 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ static void	export_without_args(void)
 	}
 }
 
-//TODO export without agrs -> declare -x machin bidule
 int	builtin_export(char **args)
 {	
 	int	i;
