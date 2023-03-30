@@ -6,7 +6,7 @@
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 13:17:14 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/03/29 16:35:43 by jlaiti           ###   ########.fr       */
+/*   Updated: 2023/03/30 10:00:51 by jlaiti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,27 +53,29 @@ static int	is_valid_varname(char *var_name)
 	return (1);
 }
 
-static	void	check_is_match(int *arg_num, int *i, char **args)
+static	void	unset_if_match(int arg_num, char **args)
 {
-	while (*i < MAX_ENV)
+	int	i;
+
+	i = 0;
+	while (i < MAX_ENV)
 	{
-		if (!g_ms.env[*i])
+		if (!g_ms.env[i])
 			break ;
-		if (ft_strncmp(g_ms.env[*i], args[*arg_num],
-				max(var_name_len(g_ms.env[*i]),
-					var_name_len(args[*arg_num]))) == 0)
+		if (ft_strncmp(g_ms.env[i], args[arg_num],
+				max(var_name_len(g_ms.env[i]),
+					var_name_len(args[arg_num]))) == 0)
 		{
-			free(g_ms.env[*i]);
-			remove_from_env(*i);
+			free(g_ms.env[i]);
+			remove_from_env(i);
 			break ;
 		}
-		(*i)++;
+		i++;
 	}	
 }
 
 int	builtin_unset(char	**args)
 {
-	int	i;
 	int	arg_num;
 	int	status;
 
@@ -85,8 +87,7 @@ int	builtin_unset(char	**args)
 	{
 		if (!is_valid_varname(args[arg_num]))
 			status = 1;
-		i = 0;
-		check_is_match(&arg_num, &i, args);
+		unset_if_match(arg_num, args);
 	}
 	return (status);
 }	
