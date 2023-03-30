@@ -73,7 +73,7 @@ LIB = libft.a
 
 %.o: %.c
 ifeq ($(shell whoami), graux)
-	${CC} ${FLAGS} ${INCLUDES} -c $< -o $@ -I/goinfre/graux/.brew/opt/readline/include
+	${CC} ${FLAGS} ${INCLUDES} -c $< -o $@ -I/goinfre/graux/.brew/opt/readline/include -fsanitize=address
 else ifeq ($(shell whoami), julienlaiti)
 	${CC} ${FLAGS} ${INCLUDES} -c $< -o $@ -I/opt/homebrew/opt/readline/include -fsanitize=address
 else
@@ -87,7 +87,7 @@ ${LIB}:
 
 $(NAME): ${LIB} $(OBJ) src/main.o
 ifeq ($(shell whoami), graux)
-	$(CC) ${FLAGS} src/main.o $(OBJ) $(INCLUDES) -I/goinfre/graux/.brew/opt/readline/include -L. -L/goinfre/graux/.brew/opt/readline/lib -lft -lreadline -o $(NAME)
+	$(CC) ${FLAGS} src/main.o $(OBJ) $(INCLUDES) -I/goinfre/graux/.brew/opt/readline/include -L. -L/goinfre/graux/.brew/opt/readline/lib -lft -lreadline -o $(NAME) -fsanitize=address
 else ifeq ($(shell whoami), julienlaiti)
 	$(CC) ${FLAGS} src/main.o $(OBJ) $(INCLUDES) -I/opt/homebrew/opt/readline/include -L. -L/opt/homebrew/opt/readline/lib -lft -lreadline -o $(NAME) -fsanitize=address
 else

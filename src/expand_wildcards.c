@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 16:12:14 by graux             #+#    #+#             */
-/*   Updated: 2023/03/30 13:00:44 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/30 13:52:32 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,8 @@ t_token	**expand_wildcards(t_token **tokens)
 	{
 		tmp = expanded;
 		expanded = expand_one(tmp, size);
-		free(tmp);
+		if (tmp != expanded)
+			free(tmp);
 		size = tokens_size(expanded);
 	}
 	return (expanded);
