@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 17:18:05 by graux             #+#    #+#             */
-/*   Updated: 2023/03/28 13:28:16 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/30 13:45:56 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,9 @@ static const char	*g_tokens_str[] = {
 [TOK_INVALID] = "TOK_INVALID"
 };
 
-static void	print_tok(t_token *tok)
+static void	print_tok(t_token *tok, int i)
 {
-	printf("%d: %-15s -> %s\n", tok->tok_num, g_tokens_str[tok->type],
+	printf("%d: %-15s -> %s\n", i, g_tokens_str[tok->type],
 		tok->content);
 }
 
@@ -49,5 +49,5 @@ void	tokens_print(t_token **tokens)
 	}
 	i = -1;
 	while (tokens[++i])
-		print_tok(tokens[i]);
+		print_tok(tokens[i], i);
 }

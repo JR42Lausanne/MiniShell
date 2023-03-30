@@ -1,2 +1,4 @@
 env | grep "_="
+export TE*ST=123
 env | grep "_="
+unset TE*ST

@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 15:46:12 by graux             #+#    #+#             */
-/*   Updated: 2023/03/30 12:43:22 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/30 13:46:42 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ typedef struct s_token
 {
 	t_token_type	type;
 	char			*content;
-	int				tok_num;
 	int				to_be_removed;
 }			t_token;
 
@@ -51,7 +50,7 @@ typedef struct s_tokenizer
 	int			pos;
 }			t_tokenizer;
 
-t_token		*token_create(t_token_type type, char *cont, int num);
+t_token		*token_create(t_token_type type, char *cont);
 void		token_void_dest(void *tok);
 void		token_destroy(t_token *tok);
 void		tokens_destroy(t_token **tokens);

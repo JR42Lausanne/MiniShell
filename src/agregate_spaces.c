@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 15:22:26 by graux             #+#    #+#             */
-/*   Updated: 2023/03/23 10:13:18 by jlaiti           ###   ########.fr       */
+/*   Updated: 2023/03/30 13:47:09 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../include/tokenizer.h"
@@ -33,7 +33,6 @@ static void	agreg_two_to_one_word(t_token **tokens, int *pos)
 static	void	remove_spaces(t_token **agreg, t_token **tokens,
 		int *i, int *j)
 {
-	tokens[*i]->tok_num = *j;
 	agreg[(*j)++] = tokens[*i];
 	if (tokens[*i + 1] && tokens[*i + 1]->type == TOK_SPACE)
 	{

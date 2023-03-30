@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 16:00:32 by graux             #+#    #+#             */
-/*   Updated: 2023/03/28 13:19:43 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/30 13:44:42 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,7 @@ t_token	*tokenizer_next_token(t_tokenizer *toker)
 {
 	t_token		*tok;
 	t_list		*new_elem;
-	static int	tok_num;
 
-	if (toker->pos == 0)
-		tok_num = 0;
 	if (!toker->input[toker->pos])
 		return (NULL);
 	tok = malloc(sizeof(t_token));
@@ -76,8 +73,9 @@ t_token	*tokenizer_next_token(t_tokenizer *toker)
 		dq_mode(toker, tok);
 	else
 		normal_mode(toker, tok);
-	tok->tok_num = tok_num++;
-	new_elem = ft_lstnew(tok); //TODO protection
+	new_elem = ft_lstnew(tok);
+	if (!new_elem)
+		return (NULL);
 	ft_lstadd_back(&toker->tokens, new_elem);
 	return (tok);
 }
