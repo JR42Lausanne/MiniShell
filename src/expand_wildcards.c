@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 16:12:14 by graux             #+#    #+#             */
-/*   Updated: 2023/03/28 17:49:53 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/30 09:52:49 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,41 +37,51 @@ static t_token	*token_from_char(char *str)
 	return (tok);
 }
 
+static int	find_wildcard(t_token **tokens)
+{
+	int		i;
+
+	i = 0;
+	while (tokens[i] && tokens[i]->type != TOK_WILDCARD)
+		i++;
+	return (i);
+}
+
+static t_token	*select_toks_or_match(t_token **tokens, char **matches,
+		int i, int j)
+{
+	if (j < i)
+		return (tokens[j]);
+	else if (j >= i + matches_len(matches))
+		return (tokens[j - matches_len(matches) + 1]);
+	else
+		return (token_from_char(matches[j - i]));
+}
+
 static t_token	**expand_one(t_token **tokens, int size)
 {
 	t_token	**exp;
 	char	**matches;
-	int		i;
+	int		wild_pos;
 	int		j;
 
-	i = 0;
 	j = -1;
-	exp = tokens;
-	while (tokens[i] && tokens[i]->type != TOK_WILDCARD)
-		i++;
-	if (tokens[i])
+	wild_pos = find_wildcard(tokens);
+	if (!tokens[wild_pos])
+		return (tokens);
+	matches = match_wildcard(tokens[wild_pos]);
+	if (!matches)
 	{
-		matches = match_wildcard(tokens[i]);
-		if (matches_len(matches) == 0)
-		{
-			tokens[i]->type = TOK_WORD;
-			return (tokens);
-		}
-		exp = ft_calloc(size + 1 + matches_len(matches), sizeof(t_token *));
-		if (!exp)
-			return (NULL);
-		while (++j < size - 1 + matches_len(matches))
-		{
-			if (j < i)
-				exp[j] = tokens[j];
-			else if (j >= i + matches_len(matches))
-				exp[j] = tokens[j - matches_len(matches) + 1];
-			else
-				exp[j] = token_from_char(matches[j - i]);
-		}
-		token_destroy(tokens[i]);
-		//TODO free matches
+		tokens[wild_pos]->type = TOK_WORD;
+		return (tokens);
 	}
+	exp = ft_calloc(size + 1 + matches_len(matches), sizeof(t_token *));
+	if (!exp)
+		return (NULL);
+	while (++j < size - 1 + matches_len(matches))
+		exp[j] = select_toks_or_match(tokens, matches, wild_pos, j);
+	token_destroy(tokens[wild_pos]);
+	//TODO free matches
 	return (exp);
 }
 
