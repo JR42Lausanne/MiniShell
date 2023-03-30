@@ -6,25 +6,13 @@
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 13:17:14 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/03/28 16:25:23 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/30 14:43:31 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 #include "../include/builtins.h"
 #include "../include/libft.h"
-
-static int	var_name_len(char *var)
-{
-	int	size;
-
-	if (!var)
-		return (0);
-	size = 0;
-	while (var[size] && var[size] != '=')
-		size++;
-	return (size);
-}
 
 static int	max(int a, int b)
 {
@@ -65,9 +53,29 @@ static int	is_valid_varname(char *var_name)
 	return (1);
 }
 
-int	builtin_unset(char	**args)
+static	void	unset_if_match(int arg_num, char **args)
 {
 	int	i;
+
+	i = 0;
+	while (i < MAX_ENV)
+	{
+		if (!g_ms.env[i])
+			break ;
+		if (ft_strncmp(g_ms.env[i], args[arg_num],
+				max(var_name_len(g_ms.env[i]),
+					var_name_len(args[arg_num]))) == 0)
+		{
+			free(g_ms.env[i]);
+			remove_from_env(i);
+			break ;
+		}
+		i++;
+	}	
+}
+
+int	builtin_unset(char	**args)
+{
 	int	arg_num;
 	int	status;
 
@@ -79,20 +87,7 @@ int	builtin_unset(char	**args)
 	{
 		if (!is_valid_varname(args[arg_num]))
 			status = 1;
-		i = -1;
-		while (++i < MAX_ENV)
-		{
-			if (!g_ms.env[i]) //TODO put in while
-				break ;
-			if (ft_strncmp(g_ms.env[i], args[arg_num],
-					max(var_name_len(g_ms.env[i]),
-						var_name_len(args[arg_num]))) == 0)
-			{	
-				free(g_ms.env[i]);
-				remove_from_env(i);
-				break ;
-			}
-		}
+		unset_if_match(arg_num, args);
 	}
 	return (status);
 }	
