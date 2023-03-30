@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 17:31:35 by graux             #+#    #+#             */
-/*   Updated: 2023/03/30 09:19:57 by graux            ###   ########.fr       */
+/*   Updated: 2023/03/30 13:03:39 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,18 +46,14 @@ int	signal_setup(void)
 	struct sigaction	sig;
 	struct termios		tp;
 
-	//TODO setup ECHOCTL in termios
-	//printf("IN SIG SETUP\n");
 	sig.sa_handler = &signal_handler;
 	sigaction(SIGINT, &sig, NULL);
 	sigaction(SIGQUIT, &sig, NULL);
 	if (tcgetattr(STDIN_FILENO, &tp) == -1)
 		return (-1);
-	//printf("first test\n");
 	tp.c_lflag &= ~ECHOCTL;
 	if (tcsetattr(STDIN_FILENO, TCSAFLUSH, &tp) == -1)
 		return (-1);
-	//printf("second test\n");
 	return (0);
 }
 
