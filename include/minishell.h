@@ -6,7 +6,7 @@
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 13:25:03 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/04/05 12:11:39 by graux            ###   ########.fr       */
+/*   Updated: 2023/04/05 16:38:40 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ extern t_ms	g_ms;
 char	*ms_getenv(char *name);
 char	*ms_getenv_cont(char *name);
 int		ms_envsetup(char **envp);
+void	ms_gen_prompt(char prompt[PROMPT_SIZE], int status);
 
 void	signal_handler(int sig);
 int		signal_setup(void);

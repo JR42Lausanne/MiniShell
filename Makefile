@@ -11,6 +11,7 @@ SRC = ast_execute_cmd.c 		\
 	  ast_gen_args.c 			\
 	  ast_node_gen_cmd.c		\
 	  ast_node_gen_builtin.c	\
+	  ast_node_gen_redir.c		\
 	  ast_node_create.c 		\
 	  ast_node_destroy.c 		\
 	  ast_node_redirect.c 		\
@@ -37,6 +38,7 @@ SRC = ast_execute_cmd.c 		\
 	  match_wildcard.c			\
 	  ms_getenv.c 				\
 	  ms_getenv_cont.c 			\
+	  ms_gen_prompt.c 			\
 	  get_full_cmd.c			\
 	  ms_envsetup.c				\
 	  signal.c					\

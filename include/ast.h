@@ -6,7 +6,7 @@
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 13:00:55 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/04/05 14:50:30 by graux            ###   ########.fr       */
+/*   Updated: 2023/04/05 15:58:48 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef enum e_ast_node_type
 	AST_OUT_REDIR,
 	AST_OUT_APPEND,
 	AST_PIPE,
+	AST_INVALID,
 	AST_TYPE_SIZE
 }			t_ast_node_type;
 
@@ -82,6 +83,8 @@ void			ast_node_destroy(t_ast_node *node);
 void			ast_node_gen_cmd(t_ast_node *node, t_token **tokens, int start,
 					int size);
 void			ast_node_gen_builtin(t_ast_node *node, t_token **tokens,
+					int start, int size);
+int				ast_node_gen_redir(t_ast_node *node, t_token **tokens,
 					int start, int size);
 int				ast_find_type(t_ast_node *node, t_token **tokens, int start,
 					int size);

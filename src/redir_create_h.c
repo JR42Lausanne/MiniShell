@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 17:32:26 by graux             #+#    #+#             */
-/*   Updated: 2023/03/28 15:18:00 by graux            ###   ########.fr       */
+/*   Updated: 2023/04/05 16:33:33 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,8 @@ t_fds	redir_create_h(t_token *tok)
 	fds.out = -1;
 	if (pipe(pipe_fd) == -1)
 	{
-		error_put("redir_create_h", "pipe error");
+		ft_putstr_fd("minishell: ", 2);
+		perror(tok->content);
 		return (fds);
 	}
 	if (read_hearedoc(pipe_fd, tok))

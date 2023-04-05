@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 16:04:36 by graux             #+#    #+#             */
-/*   Updated: 2023/04/05 15:10:42 by graux            ###   ########.fr       */
+/*   Updated: 2023/04/05 16:43:18 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 
+/*
 static void	show_debug(int argc, char **argv, t_token **tokens,
 		t_ast_node *ast_root, char c)
 {
@@ -40,42 +41,14 @@ static void	show_debug(int argc, char **argv, t_token **tokens,
 			printf("------------------- DEBUG END -----------------\n");
 	}
 }
-
-static void	gen_prompt(char prompt[PROMPT_SIZE], int status)
-{
-	int		pos;
-	char	*str;
-	int		offset;
-
-	printf("%s", GREEN);
-	prompt[0] = '(';
-	pos = 1;
-	str = ft_itoa(status);
-	ft_memcpy(prompt + pos, str, ft_strlen(str));
-	pos += ft_strlen(str);
-	free(str);
-	prompt[pos++] = ')';
-	prompt[pos++] = ' ';
-	str = ms_getenv_cont("PWD");
-	offset = 0;
-	if (ft_strlen(str) + pos > PROMPT_SIZE - 5)
-	{
-		offset = ft_strlen(str) - (PROMPT_SIZE - 5 - pos) + 4;
-		ft_memcpy(prompt + pos, "/...", 4);
-		pos += 4;
-	}
-	ft_memcpy(prompt + pos, str + offset, ft_strlen(str + offset));
-	pos += ft_strlen(str + offset);
-	free(str);
-	ft_memcpy(prompt + pos, RESET "\n$> ", 9);
-}
+*/
 
 static int	line_reading(char **line)
 {
 	char	prompt[PROMPT_SIZE + 4];
 
 	g_ms.env[MAX_ENV] = "p";
-	gen_prompt(prompt, g_ms.status);
+	ms_gen_prompt(prompt, g_ms.status);
 	*line = readline(prompt);
 	if (!(*line))
 		builtin_exit(NULL);
@@ -100,9 +73,40 @@ static int	tokens_parse(t_token ***tokens, char *line)
 	return (1);
 }
 
-//TODO only redir
-//TODO redir and pipes
-//TODO redirs permissions
+static int	check_valid_ast(t_ast_node *node, int depth)
+{
+	static int	valid;
+
+	if (!node)
+		return (0);
+	if (depth == 0)
+		valid = 1;
+	if (node->type == AST_ROOT)
+		check_valid_ast(node->children[0], depth + 1);
+	else
+	{
+		check_valid_ast(node->children[0], depth + 1);
+		check_valid_ast(node->children[1], depth + 1);
+	}
+	if (node->type == AST_INVALID)
+		valid = 0;
+	return (valid);
+}
+
+static int	ast_parse(t_ast_node **ast_root, t_token **tokens)
+{
+	*ast_root = ast_generate(tokens);
+	if (!check_valid_ast(*ast_root, 0))
+	{
+		g_ms.status = 1;
+		ast_node_destroy(*ast_root);
+		tokens_destroy(tokens);
+		return (0);
+	}
+	tokens_destroy(tokens);
+	return (1);
+}
+
 //TODO check _ env variable (ex a=dlksjflks as last arg)
 int	main(int argc, char *argv[], char *envp[])
 {
@@ -120,14 +124,12 @@ int	main(int argc, char *argv[], char *envp[])
 			continue ;
 		if (!tokens_parse(&tokens, line))
 			continue ;
-		show_debug(argc, argv, tokens, ast_root, 't');
-		ast_root = ast_generate(tokens);
-		show_debug(argc, argv, tokens, ast_root, 'a');
+		if (!ast_parse(&ast_root, tokens))
+			continue ;
 		ast_execute(ast_root);
 		ast_close_all_pipes(ast_root);
 		ast_close_all_redirs(ast_root);
 		g_ms.status = ast_wait(ast_root);
-		tokens_destroy(tokens);
 		ast_node_destroy(ast_root);
 	}
 	return (0);

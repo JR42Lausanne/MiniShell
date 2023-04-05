@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 18:06:09 by graux             #+#    #+#             */
-/*   Updated: 2023/04/05 14:58:06 by graux            ###   ########.fr       */
+/*   Updated: 2023/04/05 16:21:35 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ static const char	*g_ast_string[] = {
 [AST_OUT_REDIR] = "AST_OUT_REDIR",
 [AST_OUT_APPEND] = "AST_OUT_APPEND",
 [AST_PIPE] = "AST_PIPE",
+[AST_INVALID] = "AST_INVALID",
 [AST_TYPE_SIZE] = "AST_TYPE_SIZE"
 };
 

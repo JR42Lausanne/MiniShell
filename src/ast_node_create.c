@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 18:01:47 by graux             #+#    #+#             */
-/*   Updated: 2023/04/05 15:10:02 by graux            ###   ########.fr       */
+/*   Updated: 2023/04/05 16:26:57 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,43 +45,14 @@ static t_ast_node_type	find_exec_type(t_token **tokens, int start, int size)
 static void	ast_node_gen_content(t_ast_node *node, t_token **tokens, int start,
 		int size)
 {
-	node->type = find_exec_type(tokens, start, size);
+	if (node->type != AST_INVALID)
+		node->type = find_exec_type(tokens, start, size);
 	if (node->type == AST_CMD)
 		ast_node_gen_cmd(node, tokens, start, size);
 	else
 		ast_node_gen_builtin(node, tokens, start, size);
 	node->children[0] = NULL;
 	node->children[1] = NULL;
-}
-
-static void	ast_node_gen_redir(t_ast_node *node, t_token **tokens, int start,
-		int size)
-{
-	int		i;
-	t_fds	fds;
-
-	i = -1;
-	while (++i < size)
-	{
-		if (tokens[i + start]->type == TOK_REDIR_IN)
-		{
-			node->redir_fd_in = redir_create(tokens[i + start]);
-			node->all_redirs[(*(node->redir_index))++] = node->redir_fd_in;
-		}
-		else if (tokens[i + start]->type == TOK_HEREDOC)
-		{
-			fds = redir_create_h(tokens[i + start]);
-			node->redir_fd_in = fds.in;
-			node->all_redirs[(*(node->redir_index))++] = fds.in;
-			node->all_redirs[(*(node->redir_index))++] = fds.out;
-		}
-		else if (tokens[i + start]->type == TOK_REDIR_OUT
-			|| tokens[i]->type == TOK_REDIR_APP)
-		{
-			node->redir_fd_out = redir_create(tokens[i + start]);
-			node->all_redirs[(*(node->redir_index))++] = node->redir_fd_out;
-		}
-	}
 }
 
 static void	setup_node(t_ast_node *node, t_packed *p)
@@ -117,8 +88,9 @@ t_ast_node	*ast_node_create(t_token **tokens, int start, int size, t_packed p)
 	}
 	else
 	{
+		if (!ast_node_gen_redir(node, tokens, start, size))
+			node->type = AST_INVALID;
 		ast_node_gen_content(node, tokens, start, size);
-		ast_node_gen_redir(node, tokens, start, size);
 	}
 	return (node);
 }
