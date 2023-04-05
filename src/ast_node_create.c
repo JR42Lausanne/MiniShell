@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 18:01:47 by graux             #+#    #+#             */
-/*   Updated: 2023/04/05 16:26:57 by graux            ###   ########.fr       */
+/*   Updated: 2023/04/05 17:09:46 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static void	ast_node_gen_content(t_ast_node *node, t_token **tokens, int start,
 		node->type = find_exec_type(tokens, start, size);
 	if (node->type == AST_CMD)
 		ast_node_gen_cmd(node, tokens, start, size);
-	else
+	else if (node->type == AST_BUILTIN)
 		ast_node_gen_builtin(node, tokens, start, size);
 	node->children[0] = NULL;
 	node->children[1] = NULL;
