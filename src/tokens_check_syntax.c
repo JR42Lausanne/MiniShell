@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 10:14:53 by graux             #+#    #+#             */
-/*   Updated: 2023/03/28 13:59:01 by graux            ###   ########.fr       */
+/*   Updated: 2023/04/05 14:56:42 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int	check_words_around(t_token **tokens, int pos)
 	valid_left = 0;
 	while (tokens[++i])
 	{
-		if (tokens[i]->type == TOK_WORD)
+		if (tokens[i]->type == TOK_WORD || is_redir(tokens[i]))
 			valid_right = 1;
 		else if (tokens[i]->type == TOK_PIPE || tokens[i]->type == TOK_OR
 			|| tokens[i]->type == TOK_AND)
@@ -33,7 +33,7 @@ static int	check_words_around(t_token **tokens, int pos)
 	i = pos;
 	while (--i >= 0)
 	{
-		if (tokens[i]->type == TOK_WORD)
+		if (tokens[i]->type == TOK_WORD || is_redir(tokens[i]))
 			valid_left = 1;
 		else if (tokens[i]->type == TOK_PIPE || tokens[i]->type == TOK_OR
 			|| tokens[i]->type == TOK_AND)
@@ -54,12 +54,12 @@ static int	check_control(t_token **tokens)
 			error_put("syntax error", "invalid |");
 			return (0);
 		}
-		else if (tokens[i]->type == TOK_OR && !check_words_around(tokens, i))
+		else if (tokens[i]->type == TOK_OR)
 		{
 			error_put("syntax error", "invalid ||");
 			return (0);
 		}
-		else if (tokens[i]->type == TOK_AND && !check_words_around(tokens, i))
+		else if (tokens[i]->type == TOK_AND)
 		{
 			error_put("syntax error", "invalid &&");
 			return (0);

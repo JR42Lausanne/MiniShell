@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 16:04:36 by graux             #+#    #+#             */
-/*   Updated: 2023/04/05 14:49:54 by graux            ###   ########.fr       */
+/*   Updated: 2023/04/05 15:10:42 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,6 @@ static int	tokens_parse(t_token ***tokens, char *line)
 //TODO only redir
 //TODO redir and pipes
 //TODO redirs permissions
-//TODO change syntax checking for "> out | > out" to be okay
 //TODO check _ env variable (ex a=dlksjflks as last arg)
 int	main(int argc, char *argv[], char *envp[])
 {

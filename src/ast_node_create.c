@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 18:01:47 by graux             #+#    #+#             */
-/*   Updated: 2023/04/05 14:50:41 by graux            ###   ########.fr       */
+/*   Updated: 2023/04/05 15:10:02 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,11 @@ static t_ast_node_type	find_exec_type(t_token **tokens, int start, int size)
 	int				i;
 
 	i = start;
+	type = AST_CMD;
 	while (i < size + start && (tokens[i]->type != TOK_WORD
 			|| is_redir(tokens[i])))
 		i++;
-	if (!tokens[i])
+	if (!tokens[i] || tokens[i]->type != TOK_WORD)
 		return (AST_DO_NOTHING);
 	if (!ft_strncmp(tokens[i]->content, "echo", ft_strlen("echo") + 1))
 		type = AST_BUILTIN;
@@ -38,8 +39,6 @@ static t_ast_node_type	find_exec_type(t_token **tokens, int start, int size)
 		type = AST_BUILTIN;
 	else if (!ft_strncmp(tokens[i]->content, "exit", ft_strlen("exit") + 1))
 		type = AST_BUILTIN;
-	else
-		type = AST_CMD;
 	return (type);
 }
 

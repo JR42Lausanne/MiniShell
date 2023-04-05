@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 18:06:09 by graux             #+#    #+#             */
-/*   Updated: 2023/03/06 17:40:26 by graux            ###   ########.fr       */
+/*   Updated: 2023/04/05 14:58:06 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ static const char	*g_ast_string[] = {
 [AST_ROOT] = "AST_ROOT",
 [AST_BUILTIN] = "AST_BUILTIN",
 [AST_CMD] = "AST_CMD",
+[AST_DO_NOTHING] = "AST_DO_NOTHING",
 [AST_COND_AND] = "AST_COND_AND",
 [AST_COND_OR] = "AST_COND_OR",
 [AST_IN_REDIR] = "AST_IN_REDIR",
