@@ -6,7 +6,7 @@
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 16:04:14 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/03/30 14:53:01 by graux            ###   ########.fr       */
+/*   Updated: 2023/04/05 10:46:07 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,12 +62,12 @@ static char	*get_cmd(char *cmd)
 		command = get_full_cmd(path[i], cmd);
 		if (!check_access(command) && access(command, X_OK) == 0)
 		{
-			//TODO free all Path array
+			free_args(path);
 			return (command);
 		}
 		free(command);
 	}
-	//TODO free all Path array
+	free_args(path);
 	return (NULL);
 }
 
