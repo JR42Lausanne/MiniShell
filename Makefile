@@ -15,6 +15,8 @@ SRC = ast_execute_cmd.c 		\
 	  ast_node_destroy.c 		\
 	  ast_node_redirect.c 		\
 	  ast_handle_pipe.c 		\
+	  ast_setup_all_pipes.c		\
+	  ast_setup_all_redirs.c	\
 	  ast_print.c	 			\
 	  ast_wait.c	 			\
 	  error_put.c				\

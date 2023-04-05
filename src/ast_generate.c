@@ -6,76 +6,21 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 17:43:02 by graux             #+#    #+#             */
-/*   Updated: 2023/03/30 14:57:31 by graux            ###   ########.fr       */
+/*   Updated: 2023/04/05 11:33:46 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ast.h"
 
-static int	count_pipes(t_token **tokens)
+static int	check_setup(t_ast_node *root)
 {
-	int	i;
-	int	size;
-	int	count;
-
-	size = tokens_size(tokens);
-	i = -1;
-	count = 0;
-	while (++i < size)
-	{
-		if (tokens[i]->type == TOK_PIPE)
-			count++;
-	}
-	return (count);
-}
-
-static void	setup_all_pipes(t_ast_node *root, t_token **tokens)
-{
-	int	i;
-
-	root->pipe_index = malloc(sizeof(int));
-	root->pipe_count = count_pipes(tokens);
-	root->all_pipes = malloc(sizeof(int) * (2 * root->pipe_count));
-	if (!root->all_pipes)
-		return ;
-	i = -1;
-	while (++i < root->pipe_count)
-		pipe(root->all_pipes + (i * 2));
-}
-
-static int	count_redirs(t_token **tokens)
-{
-	int	i;
-	int	count;
-
-	i = -1;
-	count = 0;
-	while (tokens[++i])
-	{
-		if (is_redir(tokens[i]))
-			count++;
-		if (tokens[i]->type == TOK_HEREDOC)
-			count++;
-	}
-	return (count);
-}
-
-static void	setup_all_redirs(t_ast_node *root, t_token **tokens)
-{
-	int	i;
-	int	size;
-
-	size = count_redirs(tokens) + 1;
-	root->all_redirs = malloc(sizeof(int) * size);
-	if (!root->all_redirs)
-		return ;
-	i = -1;
-	while (++i < size)
-		root->all_redirs[i] = -2;
-	root->redir_index = malloc(sizeof(int));
-	if (!root->redir_index)
-		return ; //TODO better protection
-	*(root->redir_index) = 0;
+	if (!root->all_redirs || !root->redir_index)
+		return (0);
+	else if (!root->pipe_index)
+		return (0);
+	else if (!root->all_pipes && root->pipe_count != 0)
+		return (0);
+	return (1);
 }
 
 t_ast_node	*ast_generate(t_token **tokens)
@@ -92,17 +37,15 @@ t_ast_node	*ast_generate(t_token **tokens)
 		return (NULL);
 	root->type = AST_ROOT;
 	root->content = NULL;
-	setup_all_pipes(root, tokens);
-	setup_all_redirs(root, tokens);
-	p.pipe_count = root->pipe_count;
-	p.p = root->pipe_index;
-	p.all_pipes = root->all_pipes;
-	p.all_redirs = root->all_redirs;
-	p.redir_index = root->redir_index;
-	if (!root->pipe_index)
-		return (NULL);
-	*(root->pipe_index) = 0;
+	ast_setup_all_pipes(root, tokens, &p);
+	ast_setup_all_redirs(root, tokens, &p);
+	root->children[0] = NULL;
 	root->children[1] = NULL;
+	if (!check_setup(root))
+	{
+		ast_node_destroy(root);
+		return (NULL);
+	}
 	root->children[0] = ast_node_create(tokens, 0, size, p);
 	return (root);
 }
