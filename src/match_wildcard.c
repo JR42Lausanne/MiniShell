@@ -6,7 +6,7 @@
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 14:35:57 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/04/05 12:07:12 by graux            ###   ########.fr       */
+/*   Updated: 2023/04/05 12:14:59 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,10 @@ static char	**setup_lookup(int n, int m, char *pattern)
 	{
 		lookup[i] = ft_calloc(m + 1, sizeof(char));
 		if (!lookup[i])
-			return (NULL); //TODO free everything
+		{
+			free_args(lookup);
+			return (NULL);
+		}
 	}
 	lookup[0][0] = 1;
 	i = 0;

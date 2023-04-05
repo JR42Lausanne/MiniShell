@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 18:01:47 by graux             #+#    #+#             */
-/*   Updated: 2023/03/28 14:59:52 by graux            ###   ########.fr       */
+/*   Updated: 2023/04/05 12:18:07 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,19 +22,19 @@ static t_ast_node_type	find_exec_type(t_token **tokens, int start, int size)
 	while (i < size + start && (tokens[i]->type != TOK_WORD
 			|| is_redir(tokens[i])))
 		i++;
-	if (!ft_strncmp(tokens[i]->content, "echo", ft_strlen("echo")))
+	if (!ft_strncmp(tokens[i]->content, "echo", ft_strlen("echo") + 1))
 		type = AST_BUILTIN;
-	else if (!ft_strncmp(tokens[i]->content, "cd", ft_strlen("cd")))
+	else if (!ft_strncmp(tokens[i]->content, "cd", ft_strlen("cd") + 1))
 		type = AST_BUILTIN;
-	else if (!ft_strncmp(tokens[i]->content, "pwd", ft_strlen("pwd")))
+	else if (!ft_strncmp(tokens[i]->content, "pwd", ft_strlen("pwd") + 1))
 		type = AST_BUILTIN;
-	else if (!ft_strncmp(tokens[i]->content, "export", ft_strlen("export")))
+	else if (!ft_strncmp(tokens[i]->content, "export", ft_strlen("export") + 1))
 		type = AST_BUILTIN;
-	else if (!ft_strncmp(tokens[i]->content, "unset", ft_strlen("unset")))
+	else if (!ft_strncmp(tokens[i]->content, "unset", ft_strlen("unset") + 1))
 		type = AST_BUILTIN;
-	else if (!ft_strncmp(tokens[i]->content, "env", ft_strlen("env")))
+	else if (!ft_strncmp(tokens[i]->content, "env", ft_strlen("env") + 1))
 		type = AST_BUILTIN;
-	else if (!ft_strncmp(tokens[i]->content, "exit", ft_strlen("exit")))
+	else if (!ft_strncmp(tokens[i]->content, "exit", ft_strlen("exit") + 1))
 		type = AST_BUILTIN;
 	else
 		type = AST_CMD;
