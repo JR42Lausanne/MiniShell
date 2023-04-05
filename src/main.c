@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 16:04:36 by graux             #+#    #+#             */
-/*   Updated: 2023/04/05 17:06:29 by graux            ###   ########.fr       */
+/*   Updated: 2023/04/05 18:55:49 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,8 @@ int	main(int argc, char *argv[], char *envp[])
 		ast_close_all_pipes(ast_root);
 		ast_close_all_redirs(ast_root);
 		g_ms.status = ast_wait(ast_root);
+		if (*g_ms.env[MAX_ENV] == 'p')
+			g_ms.status = 130;
 		ast_node_destroy(ast_root);
 	}
 	return (0);

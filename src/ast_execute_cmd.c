@@ -6,7 +6,7 @@
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 16:04:14 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/04/05 18:06:36 by graux            ###   ########.fr       */
+/*   Updated: 2023/04/05 18:43:26 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ static int	check_access(char *cmd, char *cmd_name)
 		return (127);
 	}
 	stat(cmd, &file_stat);
-	printf("cmd: %s\n", cmd);
 	if (S_ISDIR(file_stat.st_mode))
 	{
 		error_put(cmd_name, "is a directory");

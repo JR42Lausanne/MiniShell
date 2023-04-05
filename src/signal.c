@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 17:31:35 by graux             #+#    #+#             */
-/*   Updated: 2023/03/30 13:03:39 by graux            ###   ########.fr       */
+/*   Updated: 2023/04/05 18:58:54 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static void	handle_sigint(void)
 	if (*g_ms.env[MAX_ENV] == 'e')
 	{
 		printf("\n");
-		g_ms.status = 130;
+		g_ms.env[MAX_ENV] = "p";
 	}
 }
 
