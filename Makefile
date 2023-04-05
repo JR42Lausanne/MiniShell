@@ -1,5 +1,5 @@
 CC = gcc
-FLAGS = -Wall -Wextra -Werror -g
+FLAGS = -Wall -Wextra -Werror -g -fsanitize=address
 RM = rm -rf
 
 SRC = ast_execute_cmd.c 		\
@@ -31,6 +31,7 @@ SRC = ast_execute_cmd.c 		\
 	  builtin_exit.c			\
 	  builtin_unset.c			\
 	  dq_mode.c					\
+	  main.c					\
 	  match_wildcard.c			\
 	  ms_getenv.c 				\
 	  ms_getenv_cont.c 			\
@@ -76,11 +77,11 @@ LIB = libft.a
 
 %.o: %.c
 ifeq ($(shell whoami), graux)
-	${CC} ${FLAGS} ${INCLUDES} -c $< -o $@ -I/goinfre/graux/.brew/opt/readline/include -fsanitize=address
+	${CC} ${FLAGS} ${INCLUDES} -c $< -o $@ -I/goinfre/graux/.brew/opt/readline/include
 else ifeq ($(shell whoami), julienlaiti)
-	${CC} ${FLAGS} ${INCLUDES} -c $< -o $@ -I/opt/homebrew/opt/readline/include -fsanitize=address
+	${CC} ${FLAGS} ${INCLUDES} -c $< -o $@ -I/opt/homebrew/opt/readline/include
 else
-	${CC} ${FLAGS} ${INCLUDES} -c $< -o $@ -I$(HOME)/.brew/opt/readline/include -fsanitize=address
+	${CC} ${FLAGS} ${INCLUDES} -c $< -o $@ -I$(HOME)/.brew/opt/readline/include
 endif
 
 all: ${NAME}
@@ -88,24 +89,24 @@ all: ${NAME}
 ${LIB}:
 	cd libft/ && make && cp -v libft.a ../
 
-$(NAME): ${LIB} $(OBJ) src/main.o
+$(NAME): ${LIB} $(OBJ)
 ifeq ($(shell whoami), graux)
-	$(CC) ${FLAGS} src/main.o $(OBJ) $(INCLUDES) -I/goinfre/graux/.brew/opt/readline/include -L. -L/goinfre/graux/.brew/opt/readline/lib -lft -lreadline -o $(NAME) -fsanitize=address
+	$(CC) ${FLAGS} $(OBJ) $(INCLUDES) -I/goinfre/graux/.brew/opt/readline/include -L. -L/goinfre/graux/.brew/opt/readline/lib -lft -lreadline -o $(NAME)
 else ifeq ($(shell whoami), julienlaiti)
-	$(CC) ${FLAGS} src/main.o $(OBJ) $(INCLUDES) -I/opt/homebrew/opt/readline/include -L. -L/opt/homebrew/opt/readline/lib -lft -lreadline -o $(NAME) -fsanitize=address
+	$(CC) ${FLAGS} $(OBJ) $(INCLUDES) -I/opt/homebrew/opt/readline/include -L. -L/opt/homebrew/opt/readline/lib -lft -lreadline -o $(NAME)
 else
-	$(CC) ${FLAGS} src/main.o $(OBJ) $(INCLUDES) -I$(HOME)/.brew/opt/readline/include -L. -L$(HOME)/.brew/opt/readline/lib -lft -lreadline -o $(NAME) -fsanitize=address
+	$(CC) ${FLAGS} $(OBJ) $(INCLUDES) -I$(HOME)/.brew/opt/readline/include -L. -L$(HOME)/.brew/opt/readline/lib -lft -lreadline -o $(NAME)
 endif
 
 re: fclean all
 
 clean:
 	cd libft/ && make clean
-	${RM} src/main.o
 	${RM} ${OBJ}
 
 fclean: clean
 	cd libft/ && make fclean
+	${RM} ${NAME}
 	${RM} ${LIB}
 
 .PHONY: all re clean fclean
