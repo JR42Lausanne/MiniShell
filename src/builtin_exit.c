@@ -6,7 +6,7 @@
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 11:30:08 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/03/30 12:54:25 by graux            ###   ########.fr       */
+/*   Updated: 2023/04/05 17:23:27 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ int	builtin_exit(char **args)
 	}
 	else
 		status = 0;
+	free_args(g_ms.env);
 	exit(status & 0xFF);
 	return (1);
 }
