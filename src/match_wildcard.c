@@ -6,11 +6,12 @@
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 14:35:57 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/03/28 12:20:33 by graux            ###   ########.fr       */
+/*   Updated: 2023/04/05 12:07:12 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/tokenizer.h"
+#include "../include/minishell.h"
 #include <dirent.h>
 
 static int	matches_len(char **matches)
@@ -30,7 +31,7 @@ static char	**setup_lookup(int n, int m, char *pattern)
 	char	**lookup;
 	int		i;
 
-	lookup = malloc(sizeof(char *) * (n + 1));
+	lookup = ft_calloc((n + 2), sizeof(char *));
 	if (!lookup)
 		return (NULL);
 	i = -1;
@@ -74,8 +75,9 @@ static int	is_match(char *name, char *pattern, int n, int m)
 				lookup[i][j] = 0;
 		}
 	}
-	//TODO free lookup
-	return (lookup[n][m]);
+	i = lookup[n][m];
+	free_args(lookup);
+	return (i);
 }
 
 static void	add_to_matches(char ***matches, char *to_add)

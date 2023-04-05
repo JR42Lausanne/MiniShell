@@ -6,11 +6,12 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 17:56:09 by graux             #+#    #+#             */
-/*   Updated: 2023/04/05 10:44:46 by graux            ###   ########.fr       */
+/*   Updated: 2023/04/05 11:37:48 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ast.h"
+#include "../include/minishell.h"
 
 void	free_args(char **args)
 {
