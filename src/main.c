@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 16:04:36 by graux             #+#    #+#             */
-/*   Updated: 2023/04/05 14:16:15 by graux            ###   ########.fr       */
+/*   Updated: 2023/04/05 14:49:54 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 
-/*
 static void	show_debug(int argc, char **argv, t_token **tokens,
 		t_ast_node *ast_root, char c)
 {
@@ -41,7 +40,6 @@ static void	show_debug(int argc, char **argv, t_token **tokens,
 			printf("------------------- DEBUG END -----------------\n");
 	}
 }
-*/
 
 static void	gen_prompt(char prompt[PROMPT_SIZE], int status)
 {
@@ -105,8 +103,8 @@ static int	tokens_parse(t_token ***tokens, char *line)
 //TODO only redir
 //TODO redir and pipes
 //TODO redirs permissions
+//TODO change syntax checking for "> out | > out" to be okay
 //TODO check _ env variable (ex a=dlksjflks as last arg)
-//TODO pwd
 int	main(int argc, char *argv[], char *envp[])
 {
 	char					*line;
@@ -123,7 +121,9 @@ int	main(int argc, char *argv[], char *envp[])
 			continue ;
 		if (!tokens_parse(&tokens, line))
 			continue ;
+		show_debug(argc, argv, tokens, ast_root, 't');
 		ast_root = ast_generate(tokens);
+		show_debug(argc, argv, tokens, ast_root, 'a');
 		ast_execute(ast_root);
 		ast_close_all_pipes(ast_root);
 		ast_close_all_redirs(ast_root);

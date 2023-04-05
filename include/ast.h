@@ -6,7 +6,7 @@
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 13:00:55 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/04/05 12:12:12 by graux            ###   ########.fr       */
+/*   Updated: 2023/04/05 14:50:30 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ typedef enum e_ast_node_type
 	AST_ROOT = 0,
 	AST_BUILTIN,
 	AST_CMD,
+	AST_DO_NOTHING,
 	AST_COND_AND,
 	AST_COND_OR,
 	AST_IN_REDIR,

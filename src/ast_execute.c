@@ -6,7 +6,7 @@
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 13:22:42 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/03/30 12:41:12 by graux            ###   ########.fr       */
+/*   Updated: 2023/04/05 14:52:52 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,7 @@ void	ast_execute(t_ast_node *node)
 		ast_execute_cmd(node);
 	else if (node->type == AST_BUILTIN)
 		ast_execute_built(node);
+	else if (node->type == AST_DO_NOTHING)
+		node->exit_status = 0;
 	export_last_arg(node);
 }
