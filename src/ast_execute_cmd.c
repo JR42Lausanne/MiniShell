@@ -6,7 +6,7 @@
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 16:04:14 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/04/05 10:46:07 by graux            ###   ########.fr       */
+/*   Updated: 2023/04/05 11:04:32 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +30,26 @@ static int	check_relative(char *cmd)
 	return (0);
 }
 
-static int	check_access(char *cmd)
+static int	check_access(char *cmd, char *cmd_name)
 {
 	struct stat	file_stat;
 
 	if (!cmd)
+	{
+		error_put(cmd_name, "command not found");
 		return (127);
+	}
 	stat(cmd, &file_stat);
 	if (S_ISDIR(file_stat.st_mode))
+	{
+		error_put(cmd_name, "is a directory");
 		return (126);
+	}
+	if (access(cmd, X_OK) != 0)
+	{
+		error_put(cmd_name, "Permission denied");
+		return (126);
+	}
 	return (0);
 }
 
@@ -49,6 +60,7 @@ static char	*get_cmd(char *cmd)
 	char	**path;
 	int		i;
 
+	command = NULL;
 	if (check_relative(cmd))
 		return (ft_strdup(cmd));
 	env_path = ms_getenv_cont("PATH");
@@ -60,25 +72,13 @@ static char	*get_cmd(char *cmd)
 	while (path[++i])
 	{
 		command = get_full_cmd(path[i], cmd);
-		if (!check_access(command) && access(command, X_OK) == 0)
-		{
-			free_args(path);
-			return (command);
-		}
+		if (access(command, F_OK) == 0)
+			break ;
 		free(command);
+		command = NULL;
 	}
 	free_args(path);
-	return (NULL);
-}
-
-static char	*cmd_exec_err_str(int status)
-{
-	if (status == 127)
-		return ("command not found");
-	else if (status == 126)
-		return ("is a directory");
-	else
-		return ("unknow cmd error");
+	return (command);
 }
 
 void	ast_execute_cmd(t_ast_node *node)
@@ -89,11 +89,11 @@ void	ast_execute_cmd(t_ast_node *node)
 
 	content = (t_cmd_cont *) node->content;
 	cmd_full_path = get_cmd(content->cmd_name);
-	access_status = check_access(cmd_full_path);
+	access_status = check_access(cmd_full_path, content->cmd_name);
 	if (access_status)
 	{
-		error_put(content->cmd_name, cmd_exec_err_str(access_status));
 		node->exit_status = access_status;
+		free(cmd_full_path);
 		return ;
 	}
 	node->pid = fork();
