@@ -6,7 +6,7 @@
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 16:04:14 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/04/05 12:44:08 by graux            ###   ########.fr       */
+/*   Updated: 2023/04/05 18:06:36 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,14 @@ static int	check_access(char *cmd, char *cmd_name)
 {
 	struct stat	file_stat;
 
-	if (!cmd || !ft_strncmp(cmd_name, "..", 3) || !ft_strncmp(cmd_name, ".", 2))
+	if (!cmd || !ft_strncmp(cmd_name, "..", 3) || !ft_strncmp(cmd_name, ".", 2)
+		|| ft_strlen(cmd_name) == 0)
 	{
 		error_put(cmd_name, "command not found");
 		return (127);
 	}
 	stat(cmd, &file_stat);
+	printf("cmd: %s\n", cmd);
 	if (S_ISDIR(file_stat.st_mode))
 	{
 		error_put(cmd_name, "is a directory");
