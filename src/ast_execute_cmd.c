@@ -6,7 +6,7 @@
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 16:04:14 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/04/05 18:43:26 by graux            ###   ########.fr       */
+/*   Updated: 2023/04/05 19:09:09 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,11 @@ static int	check_access(char *cmd, char *cmd_name)
 	{
 		error_put(cmd_name, "is a directory");
 		return (126);
+	}
+	if (access(cmd, F_OK) != 0)
+	{
+		error_put(cmd_name, "No such file or directory");
+		return (127);
 	}
 	if (access(cmd, X_OK) != 0)
 	{

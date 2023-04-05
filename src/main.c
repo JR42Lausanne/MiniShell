@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 16:04:36 by graux             #+#    #+#             */
-/*   Updated: 2023/04/05 18:55:49 by graux            ###   ########.fr       */
+/*   Updated: 2023/04/05 19:19:23 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,7 @@ static int	ast_parse(t_ast_node **ast_root, t_token **tokens)
 	return (1);
 }
 
+//TODO invalid syntax for && and || ANNNNNND ()
 int	main(int argc, char *argv[], char *envp[])
 {
 	char					*line;
