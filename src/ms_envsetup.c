@@ -6,7 +6,7 @@
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 11:44:53 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/04/05 12:26:18 by graux            ###   ########.fr       */
+/*   Updated: 2023/04/05 12:55:45 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ int	ms_envsetup(char **envp)
 {
 	int	i;
 
+	if (signal_setup() == -1)
+		return (0);
 	g_ms.env = ft_calloc((MAX_ENV + 2), sizeof(char *));
 	if (!g_ms.env)
 		return (0);

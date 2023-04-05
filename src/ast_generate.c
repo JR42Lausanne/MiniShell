@@ -6,11 +6,12 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 17:43:02 by graux             #+#    #+#             */
-/*   Updated: 2023/04/05 11:33:46 by graux            ###   ########.fr       */
+/*   Updated: 2023/04/05 12:59:07 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ast.h"
+#include "../include/minishell.h"
 
 static int	check_setup(t_ast_node *root)
 {
@@ -29,6 +30,7 @@ t_ast_node	*ast_generate(t_token **tokens)
 	int			size;
 	t_packed	p;
 
+	g_ms.env[MAX_ENV] = "e";
 	size = tokens_size(tokens);
 	if (size == 0)
 		return (NULL);

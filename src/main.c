@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 16:04:36 by graux             #+#    #+#             */
-/*   Updated: 2023/03/30 11:57:54 by graux            ###   ########.fr       */
+/*   Updated: 2023/04/05 13:51:48 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,9 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 
-static void	show_debug(int argc, char **argv, t_token **tokens, t_ast_node *ast_root, char c)
+/*
+static void	show_debug(int argc, char **argv, t_token **tokens,
+		t_ast_node *ast_root, char c)
 {
 	if (argc == 2)
 	{
@@ -39,23 +41,7 @@ static void	show_debug(int argc, char **argv, t_token **tokens, t_ast_node *ast_
 			printf("------------------- DEBUG END -----------------\n");
 	}
 }
-
-static int	not_interactive(char *cmd)
-{
-	t_token			**tokens;
-	t_ast_node		*ast_root;
-	int				status;
-
-	tokens = tokenize_input(cmd, 0);
-	status = tokens_check_syntax(tokens) - 1;
-	if (status + 1)
-		return (status);
-	ast_root = ast_generate(tokens);
-	ast_execute(ast_root);
-	ast_close_all_pipes(ast_root);
-	status = ast_wait(ast_root);
-	return (status);
-}
+*/
 
 static void	gen_prompt(char prompt[PROMPT_SIZE], int status)
 {
@@ -70,9 +56,8 @@ static void	gen_prompt(char prompt[PROMPT_SIZE], int status)
 	ft_memcpy(prompt + pos, str, ft_strlen(str));
 	pos += ft_strlen(str);
 	free(str);
-	prompt[pos] = ')';
-	prompt[pos + 1] = ' ';
-	pos += 2;
+	prompt[pos++] = ')';
+	prompt[pos++] = ' ';
 	str = ms_getenv_cont("PWD");
 	offset = 0;
 	if (ft_strlen(str) + pos > PROMPT_SIZE - 5)
@@ -84,8 +69,37 @@ static void	gen_prompt(char prompt[PROMPT_SIZE], int status)
 	ft_memcpy(prompt + pos, str + offset, ft_strlen(str + offset));
 	pos += ft_strlen(str + offset);
 	free(str);
-	ft_memcpy(prompt + pos, RESET, 4);
-	ft_memcpy(prompt + pos + 4, "\n$> ", 5);
+	ft_memcpy(prompt + pos, RESET "\n$> ", 9);
+}
+
+static int	line_reading(char **line)
+{
+	char	prompt[PROMPT_SIZE + 4];
+
+	g_ms.env[MAX_ENV] = "p";
+	gen_prompt(prompt, g_ms.status);
+	*line = readline(prompt);
+	if (!(*line))
+		builtin_exit(NULL);
+	if (ft_strlen(*line) == 0)
+	{
+		free(*line);
+		return (0);
+	}
+	add_history(*line);
+	return (1);
+}
+
+static int	tokens_parse(t_token ***tokens, char *line)
+{
+	*tokens = tokenize_input(line, g_ms.status);
+	g_ms.status = tokens_check_syntax(*tokens) - 1;
+	if (g_ms.status + 1)
+	{
+		tokens_destroy(*tokens);
+		return (0);
+	}
+	return (1);
 }
 
 int	main(int argc, char *argv[], char *envp[])
@@ -93,39 +107,18 @@ int	main(int argc, char *argv[], char *envp[])
 	char					*line;
 	t_token					**tokens;
 	t_ast_node				*ast_root;
-	char					prompt[PROMPT_SIZE + 4];
 
+	(void) argv;
+	(void) argc;
 	if (!ms_envsetup(envp))
-		return (-1);
-	if (argc == 3 && !ft_strncmp(argv[1], "-c", 3))
-		exit(not_interactive(argv[2]));
-	if (signal_setup() == -1) //TODO put that in ms_envsetup when done with tester
 		return (-1);
 	while (1)
 	{
-		g_ms.env[MAX_ENV] = "p";
-		gen_prompt(prompt, g_ms.status);
-		line = readline(prompt);
-		if (!line)
-			builtin_exit(NULL);
-		if (ft_strlen(line) == 0)
-		{
-			free(line);
+		if (!line_reading(&line))
 			continue ;
-		}
-		add_history(line);
-		tokens = tokenize_input(line, g_ms.status);
-		free(line); //TODO remove with -c option
-		show_debug(argc, argv, tokens, ast_root, 't');
-		g_ms.status = tokens_check_syntax(tokens) - 1;
-		if (g_ms.status + 1)
-		{
-			tokens_destroy(tokens);
+		if (!tokens_parse(&tokens, line))
 			continue ;
-		}
-		g_ms.env[MAX_ENV] = "e";
 		ast_root = ast_generate(tokens);
-		show_debug(argc, argv, tokens, ast_root, 'a');
 		ast_execute(ast_root);
 		ast_close_all_pipes(ast_root);
 		ast_close_all_redirs(ast_root);
