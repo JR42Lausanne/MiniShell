@@ -6,23 +6,24 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 17:56:09 by graux             #+#    #+#             */
-/*   Updated: 2023/04/05 11:37:48 by graux            ###   ########.fr       */
+/*   Updated: 2023/04/05 12:12:38 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ast.h"
 #include "../include/minishell.h"
 
-void	free_args(char **args)
+int	free_args(char **args)
 {
 	int	i;
 
 	if (!args)
-		return ;
+		return (1);
 	i = -1;
 	while (args[++i])
 		free(args[i]);
 	free(args);
+	return (1);
 }
 
 static void	free_content(t_ast_node *node)

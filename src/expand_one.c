@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 15:01:31 by graux             #+#    #+#             */
-/*   Updated: 2023/04/05 11:43:28 by graux            ###   ########.fr       */
+/*   Updated: 2023/04/05 12:10:49 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,11 +76,8 @@ t_token	**expand_one(t_token **tokens, int size)
 		return (tokens);
 	}
 	exp = ft_calloc(size + 1 + matches_len(matches), sizeof(t_token *));
-	if (!exp)
-	{
-		free_args(matches);
+	if (!exp && free_args(matches))
 		return (NULL);
-	}
 	while (++j < size - 1 + matches_len(matches))
 		exp[j] = select_toks_or_match(tokens, matches, wild_pos, j);
 	token_destroy(tokens[wild_pos]);

@@ -6,7 +6,7 @@
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 13:25:03 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/04/05 11:38:16 by graux            ###   ########.fr       */
+/*   Updated: 2023/04/05 12:11:39 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,6 @@ void	signal_handler(int sig);
 int		signal_setup(void);
 
 void	error_put(char *cause, const char *err_msg);
-void	free_args(char **args);
+int		free_args(char **args);
 
 #endif
