@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 15:55:18 by graux             #+#    #+#             */
-/*   Updated: 2023/04/06 14:10:02 by graux            ###   ########.fr       */
+/*   Updated: 2023/04/06 14:34:43 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ static int	handle_redir_in(t_token **tokens, t_ast_node *node, int i,
 {
 	node->redir_fd_in = redir_create(tokens[i + start]);
 	node->all_redirs[(*(node->redir_index))++] = node->redir_fd_in;
+	node->all_redirs[(*(node->redir_index))] = -2;
 	return (node->redir_fd_in != -1);
 }
 
@@ -25,6 +26,7 @@ static int	handle_redir_out(t_token **tokens, t_ast_node *node, int i,
 {
 	node->redir_fd_out = redir_create(tokens[i + start]);
 	node->all_redirs[(*(node->redir_index))++] = node->redir_fd_out;
+	node->all_redirs[(*(node->redir_index))] = -2;
 	return (node->redir_fd_out != -1);
 }
 
@@ -37,6 +39,7 @@ static int	handle_redir_h(t_token **tokens, t_ast_node *node, int i,
 	node->redir_fd_in = fds.in;
 	node->all_redirs[(*(node->redir_index))++] = fds.in;
 	node->all_redirs[(*(node->redir_index))++] = fds.out;
+	node->all_redirs[(*(node->redir_index))] = -2;
 	return (fds.in != -1 && fds.out != -1);
 }
 
@@ -49,7 +52,7 @@ int	ast_node_gen_redir(t_ast_node *node, t_token **tokens, int start, int size)
 		status = 1;
 	if (!status)
 		return (1);
-	i = start - 1;
+	i = -1;
 	while (++i < size)
 	{
 		if (tokens[i + start]->type == TOK_REDIR_IN)
