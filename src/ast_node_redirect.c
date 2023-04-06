@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 18:14:44 by graux             #+#    #+#             */
-/*   Updated: 2023/04/05 15:40:40 by graux            ###   ########.fr       */
+/*   Updated: 2023/04/06 14:06:07 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,9 @@ int	ast_node_redirect(t_ast_node *node)
 	if (node->redir_fd_out == -1)
 		dup2(node->fd_out, STDOUT_FILENO);
 	if (node->redir_fd_in != -1)
-		dup2(node->redir_fd_in, node->fd_in);
+		dup2(node->redir_fd_in, STDIN_FILENO);
 	if (node->redir_fd_out != -1)
-		dup2(node->redir_fd_out, node->fd_out);
+		dup2(node->redir_fd_out, STDOUT_FILENO);
 	ast_close_all_pipes(node);
 	ast_close_all_redirs(node);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 15:55:18 by graux             #+#    #+#             */
-/*   Updated: 2023/04/05 17:07:33 by graux            ###   ########.fr       */
+/*   Updated: 2023/04/06 14:10:02 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	ast_node_gen_redir(t_ast_node *node, t_token **tokens, int start, int size)
 		status = 1;
 	if (!status)
 		return (1);
-	i = -1;
+	i = start - 1;
 	while (++i < size)
 	{
 		if (tokens[i + start]->type == TOK_REDIR_IN)
