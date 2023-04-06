@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 15:29:55 by graux             #+#    #+#             */
-/*   Updated: 2023/03/21 13:53:02 by graux            ###   ########.fr       */
+/*   Updated: 2023/04/06 13:11:21 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,7 @@ static void	fill_token(t_tokenizer *toker, t_token *tok)
 		}
 	}
 	token_gen_content(tok, tot_string, ft_strlen(tot_string));
+	free(tot_string);
 }
 
 void	dq_mode(t_tokenizer *toker, t_token *tok)
