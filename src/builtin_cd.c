@@ -6,7 +6,7 @@
 /*   By: jlaiti <jlaiti@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 17:05:21 by jlaiti            #+#    #+#             */
-/*   Updated: 2023/04/05 14:33:51 by graux            ###   ########.fr       */
+/*   Updated: 2023/04/06 10:42:33 by jlaiti           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,24 +32,36 @@ static	void	export_new_var(char **export_args, char *old_pwd)
 	change_old_pwd(old_pwd);
 }
 
+static int	try_cd(char **args)
+{
+	if (args && !args[1])
+	{
+		if (chdir(ms_getenv_cont("HOME")) == -1)
+		{
+			error_put(args[0], "HOME not set");
+			return (0);
+		}
+	}
+	else
+	{
+		if (chdir(args[1]) == -1)
+		{
+			ft_putstr_fd("minishell: ", 2);
+			perror(args[1]);
+			return (0);
+		}
+	}
+	return (1);
+}
+
 int	builtin_cd(char **args)
 {
-	int		status;
 	char	old_pwd[NAME_MAX];
 	char	current_path[NAME_MAX];
 	char	*export_args[3];
 
 	getcwd(old_pwd, NAME_MAX);
-	if (args && !args[1])
-		status = chdir(ms_getenv_cont("HOME"));
-	else
-		status = chdir(args[1]);
-	if (status == -1)
-	{
-		error_put(args[0], "HOME not set");
-		return (1);
-	}
-	else
+	if (try_cd(args))
 	{
 		getcwd(current_path, NAME_MAX);
 		export_args[0] = "export";
@@ -57,6 +69,7 @@ int	builtin_cd(char **args)
 		export_args[2] = NULL;
 		export_new_var(export_args, old_pwd);
 		free(export_args[1]);
+		return (0);
 	}	
-	return (0);
+	return (1);
 }
